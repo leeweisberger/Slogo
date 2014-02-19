@@ -1,15 +1,57 @@
 slogo
 =====
+TODO:
+1. Describe the goals of your project's design (i.e., what you want to make flexible and what assumptions you may need to make) by breaking it into modules.
+2. Describe the program's core architecture, core structure, and snap shot of UML
+3. Example code
+4. Alternative design
 
-Design Goals
 
-Describe the goals of your project's design (i.e., what you want to make flexible and what assumptions you may need to make) by breaking it into modules. A module is a concept in your program that may be represented by a single class or a group of classes related in some standard way, such as set of subclasses, that has a purpose with regards to the program's functionality and collaborates with other modules.
+Team member Responsibility breakdown:
+Lee Weisberger and Shenghan Chen: Back-end
+Anthony Olawo and Siyang Wang: Front-end
 
-Primary Classes and Methods
+API:
 
-Describe the program's core architecture (focus on behavior not state), including pictures of a UML diagram to describe the Model and "screen shots" of your intended View interface
-Example code (this is especially important in helping others understand how to use your API)
-Show actual code that implements the following use case: "The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail." It should be clear from this code which objects are responsible for completing each part of the task, but you do not have to implement the called functions.
+Interface:
+	Potential classes:
+		Panel:
+		Window (abstract)
+			Sample Commands
+			Turtle Graphics 
+Command Window 
+Command History
+		Buttons (abstract)
+			Run buttons: Speed selection
+			Change color:
+			Clear
+			Undo
+			Terminate when infinite loop
 
-Explain some alternatives to your design, and why you choose the one you did
-List of each team member's role in the project and a breakdown of what each person is expected to work on.
+	
+			
+Model:
+Parsing(module):
+Abstract Syntax Tree:
+	Command classes(module): 
+		e.g. for loop, repeat, if statement, forward, etc…
+			e.g. rt, fd, 
+	Turtle Graphics and pen (module)
+
+	Potential Classes:
+		Parser
+		General Command
+		Variable, Constant, Repeat 
+
+Turtle:
+	
+
+Potentially: 
+	Mediator design pattern 
+		Transform the user inputs to commands -- > place we can detect errors 
+
+Assumptions:
+	Passing the command tree once at a time V.S. passing the command trees together once 
+
+
+
