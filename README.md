@@ -87,3 +87,9 @@ The View Interface is the third important component, and its responsibility is t
 
 
 
+
+There are several alternatives we could take, either to have the parser work in another way, or to make the turtle graphic module look difference.
+
+1.  Now we are calling a command maker throughout the process of parsing; each time we interpret a piece of text, we pass it to the command maker to produce a command; we create a syntax tree maker at the top, and while we are making commands we also pass them to the tree maker so that it's generating a syntax tree for the turtle object to go through and call its methods. Instead, we could call the command maker and the tree maker at the very end, so after all the text is parsed we put all the commands together to generate a syntax tree. We decide not to do so because this might cause the syntax tree to lose certain features about the structure of the program the user codes, as we have to store the decoded parts in a collection for the tree maker to pick up later, but such a collection isn't capable of holding structural information.
+
+2.  We decide to have the turtle object communicate with the turtle graphic module within each method that's invoked on the turtle, which means whenever the turtle takes a move, the view interface should be notified and respond accordingly so as to update its drawing. Instead, we could pass information to the view interface after the turtle finishes all its moves, drawing the result only at the final state of the turtle. Again, we choose not to implement a design like this, because once we do so, users won't be able to keep track of the movement of the turtle, which is essentially an important feature of SLogo, or to pause the drawing while the program is being executed.
