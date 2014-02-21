@@ -9,10 +9,10 @@ TODO:
 faTeam member Responsibility breakdown:
 Lee Weisberger and Shenghan Chen: Back-end
 Anthony Olawo and Siyang Wang: Front-end:
-	1: Graphic Layout
-	2: Data I/O
-	3: Drawing functionalities
-	4: Button 
+	1: Graphic Layout (Olawo and Wang will peer program this part)
+	2: Data I/O (Olawo and Wang will peer program this part)
+	3: Drawing functionalities (Olawo)
+	4: Buttons(Wang)
 
 API:
 
