@@ -6,10 +6,13 @@ TODO:
 3. Example code
 4. Alternative design
 
-
-Team member Responsibility breakdown:
+faTeam member Responsibility breakdown:
 Lee Weisberger and Shenghan Chen: Back-end
-Anthony Olawo and Siyang Wang: Front-end
+Anthony Olawo and Siyang Wang: Front-end:
+	1: Graphic Layout
+	2: Data I/O
+	3: Drawing functionalities
+	4: Button 
 
 API:
 
