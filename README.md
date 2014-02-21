@@ -15,18 +15,20 @@ Anthony Olawo and Siyang Wang: Front-end:
 	4: Buttons(Wang)
 
 Design Goals:
-For this project the team is designing and implementing a flexible GUI program that can be used or extended via an API. The program's view consisting three modules: a graphic layout module, a 'draw' module, and an action listener module. The model will consist fo a parsing module, a command module, and a turtle module. 
+The team is designing and implementing a flexible GUI program-- SLogo-- whose functionality can be used and/or extended via an API. Like most standard GUI programs SLogo will have a view and model. The view will consist of four modules: a graphic layout module, a 'draw' module, an action listener module and a command history module. The model on the other hand will consist of a parsing module, and a command module. The program will also have a turtle module distinct from both the view and model. 
 
-View
-The graphic layout module will be a canvas that responsible for laying out the windows and buttons that the user will interract with: a command window; a turtle graphics, command, sample command, and command history window, as well as a run, stop, clear, slow, and undo button. This module will be quite flexible as it'll allow future developers to add windows and buttons to it. 
+View Modules
+The graphic layout module will be a canvas responsible for laying out the windows and buttons that the user will interract with. These include command, turtle graphics, command, and command history windows, as well as run, stop, clear, slow, and undo button. This module will be designed to allow future developers to add windows and buttons to it. 
 
-The draw module's will draw the turtle and trace its movements on the turtle graphics window. Here  the team made here was that assumed that the module would only ever have to draw a single turtle at a time because all other implementations of logo had a single turtle. That said, it will be designed to be flexible enough to allow future developers add different kinds of movements to the turtle.
+The draw module's will draw the turtle and trace its movements on the turtle graphics window. Here  the team assumed that the module would only ever have to draw a single turtle at a time because all other implementations of logo had a single turtle. That said, it will be designed to allow future developers extend the manner in which the turtle is drawn and its movements traced eg. the type of turtle drawn, the thickness, color and style of the trace etc.
 
 
-The action listener module's primary goal will be to communicate user input to the model and then query that in order to update the graphical layout. This module will be less flexible than the other two because a developer should only need to extend it after they had already extended either the graphical layout module-- which it takes input to pass to the model-- or the turtle-- which it takes input from to update the draw module and the command history window. 
+The action listener module's primary goal will be to communicate user input from the graphic layout module to the model and then query the turtle module in order to update the graphic layout module. A developer should only need to extend this after they have already extended either the graphical layout module-- which it takes input from to pass to the model-- or the turtle-- which it takes input from to update the view's draw module and command history module.
+
+The command history module will be responsible for keeping track of and displaying the commmands entered in the command window of the graphical layout module. 
 
 Model: 
-The parsing module's primary goal will be to take raw input from the action module and parse it into commands. The module should take a line at a time or more. 
+The parsing module's primary goal will be to take raw input from the action listener module and parse it into commands. The module should be capable of parsing a line at a time or more. 
 
 The command module will then instantiate the respective commands. This module will need to be flexible since it lexicographs a huge part of the turtle's behaviour and other developers may want to extend this behaviour.
 
@@ -35,8 +37,8 @@ The turtle module will take the instantiated commands from the command module an
 
 Primary Classes: 
 View:
-		Panel
-		Window (abstract)
+		GraphicalLayout.java
+		
 		Sample Commands
 		Turtle Graphics 
 		Command Window 
@@ -79,9 +81,9 @@ Describe the program's core architecture (focus on behavior not state), includin
 
 The program is generally divided into the Model, the View Interface(GUI), and the Turtle component. The model part is responsible for parsing (by Lexer/Abstract Syntax Tree), storing the user-typed commands, and then calling the command classes in the Model package, which are the sub-classes of a command super class. Each of the command classes individually corresponds to simple syntax with constants used to draw forward, squares, and triangles; simple syntax with variables; loops, loops with variables; procedures, including the ones with variables, and those with recursion. 
 
-Another important component is the Turtle class. It is an independent class that lives between the Model and the Interface. Model calls Turtle once it finishes parsing, and then turtle calls the TurtleGraphics that extends some GUI tools in the View Interface. 
+Another important component is the Turtle class. It is an independent class that lives between the Model and the Interface. Model calls Turtle once it finishes parsing, and then TurtleGraphics, that extends some GUI tools in the View Interface, calls Turtle. 
 
-The View Interface is the third important component, and its responsibility is to be called by Turtle and then perform the basic methods like draw(), rotate(), changeColor(). The turtle is passed into the turtleGraphics where all the drawings are implemented. Moreover, the View Interface also has some additional functionalities: get History, move fast, move slow, clear -- these correspond to buttons, and onClick. The View Interface will call TurtleGraphics to make adjustments and implement any additions in the drawing process. 
+The View Interface is the third important component, and its responsibility is to call Turtle and then perform the basic methods like draw(), rotate(), changeColor(). The turtle is passed into the turtleGraphics where all the drawings are implemented. Moreover, the View Interface also has some additional functionalities: get History, move fast, move slow, clear -- these correspond to buttons, and onClick. The View Interface will call TurtleGraphics to make adjustments and implement any additions in the drawing process. 
 
 
 
