@@ -9,9 +9,10 @@ public class Tree<T> {
     private Node<T> root;
 
     
-    public Tree(Token rootData) {
+    public Tree(List<Token> tokens) {
         root = new Node<T>();
-        root.data = rootData;
+        //not sure what to make root data yet
+        root.data = null;
         root.children = new Node[2];
         
     }

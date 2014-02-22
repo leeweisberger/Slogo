@@ -19,7 +19,7 @@ public class Parser {
 		return tokens;
 	}
 	private void makeTree(List<Token> tokens){
-		Tree tree = new Tree();
+		Tree tree = new Tree(tokens);
 	}
 	
 	
