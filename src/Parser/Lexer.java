@@ -1,11 +1,19 @@
 package Parser;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+/*
+ * Class Lexer receives a string input and converts this string to tokens
+ */
 public class Lexer {
-    public static enum TokenType {
+	String myInput;
+	public Lexer(String input){
+		myInput=input;
+	}
+    private static enum TokenType {
         // Token types cannot have underscores
         CONSTANT("-?[0-9]+\\.?[0-9]*"), COMMAND("[a-zA-z_]+(\\?)?"), WHITESPACE("[ \t\f\r\n]+");
 
@@ -16,7 +24,7 @@ public class Lexer {
         }
     }
 
-    public static class Token {
+    private static class Token {
         public TokenType type;
         public String data;
 
@@ -25,13 +33,13 @@ public class Lexer {
             this.data = data;
         }
 
-        @Override
-        public String toString() {
-            return String.format("(%s %s)", type.name(), data);
-        }
+//        @Override
+//        public String toString() {
+//            return String.format("(%s %s)", type.name(), data);
+//        }
     }
 
-    public static ArrayList<Token> lex(String input) {
+    private static ArrayList<Token> lex(String input) {
         // The tokens to return
         ArrayList<Token> tokens = new ArrayList<Token>();
 
@@ -57,13 +65,18 @@ public class Lexer {
         return tokens;
     }
     
-
-    public static void main(String[] args) {
-        String input = "fd 11.5 rt 45";
-
-        // Create tokens and print them
-        ArrayList<Token> tokens = lex(input);
-        for (Token token : tokens)
-            System.out.println(token);
+    public List<Token> getTokens(){
+    	List<Token> tokens = lex(myInput);
+    	return tokens;
     }
+    
+
+//    public static void main(String[] args) {
+//        String input = "fd 11.5 rt 45";
+//
+//        // Create tokens and print them
+//        List<Token> tokens = lex(input);
+//        for (Token token : tokens)
+//            System.out.println(token);
+//    }
 }
