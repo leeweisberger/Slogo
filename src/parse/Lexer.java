@@ -1,4 +1,4 @@
-package Parser;
+package parse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +44,9 @@ public class Lexer {
 //        }
 	}
 
-	public  ArrayList<Token> lex(String input) {
+	public  List<Token> lex(String input) {
 		// The tokens to return
-		ArrayList<Token> tokens = new ArrayList<Token>();
+		List<Token> tokens = new ArrayList<Token>();
 
 		// Lexer logic begins here
 		StringBuffer tokenPatternsBuffer = new StringBuffer();
@@ -64,7 +64,7 @@ public class Lexer {
 	}
 
 
-	private ArrayList<Token> matchTokenTypes(ArrayList<Token> tokens, Matcher matcher) {
+	private List<Token> matchTokenTypes(List<Token> tokens, Matcher matcher) {
 		for(TokenType token:TokenType.tokenTypes){
 			if (matcher.group(TokenType.WHITESPACE.name()) != null){
 				//do nothing

@@ -1,7 +1,6 @@
 package slogo_team02;
 
-import Parser.AbstractSyntaxTree;
-import Parser.Lexer;
+import parse.Parser;
 
 public class Controller {
 /*
@@ -13,9 +12,9 @@ public class Controller {
 	/*
 	 * do Parse takes a String as an input, creates a new Lexer object, and passes the results of the lexer object to create a new Abstract Syntax Tree
 	 */
-	private void doParse(String input){
-		Lexer lexer = new Lexer();
-		AbstractSyntaxTree aST = new AbstractSyntaxTree(lexer.lex(input));		
+	private void parse(String input){
+		Parser parser = new Parser(input);
+		parser.doParse();
 	}
 
 }
