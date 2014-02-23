@@ -69,13 +69,9 @@ public class Parser {
 			Command command = new Constant();
 			return command;
 		}
-		//This is added because the try statement is not working. So the only command that will be recognized is Forward for now
-		if(token.data.equals("Forward")){
-			Command command = new Forward();
-			return command;
-		}
+		//All commands must be in the commands package
 		try {
-			Command command = (Command) Class.forName(token.data).newInstance();
+			Command command = (Command) Class.forName("commands."+token.data).newInstance();
 			return command;
 			
 			
