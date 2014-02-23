@@ -8,15 +8,18 @@ import commands.Command;
 import commands.CommandOneInput;
 import commands.CommandTwoInputs;
 import commands.CommandZeroInputs;
+import commands.Constant;
 import commands.Forward;
-import commands.turtle.Constant;
+/*
+ * Takes raw input in string form, parses the information, and returns a list of trees with all of the commands
+ */
 public class Parser {
 	private String myInput;
 	public Parser(String input) {
 		myInput=input;
 	}
 	
-	public void doParse(){
+	public List<Node> doParse(){
 		List<Token> tokens= makeTokenList();
 		List<Command> commandList = makeCommandList(tokens);
 		
@@ -24,7 +27,7 @@ public class Parser {
 		while(!commandList.isEmpty()){
 			NodeList.add(buildTree(commandList));
 		}
-		
+		return NodeList;
 	}
 	
 	private List<Command> makeCommandList(List<Token> tokens){
@@ -74,8 +77,6 @@ public class Parser {
 			Command command = (Command) Class.forName("commands."+token.data).newInstance();
 			return command;
 			
-			
-			
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,15 +90,5 @@ public class Parser {
 		}
 		return null;
 	}
-	
-	public static void main(String[] args) {
-		Parser p = new Parser("Forward 50");
-		p.doParse();
-	}
-	
-	
-	
-	
-	
 
 }

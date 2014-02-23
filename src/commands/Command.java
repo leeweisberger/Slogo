@@ -9,4 +9,6 @@ public abstract class Command {
 	public int getNumInputs(){
 		return myNumInputs;
 	}
+	
+	public abstract void doCommand();
 }

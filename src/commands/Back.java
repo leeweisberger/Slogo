@@ -1,16 +1,11 @@
 package commands;
 
+public class Back extends Movement{
 
-
-public class Forward extends Movement{
-
-	public Forward(){
-		
-	}
 
 	@Override
 	public double move(double pixels) {
-		return pixels;
+		return -pixels;
 	}
 
 	@Override

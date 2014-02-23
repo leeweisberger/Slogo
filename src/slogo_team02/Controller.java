@@ -1,20 +1,22 @@
 package slogo_team02;
 
-import parse.Parser;
+import model.Model;
 
 public class Controller {
 /*
  * The Controller class serves as a bridge between the View and the Model
  */
-	public Controller() {
-		// TODO Auto-generated constructor stub
+	private void initModel(String input){
+		Model model = new Model();
+		model.parse(input);
+		
 	}
-	/*
-	 * do Parse takes a String as an input, creates a new Lexer object, and passes the results of the lexer object to create a new Abstract Syntax Tree
-	 */
-	private void parse(String input){
-		Parser parser = new Parser(input);
-		parser.doParse();
+	
+	//main method to test
+	public static void main(String[] args) {
+		Controller c = new Controller();
+		c.initModel("Forward 50 Back 60");
 	}
+	
 
 }
