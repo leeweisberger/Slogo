@@ -11,9 +11,9 @@ import java.util.regex.Matcher;
 public class Lexer {
 
 	
-	private enum TokenType {
+	enum TokenType {
 		// Token types cannot have underscores
-		CONSTANT("-?[0-9]+\\.?[0-9]*"), COMMAND("[a-zA-z_]+(\\?)?"), BINARYOP("[*|/|+|-]"), WHITESPACE("[ \t\f\r\n]+");
+		CONSTANT("-?[0-9]+\\.?[0-9]*"), COMMAND("[a-zA-z_]+(\\?)?"), WHITESPACE("[ \t\f\r\n]+"); 
 
 		public final String pattern;
 		//create new list of all of the types
@@ -21,7 +21,7 @@ public class Lexer {
 		static
 		{
 			tokenTypes = new ArrayList<TokenType>();
-			tokenTypes.add(CONSTANT); tokenTypes.add(COMMAND); tokenTypes.add(BINARYOP); tokenTypes.add(WHITESPACE);
+			tokenTypes.add(CONSTANT); tokenTypes.add(COMMAND); tokenTypes.add(WHITESPACE);
 		}
 
 		private TokenType(String pattern) {
@@ -36,6 +36,7 @@ public class Lexer {
 		public Token(TokenType type, String data) {
 			this.type = type;
 			this.data = data;
+			
 		}
 
 //        @Override
