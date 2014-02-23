@@ -17,7 +17,7 @@ public class Controller {
 	//main method to test
 	public static void main(String[] args) {
 		Controller c = new Controller();
-		c.initModel("Forward 50");
+		c.initModel("Forward 50 Back 50 Right 90");
 	}
 	
 

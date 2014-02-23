@@ -14,6 +14,7 @@ public class Model {
 	//set where turtle is initally. Eventually will be in the middle of the screen
 	public void setState(double xpos, double ypos, double angle){
 		myCurrentState = new State(xpos,ypos,angle);
+		System.out.println("x: " + myCurrentState.getX() + " y: " + myCurrentState.getY() + " angle: " + myCurrentState.getAngle());
 	}
 	public List<Node> parse(String input){
 		Parser parser = new Parser(input);
@@ -27,6 +28,7 @@ public class Model {
 			if(node.getLeftChild()!=null)curCommand.setInput1((Constant)node.getLeftChild().getCommand());
 			if(node.getRightChild()!=null)curCommand.setInput2((Constant)node.getRightChild().getCommand());		
 			myCurrentState=curCommand.doCommand(this);		
+			System.out.println("x: " + myCurrentState.getX() + " y: " + myCurrentState.getY() + " angle: " + myCurrentState.getAngle());
 		}
 	}
 	public double getX(){
