@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import parse.Lexer.Token;
-
 import commands.Command;
+import commands.CommandOneInput;
+import commands.CommandTwoInputs;
+import commands.CommandZeroInputs;
+import commands.Forward;
 import commands.turtle.Constant;
-import parse.Forward;
 public class Parser {
 	private String myInput;
 	public Parser(String input) {
@@ -18,7 +20,10 @@ public class Parser {
 		List<Token> tokens= makeTokenList();
 		List<Command> commandList = makeCommandList(tokens);
 		
-		Tree tree = makeTree(tokens);
+		List<Node> NodeList = new ArrayList<Node>();
+		while(!commandList.isEmpty()){
+			NodeList.add(buildTree(commandList));
+		}
 		
 	}
 	
@@ -30,17 +35,43 @@ public class Parser {
 		return commandList;
 	}
 	
+	private Node buildTree(List<Command> commandList){
+		
+		Command root = commandList.get(0);
+		commandList.remove(0);
+		Node Node = new Node(root);
+		if(root instanceof CommandZeroInputs){
+			return Node;
+		}
+		if(root instanceof CommandOneInput){
+			Node.setLeftChild(commandList.get(0));
+			commandList.remove(0);
+			return Node;
+		}
+		else if(root instanceof CommandTwoInputs){
+			Node.setLeftChild(commandList.get(0));
+			Node.setRightChild(commandList.get(1));
+			commandList.remove(0); commandList.remove(0);
+			return Node;
+		}
+		return Node;
+		
+	}
+	
 	private List<Token> makeTokenList(){
 		Lexer lexer = new Lexer();
 		return lexer.lex(myInput);
 	}
-	private Tree makeTree(List<Token> tokens){
-		return new Tree(tokens);
-	}
+	
 	
 	private Command getCommandType(Token token){
 		if(token.type.name().equals("CONSTANT")){
 			Command command = new Constant();
+			return command;
+		}
+		//This is added because the try statement is not working. So the only command that will be recognized is Forward for now
+		if(token.data.equals("Forward")){
+			Command command = new Forward();
 			return command;
 		}
 		try {
@@ -58,6 +89,7 @@ public class Parser {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 		return null;
 	}
