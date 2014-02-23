@@ -1,17 +1,25 @@
 package commands;
 
+import model.Model;
+import slogo_team02.State;
+
 
 /*
  * Abstract super class for all turtle movements
  */
 public abstract class Movement extends CommandOneInput{
-	//get current angle from the state
-	
+
 	//get pixels from the tree
-	double pixels=5;
-	double pixelsMoved = move(pixels);
+	double pixels = getInputs()[0].getValue();
 	//calculate the new position that is to be moved to
-	//to do
+	public State doCommand(Model model){
+		double currentAngle = model.getAngle();
+		double currentX=model.getX();
+		double currentY=model.getY();
+		double newX = currentX+move(pixels)*Math.sin(currentAngle);
+		double newY = currentY+move(pixels)*Math.cos(currentAngle);
+		return new State(newX,newY,currentAngle);
+	}
 	public  abstract double move(double pixels);
 		
 }

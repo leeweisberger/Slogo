@@ -69,7 +69,7 @@ public class Parser {
 	
 	private Command getCommandType(Token token){
 		if(token.type.name().equals("CONSTANT")){
-			Command command = new Constant();
+			Command command = new Constant(Double.parseDouble(token.data));
 			return command;
 		}
 		//All commands must be in the commands package
