@@ -8,11 +8,15 @@ import slogo_team02.State;
  * Abstract super class for all turtle movements
  */
 public abstract class Movement extends CommandOneInput{
-
+	
+	public double in(){
+		return myInput1.getValue();
+	}
 	//get pixels from the tree
-	double pixels = getInputs()[0].getValue();
+	
 	//calculate the new position that is to be moved to
 	public State doCommand(Model model){
+		double pixels = in();
 		double currentAngle = model.getAngle();
 		double currentX=model.getX();
 		double currentY=model.getY();

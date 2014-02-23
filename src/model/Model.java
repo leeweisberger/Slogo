@@ -15,16 +15,17 @@ public class Model {
 	public void setState(double xpos, double ypos, double angle){
 		myCurrentState = new State(xpos,ypos,angle);
 	}
-	public void parse(String input){
+	public List<Node> parse(String input){
 		Parser parser = new Parser(input);
 		List<Node> nodeList= parser.doParse();
-		doCommands(nodeList);
+		return nodeList;
 	}
-	private void doCommands(List<Node> nodeList){
+	public void doCommands(List<Node> nodeList){
 		for(Node node:nodeList){
+
 			Command curCommand=node.getCommand();
-			curCommand.setInput1((Constant)node.getLeftChild().getCommand());
-			curCommand.setInput2((Constant)node.getRightChild().getCommand());		
+			if(node.getLeftChild()!=null)curCommand.setInput1((Constant)node.getLeftChild().getCommand());
+			if(node.getRightChild()!=null)curCommand.setInput2((Constant)node.getRightChild().getCommand());		
 			myCurrentState=curCommand.doCommand(this);		
 		}
 	}

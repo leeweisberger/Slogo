@@ -8,14 +8,16 @@ public class Controller {
  */
 	private void initModel(String input){
 		Model model = new Model();
-		model.parse(input);
 		
+		model.setState(30, 50, 0);
+		
+		model.doCommands(model.parse(input));
 	}
 	
 	//main method to test
 	public static void main(String[] args) {
 		Controller c = new Controller();
-		c.initModel("Forward 50 Back 60");
+		c.initModel("Forward 50");
 	}
 	
 
