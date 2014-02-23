@@ -12,14 +12,15 @@ public class Parser {
 	
 	public void doParse(){
 		List<Token> tokens= makeTokenList();
+		Tree tree = makeTree(tokens);
+		
 	}
 	private List<Token> makeTokenList(){
 		Lexer lexer = new Lexer();
-		List<Token> tokens = lexer.lex(myInput);
-		return tokens;
+		return lexer.lex(myInput);
 	}
-	private void makeTree(List<Token> tokens){
-		Tree tree = new Tree(tokens);
+	private Tree makeTree(List<Token> tokens){
+		return new Tree(tokens);
 	}
 	
 	
