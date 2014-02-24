@@ -10,10 +10,10 @@ import java.util.regex.Matcher;
  */
 public class Lexer {
 
-	
 	enum TokenType {
 		// Token types cannot have underscores
-		INBRACKETS("\\[(.*?)\\]"), CONSTANT("-?[0-9]+\\.?[0-9]*"), COMMAND("[a-zA-z_]+(\\?)?"), WHITESPACE("[ \t\f\r\n]+"); 
+		INBRACKETS("\\[(.*?)\\]"), 
+		CONSTANT("-?[0-9]+\\.?[0-9]*"), COMMAND("[a-zA-z_]+(\\?)?"), WHITESPACE("[ \t\f\r\n]+"); 
 
 		public final String pattern;
 		//create new list of all of the types
@@ -21,7 +21,8 @@ public class Lexer {
 		static
 		{
 			tokenTypes = new ArrayList<TokenType>();
-			tokenTypes.add(INBRACKETS); tokenTypes.add(CONSTANT);  tokenTypes.add(COMMAND); tokenTypes.add(WHITESPACE); 
+			
+			tokenTypes.add(CONSTANT);  tokenTypes.add(COMMAND); tokenTypes.add(WHITESPACE);tokenTypes.add(INBRACKETS);  
 		}
 
 		private TokenType(String pattern) {
@@ -35,6 +36,12 @@ public class Lexer {
 
 		public Token(TokenType type, String data) {
 			this.type = type;
+			if(data.startsWith("[")){
+				data=data.substring(2, data.length()-2);
+				for(String str:data.split(" ")){
+					
+				}
+			}
 			this.data = data;
 			
 		}
@@ -71,9 +78,14 @@ public class Lexer {
 			if (matcher.group(TokenType.WHITESPACE.name()) != null){
 				//do nothing
 			}
+			
 			else if(matcher.group(token.name())!=null){
-				tokens.add(new Token(token, matcher.group(token.name())));
-				
+				if(token.toString().equals("INBRACKETS")){
+					makeTokensFromBrackets(tokens, matcher, token);
+				}			
+				else{
+					tokens.add(new Token(token, matcher.group(token.name())));				
+				}
 			}
 			
 		}
@@ -82,12 +94,16 @@ public class Lexer {
 	}
 
 
-
-
+	private static void makeTokensFromBrackets(List<Token> tokens,
+			Matcher matcher, TokenType token) {
+		String data = matcher.group(token.name());
+		data = data.substring(2,data.length()-2);
+		for(String element:data.split(" "))
+			tokens.add(new Token(token, element));
+	}
 
 //	    public static void main(String[] args) {
-//	        String input = "fd 11.5 + repeat 9 [fd 7]";
-//	        
+//	        String input = "fd 11.5 + repeat 9 [ fd 7 back 6 ]";
 //	        // Create tokens and print them
 //	        List<Token> tokens = lex(input);
 //	        for (Token token : tokens)

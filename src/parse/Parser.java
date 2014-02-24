@@ -3,8 +3,11 @@ package parse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import parse.Lexer.Token;
+
 import commands.Command;
 import commands.CommandList;
 import commands.CommandOneInput;
@@ -16,12 +19,13 @@ import commands.Constant;
  */
 public class Parser {
 	private String myInput;
-	private HashMap<Command,Token> myCommandTokenMap = new HashMap<Command,Token>();
+	private HashMap<String,Boolean> isInBracketsMap = new HashMap<String,Boolean>();
 	public Parser(String input) {
 		myInput=input;
 	}
 	
 	public List<Node> doParse(){
+		
 		List<Token> tokens= makeTokenList();
 		
 		List<Command> commandList = makeCommandList(tokens);
@@ -37,9 +41,7 @@ public class Parser {
 		List<Command> commandList = new ArrayList<Command>();
 		
 		for(Token token: tokens){
-			
 			commandList.add(getCommandType(token));
-			myCommandTokenMap.put(getCommandType(token), token);
 		}
 		return commandList;
 	}
@@ -66,9 +68,13 @@ public class Parser {
 		}
 		else if(root instanceof CommandList){
 			node.setLeftChild(commandList.get(0));
-			node.setRightChild(commandList.get(1));
 			commandList.remove(0);
-			buildTree(commandList,node.getRightChild());
+			System.out.println(myCommandTokenMap.get(commandList.get(0)).type);
+			while(myCommandTokenMap.get(commandList.get(0)).type.equals("INBRACKETS")){
+				node.addToChildrenList(commandList.get(0));			
+			}
+					
+			buildTree(commandList,node.getChildrenList().get(node.getChildrenList().size()-1));
 			
 		}
 		return node;
@@ -80,6 +86,15 @@ public class Parser {
 		return lexer.lex(myInput);
 	}
 	
+//	private HashMap<String,Boolean> isInBrackets(String input){
+//		Pattern pattern = Pattern.compile("\\[(.*?)\\]");
+//		Matcher matcher = pattern.matcher(input);
+//		while(matcher.find()) {
+//			isInBracketsMap.put(matcher.group(1), true);
+//		    System.out.println(matcher.group(1));
+//		}
+//		return false;
+//	}
 	
 	private Command getCommandType(Token token){
 		if(token.type.name().equals("CONSTANT")){
@@ -92,6 +107,7 @@ public class Parser {
 			Command command;	
 			if(token.data.startsWith("[")){
 				command = (Command) Class.forName("commands."+token.data.substring(2,token.data.length()-2).trim()).newInstance();
+				
 			}
 			
 			else{command = (Command) Class.forName("commands."+token.data).newInstance();}
