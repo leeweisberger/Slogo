@@ -1,10 +1,8 @@
 package parse;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import parse.Lexer.Token;
 
@@ -19,7 +17,7 @@ import commands.Constant;
  */
 public class Parser {
 	private String myInput;
-	private HashMap<String,Boolean> isInBracketsMap = new HashMap<String,Boolean>();
+	private HashSet<Command> bracketCommands = new HashSet<Command>();
 	public Parser(String input) {
 		myInput=input;
 	}
@@ -41,7 +39,10 @@ public class Parser {
 		List<Command> commandList = new ArrayList<Command>();
 		
 		for(Token token: tokens){
-			commandList.add(getCommandType(token));
+			Command c = getCommandType(token);
+			commandList.add(c);
+			if(token.type.toString().equals("INBRACKETS"))
+				bracketCommands.add(c);
 		}
 		return commandList;
 	}
@@ -69,12 +70,14 @@ public class Parser {
 		else if(root instanceof CommandList){
 			node.setLeftChild(commandList.get(0));
 			commandList.remove(0);
-			System.out.println(myCommandTokenMap.get(commandList.get(0)).type);
-			while(myCommandTokenMap.get(commandList.get(0)).type.equals("INBRACKETS")){
-				node.addToChildrenList(commandList.get(0));			
+			
+			while(commandList.size()>0 && bracketCommands.contains(commandList.get(0))){
+				System.out.println(commandList.get(0));
+				node.addToChildrenList(commandList.get(0));
+				buildTree(commandList,node.getChildrenList().get(node.getChildrenList().size()-1));
 			}
 					
-			buildTree(commandList,node.getChildrenList().get(node.getChildrenList().size()-1));
+		
 			
 		}
 		return node;
@@ -95,9 +98,20 @@ public class Parser {
 //		}
 //		return false;
 //	}
-	
+	private boolean isNumeric(String str)  
+	{  
+	  try  
+	  {  
+	    double d = Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
+	}
 	private Command getCommandType(Token token){
-		if(token.type.name().equals("CONSTANT")){
+		if(isNumeric(token.data)){
 			Command command = new Constant(Double.parseDouble(token.data));
 			return command;
 		}
@@ -105,12 +119,9 @@ public class Parser {
 		
 		try {
 			Command command;	
-			if(token.data.startsWith("[")){
-				command = (Command) Class.forName("commands."+token.data.substring(2,token.data.length()-2).trim()).newInstance();
-				
-			}
 			
-			else{command = (Command) Class.forName("commands."+token.data).newInstance();}
+			
+			command = (Command) Class.forName("commands."+token.data).newInstance();
 			return command;
 			
 		} catch (InstantiationException e) {

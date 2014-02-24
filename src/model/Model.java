@@ -32,7 +32,7 @@ public class Model {
 			if(node.getLeftChild()!=null)
 				curCommand.setInput1((Command)node.getLeftChild().getCommand());
 			if(curCommand instanceof CommandList)
-				((CommandList) curCommand).setCommandList(node.getRightChild());
+				((CommandList) curCommand).setCommandList(node.getChildrenList());
 			else if(node.getRightChild()!=null)
 				curCommand.setInput2((Command)node.getRightChild().getCommand());		
 			myCurrentState=curCommand.doCommand(this);		
