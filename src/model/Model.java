@@ -7,7 +7,7 @@ import parse.Parser;
 import slogo_team02.State;
 
 import commands.Command;
-import commands.Constant;
+import commands.CommandList;
 
 public class Model { 
 	private State myCurrentState;
@@ -16,6 +16,9 @@ public class Model {
 		myCurrentState = new State(xpos,ypos,angle);
 		System.out.println("x: " + myCurrentState.getX() + " y: " + myCurrentState.getY() + " angle: " + myCurrentState.getAngle());
 	}
+	public void setState(State state){
+		myCurrentState=state;
+	}
 	public List<Node> parse(String input){
 		Parser parser = new Parser(input);
 		List<Node> nodeList= parser.doParse();
@@ -23,10 +26,15 @@ public class Model {
 	}
 	public void doCommands(List<Node> nodeList){
 		for(Node node:nodeList){
-
+			
 			Command curCommand=node.getCommand();
-			if(node.getLeftChild()!=null)curCommand.setInput1((Constant)node.getLeftChild().getCommand());
-			if(node.getRightChild()!=null)curCommand.setInput2((Constant)node.getRightChild().getCommand());		
+			
+			if(node.getLeftChild()!=null)
+				curCommand.setInput1((Command)node.getLeftChild().getCommand());
+			if(curCommand instanceof CommandList)
+				((CommandList) curCommand).setCommandList(node.getRightChild());
+			else if(node.getRightChild()!=null)
+				curCommand.setInput2((Command)node.getRightChild().getCommand());		
 			myCurrentState=curCommand.doCommand(this);		
 			System.out.println("x: " + myCurrentState.getX() + " y: " + myCurrentState.getY() + " angle: " + myCurrentState.getAngle());
 		}

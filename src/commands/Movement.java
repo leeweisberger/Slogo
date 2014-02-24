@@ -12,7 +12,7 @@ public abstract class Movement extends CommandOneInput{
 	
 	//calculate the new position that is to be moved to
 	public State doCommand(Model model){
-		double pixels = getInputs()[0].getValue();
+		double pixels =  ((Constant)getInputs()[0]).getValue();
 		double currentAngle = model.getAngle();
 		double currentX=model.getX();
 		double currentY=model.getY();

@@ -6,5 +6,8 @@ public abstract class CommandZeroInputs extends Command{
 		super.myNumInputs=0;
 	}
 
+	public Constant[] getInputs(){
+		return new Constant[] {};
+	}
 
 }

@@ -8,22 +8,21 @@ import slogo_team02.State;
  */
 public abstract class Command {
 	public int myNumInputs;
-	public Constant myInput1=null;
-	public Constant myInput2=null;
+	public Command myInput1=null;
+	public Command myInput2=null;
 	
 	
 	public int getNumInputs(){
 		return myNumInputs;
 	}
-	public void setInput1(Constant input){
-		myInput1=input;
+	public void setInput1(Command command){
+		myInput1=command;
+		
 	}
-	public void setInput2(Constant input){
-		myInput2=input;
+	public void setInput2(Command command){
+		myInput2=command;
 	}
-	public Constant[] getInputs(){
-		return new Constant[] {myInput1,myInput2};
-	}
+	public abstract Command[] getInputs();
 	
 	
 	public abstract State doCommand(Model model);

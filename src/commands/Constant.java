@@ -18,6 +18,11 @@ public class Constant extends Command{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public Command[] getInputs() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 

@@ -1,63 +1,77 @@
 package parse;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import parse.Lexer.Token;
 import commands.Command;
+import commands.CommandList;
 import commands.CommandOneInput;
 import commands.CommandTwoInputs;
 import commands.CommandZeroInputs;
 import commands.Constant;
-import commands.Forward;
 /*
  * Takes raw input in string form, parses the information, and returns a list of trees with all of the commands
  */
 public class Parser {
 	private String myInput;
+	private HashMap<Command,Token> myCommandTokenMap = new HashMap<Command,Token>();
 	public Parser(String input) {
 		myInput=input;
 	}
 	
 	public List<Node> doParse(){
 		List<Token> tokens= makeTokenList();
+		
 		List<Command> commandList = makeCommandList(tokens);
 		
 		List<Node> NodeList = new ArrayList<Node>();
 		while(!commandList.isEmpty()){
-			NodeList.add(buildTree(commandList));
+			NodeList.add(buildTree(commandList,new Node(commandList.get(0))));
 		}
 		return NodeList;
 	}
 	
 	private List<Command> makeCommandList(List<Token> tokens){
 		List<Command> commandList = new ArrayList<Command>();
+		
 		for(Token token: tokens){
+			
 			commandList.add(getCommandType(token));
+			myCommandTokenMap.put(getCommandType(token), token);
 		}
 		return commandList;
 	}
 	
-	private Node buildTree(List<Command> commandList){
+	private Node buildTree(List<Command> commandList, Node n){
 		
 		Command root = commandList.get(0);
 		commandList.remove(0);
-		Node Node = new Node(root);
+		Node node = n;
 		if(root instanceof CommandZeroInputs){
-			return Node;
+			return node;
 		}
-		if(root instanceof CommandOneInput){
-			Node.setLeftChild(commandList.get(0));
+		else if(root instanceof CommandOneInput){
+			node.setLeftChild(commandList.get(0));
 			commandList.remove(0);
-			return Node;
+			return node;
 		}
 		else if(root instanceof CommandTwoInputs){
-			Node.setLeftChild(commandList.get(0));
-			Node.setRightChild(commandList.get(1));
+			
+			node.setLeftChild(commandList.get(0));
+			node.setRightChild(commandList.get(1));
 			commandList.remove(0); commandList.remove(0);
-			return Node;
+			return node;
 		}
-		return Node;
+		else if(root instanceof CommandList){
+			node.setLeftChild(commandList.get(0));
+			node.setRightChild(commandList.get(1));
+			commandList.remove(0);
+			buildTree(commandList,node.getRightChild());
+			
+		}
+		return node;
 		
 	}
 	
@@ -73,8 +87,14 @@ public class Parser {
 			return command;
 		}
 		//All commands must be in the commands package
+		
 		try {
-			Command command = (Command) Class.forName("commands."+token.data).newInstance();
+			Command command;	
+			if(token.data.startsWith("[")){
+				command = (Command) Class.forName("commands."+token.data.substring(2,token.data.length()-2).trim()).newInstance();
+			}
+			
+			else{command = (Command) Class.forName("commands."+token.data).newInstance();}
 			return command;
 			
 		} catch (InstantiationException e) {

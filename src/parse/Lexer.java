@@ -13,7 +13,7 @@ public class Lexer {
 	
 	enum TokenType {
 		// Token types cannot have underscores
-		CONSTANT("-?[0-9]+\\.?[0-9]*"), COMMAND("[a-zA-z_]+(\\?)?"), WHITESPACE("[ \t\f\r\n]+"); 
+		INBRACKETS("\\[(.*?)\\]"), CONSTANT("-?[0-9]+\\.?[0-9]*"), COMMAND("[a-zA-z_]+(\\?)?"), WHITESPACE("[ \t\f\r\n]+"); 
 
 		public final String pattern;
 		//create new list of all of the types
@@ -21,7 +21,7 @@ public class Lexer {
 		static
 		{
 			tokenTypes = new ArrayList<TokenType>();
-			tokenTypes.add(CONSTANT); tokenTypes.add(COMMAND); tokenTypes.add(WHITESPACE);
+			tokenTypes.add(INBRACKETS); tokenTypes.add(CONSTANT);  tokenTypes.add(COMMAND); tokenTypes.add(WHITESPACE); 
 		}
 
 		private TokenType(String pattern) {
@@ -39,13 +39,13 @@ public class Lexer {
 			
 		}
 
-//        @Override
-//        public String toString() {
-//            return String.format("(%s %s)", type.name(), data);
-//        }
+        @Override
+        public String toString() {
+            return String.format("(%s %s)", type.name(), data);
+        }
 	}
 
-	public  List<Token> lex(String input) {
+	public List<Token> lex(String input) {
 		// The tokens to return
 		List<Token> tokens = new ArrayList<Token>();
 
@@ -67,6 +67,7 @@ public class Lexer {
 
 	private List<Token> matchTokenTypes(List<Token> tokens, Matcher matcher) {
 		for(TokenType token:TokenType.tokenTypes){
+			
 			if (matcher.group(TokenType.WHITESPACE.name()) != null){
 				//do nothing
 			}
@@ -76,6 +77,7 @@ public class Lexer {
 			}
 			
 		}
+		
 		return tokens;
 	}
 
@@ -84,8 +86,8 @@ public class Lexer {
 
 
 //	    public static void main(String[] args) {
-//	        String input = "fd 11.5 + rt 45";
-//	
+//	        String input = "fd 11.5 + repeat 9 [fd 7]";
+//	        
 //	        // Create tokens and print them
 //	        List<Token> tokens = lex(input);
 //	        for (Token token : tokens)
