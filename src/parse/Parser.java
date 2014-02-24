@@ -72,7 +72,6 @@ public class Parser {
 			commandList.remove(0);
 			
 			while(commandList.size()>0 && bracketCommands.contains(commandList.get(0))){
-				System.out.println(commandList.get(0));
 				node.addToChildrenList(commandList.get(0));
 				buildTree(commandList,node.getChildrenList().get(node.getChildrenList().size()-1));
 			}

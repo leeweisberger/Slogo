@@ -1,5 +1,6 @@
 package commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import parse.Node;
@@ -8,29 +9,33 @@ public abstract class CommandList extends Command{
 	public CommandList() {
 		super.myNumInputs=2;
 	}
-	private List<Node> myCommandList;
+	private List<Node> myNodeList;
+	private List<Command> myCommandList = new ArrayList<Command>();
 
 	public void setCommandList(List<Node> list){
-		myCommandList = list;
+		myNodeList = list;
 	}
 
 
-	public Command[] getInputs(){
+	public Command getConstantInput(){
+		
+		return myInput1;
+	}
+	
+	public List<Command> getCommandList(){
 		setInnerCommands();
-		return new Command[] {myInput1,myInput2};
-	}
-	public List<Node> getCommandList(){
 		return myCommandList;
 	}
 
 	public void setInnerCommands(){
-		for(Node commandNode: myCommandList){
+		for(Node commandNode: myNodeList){
+			
 			Command curCommand = commandNode.getCommand();
 			if(commandNode.getLeftChild()!=null)
 				curCommand.setInput1((Command)commandNode.getLeftChild().getCommand());
 			if(commandNode.getRightChild()!=null)
 				curCommand.setInput2((Command)commandNode.getRightChild().getCommand());
-			setInput2(curCommand);
+			myCommandList.add(curCommand);
 		}
 	}
 

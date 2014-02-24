@@ -15,7 +15,7 @@ public class Controller {
 	//main method to test
 	public static void main(String[] args) {
 		Controller c = new Controller();
-		c.initModel("Forward 50 Back 45 Repeat 6 [ Forward 7 ]");
+		c.initModel("Forward 50 Back 45 Repeat 6 [ Forward 10 Back 10 ]");
 	}
 	
 
