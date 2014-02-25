@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 public class Lexer {
 
 	enum TokenType {
-		INBRACKETS("\\[(.*?)\\]"), CONSTANT("-?[0-9]+\\.?[0-9]*"), COMMAND("[a-zA-z_]+(\\?)?"), WHITESPACE("[ \t\f\r\n]+"); 
+		CONSTANT("-?[0-9]+\\.?[0-9]*"), INBRACKETS("\\[(.*?)\\]"),  COMMAND("[a-zA-z_]+(\\?)?"), WHITESPACE("[ \t\f\r\n]+"); 
 
 		public final String pattern;
 		private static final List<TokenType> tokenTypes;
@@ -26,7 +26,7 @@ public class Lexer {
 		}
 	}
 
-	public static class Token {
+	public class Token {
 		public TokenType type;
 		public String data;
 
@@ -85,6 +85,6 @@ public class Lexer {
 //	        // Create tokens and print them
 //	        List<Token> tokens = lex(input);
 //	        for (Token token : tokens)
-//	            System.out.println(token);
+//	            System.out.println(token.data + token.type);
 //	    }
 }

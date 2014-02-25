@@ -67,12 +67,10 @@ public class Parser {
 	}
 
 	private Command getCommandType(Token token){
-		if(isNumeric(token.data)){
-			Command command = new Constant(Double.parseDouble(token.data));
-			return command;
-		}
+		if(isNumeric(token.data))
+			return new Constant(Double.parseDouble(token.data));
 		//All commands must be in the commands package
-		try {	
+		try {				
 			return (Command) Class.forName("commands."+token.data).newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -84,16 +82,9 @@ public class Parser {
 		return null;
 	}
 
-	private boolean isNumeric(String str)  
-	{  
-		try  
-		{  
-			double d = Double.parseDouble(str);  
-		}  
-		catch(NumberFormatException nfe)  
-		{  
-			return false;  
-		}  
+	private boolean isNumeric(String str){  
+		try{ double d = Double.parseDouble(str);  } 
+		catch(NumberFormatException nfe){return false;}  
 		return true;  
 	}
 
