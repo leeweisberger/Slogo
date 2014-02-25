@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Model;
 import parse.Node;
-import slogo_team02.State;
+import slogo_team02.TurtleState;
 
 public class Repeat extends CommandList{
 

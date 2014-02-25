@@ -1,10 +1,10 @@
 package slogo_team02;
 
-public class State {
+public class TurtleState {
 	private double myX;
 	private double myY;
 	private double myAngle;
-	public State(double x, double y, double angle) {
+	public TurtleState(double x, double y, double angle) {
 		myX=x;
 		myY=y;
 		myAngle=angle;

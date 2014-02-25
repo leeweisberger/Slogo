@@ -1,6 +1,6 @@
 package commands;
 
-import slogo_team02.State;
+import slogo_team02.TurtleState;
 import model.Model;
 
 

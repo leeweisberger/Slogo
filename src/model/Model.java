@@ -5,7 +5,7 @@ import java.util.List;
 
 import parse.Node;
 import parse.Parser;
-import slogo_team02.State;
+import slogo_team02.TurtleState;
 
 import commands.Command;
 import commands.CommandList;
@@ -13,15 +13,15 @@ import commands.CommandTwoInputs;
 import commands.CommandZeroInputs;
 
 public class Model { 
-	private State myCurrentState;
+	private TurtleState myCurrentState;
 	private List<Command> myCommandList = new ArrayList<Command>();
 	//set where turtle is initally. Eventually will be in the middle of the screen
 	public void setState(double xpos, double ypos, double angle){
-		myCurrentState = new State(xpos,ypos,angle);
+		myCurrentState = new TurtleState(xpos,ypos,angle);
 		System.out.println("x: " + myCurrentState.getX() + " y: " + myCurrentState.getY() + " angle: " + myCurrentState.getAngle());
 	}
-	public void setState(State state){
-		myCurrentState=state;
+	public void setState(TurtleState turtleState){
+		myCurrentState=turtleState;
 	}
 	public List<Node> parse(String input){
 		Parser parser = new Parser(input);
