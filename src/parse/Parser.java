@@ -57,30 +57,14 @@ public class Parser {
 			buildTree(commandList,node.getLastChild());
 		}
 		
-//		if(root instanceof CommandZeroInputs){
-//			return node;
-//		}
-//		else if(root instanceof CommandOneInput){
-//			node.addToChildrenList((commandList.get(0)));
-//			buildTree(commandList,node.getChildrenList().get(0));
-//			return node;
-//		}
-//		else if(root instanceof CommandTwoInputs){
-//			
-//			node.addToChildrenList((commandList.get(0)));
-//			node.setRightChild(commandList.get(1));
-//			commandList.remove(0); commandList.remove(0);
-//			return node;
-//		}
-		
 		if(root instanceof CommandList){
 			node.addToChildrenList((commandList.get(0)));
 			root.myNumInputs++;
-			commandList.remove(0);			
+			buildTree(commandList,node.getLastChild());			
 			while(commandList.size()>0 && bracketCommands.contains(commandList.get(0))){
 				node.addToChildrenList(commandList.get(0));
 				root.myNumInputs++;
-				buildTree(commandList,node.getChildrenList().get(node.getChildrenList().size()-1));
+				buildTree(commandList,node.getLastChild());
 			}
 		}
 		return node;
@@ -92,15 +76,6 @@ public class Parser {
 		return lexer.lex(myInput);
 	}
 	
-//	private HashMap<String,Boolean> isInBrackets(String input){
-//		Pattern pattern = Pattern.compile("\\[(.*?)\\]");
-//		Matcher matcher = pattern.matcher(input);
-//		while(matcher.find()) {
-//			isInBracketsMap.put(matcher.group(1), true);
-//		    System.out.println(matcher.group(1));
-//		}
-//		return false;
-//	}
 	private boolean isNumeric(String str)  
 	{  
 	  try  

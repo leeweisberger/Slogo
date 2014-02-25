@@ -20,19 +20,6 @@ public class Repeat extends CommandList{
 				command.doCommand(model);
 			}
 		}
-//		Command numTimesCommand = (((Command) getConstantInput()));
-//		double numTimes = (double) numTimesCommand.doCommand(model);
-//		List<Command> commandList = getCommandList();
-//		State state=null;
-//		for(Command command:commandList){
-//			
-//			for(int i=0; i<numTimes; i++){
-//				command.doCommand(model);
-//			}
-//			
-//			
-//		}
-//		return state;
 		return null;
 	}
 }
