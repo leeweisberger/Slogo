@@ -5,7 +5,7 @@ public abstract class CommandOneInput extends Command {
 
 	public CommandOneInput() {
 		
-		super.myNumInputs=1;
+		super.setNumInputs(1);
 	}
 
 	

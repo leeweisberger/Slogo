@@ -12,7 +12,7 @@ public class SetXY extends CommandTwoInputs {
 		double newX=(double) getInputs().get(0).doCommand(model);
 		double newY=(double) getInputs().get(1).doCommand(model);
 		double distance = calculateDistance(oldX,newX,oldY,newY);
-		model.setState(new TurtleState(newX,newY,model.getAngle()));
+		model.setState(newX,newY,model.getAngle());
 		return distance;
 	}
 	public double calculateDistance(double x1, double x2, double y1, double y2){

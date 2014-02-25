@@ -52,18 +52,18 @@ public class Parser {
 		Command root = commandList.get(0);
 		commandList.remove(0);
 		Node node = n;
-		for(int i=0; i<root.myNumInputs; i++){
+		for(int i=0; i<root.getNumInputs(); i++){
 			node.addToChildrenList(commandList.get(0));
 			buildTree(commandList,node.getLastChild());
 		}
 		
 		if(root instanceof CommandList){
 			node.addToChildrenList((commandList.get(0)));
-			root.myNumInputs++;
+			((CommandList) root).incrementNumInputs();
 			buildTree(commandList,node.getLastChild());			
 			while(commandList.size()>0 && bracketCommands.contains(commandList.get(0))){
 				node.addToChildrenList(commandList.get(0));
-				root.myNumInputs++;
+				((CommandList) root).incrementNumInputs();
 				buildTree(commandList,node.getLastChild());
 			}
 		}

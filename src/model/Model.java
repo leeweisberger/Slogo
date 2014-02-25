@@ -37,7 +37,7 @@ public class Model {
 		if(command instanceof CommandZeroInputs)
 			return null;
 		else {
-			for(int i=0; i<command.myNumInputs; i++){
+			for(int i=0; i<command.getNumInputs(); i++){
 				for(Node child:node.getChildrenList()){
 					command.setInput(child.getCommand());
 					setCommandInputs(child, child.getCommand());
