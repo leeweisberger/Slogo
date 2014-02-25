@@ -1,12 +1,15 @@
 package command;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
-import parse.Lexer.Token;
-import slogo_team02.Controller;
 import slogo_team02.TurtleState;
 
 public class Program {
@@ -18,6 +21,8 @@ public class Program {
 	private BooleanOperations myBooleanOperations;
 	private ControlStructures myControlStructures;
 	
+	private Map<String, Method> myCmdMap;
+	
 	public Program(TurtleState turtleState){
 		myTurtle = turtleState;
 		myTurtleCommands = new TurtleCommands(myTurtle);
@@ -27,9 +32,22 @@ public class Program {
 		myControlStructures = new ControlStructures(this);
 	}
 	
-	public double execute(List<String> tokenList){
+	public void makeMenu(){
+		myCmdMap = new HashMap<String, Method>();
+		Method[] methods = Object.class.getMethods();
+		List<Method> common = Arrays.asList(methods);
 		
-		double result = -1;
+		Class[] classes = {TurtleCommands.class, TurtleQueries.class, 
+				MathOperations.class, BooleanOperations.class, ControlStructures.class};
+		for (Class cl : classes){
+			for (Method method : cl.getMethods()){
+				if (!common.contains(method))
+					myCmdMap.put(method.getName(), method);
+			}
+		}
+	}
+	
+	public double execute(List<String> tokenList){
 		
 		int inList = 0;
 		List<String> inBracket = new ArrayList<String>();
@@ -49,7 +67,6 @@ public class Program {
 					inList += 1;
 				if (token.equals("]"))
 					inList -= 1;
-				
 				if (inList > 0){
 					inBracket.add(token);
 					continue;
@@ -89,24 +106,17 @@ public class Program {
 			
 			while (curNum == curArg){
 				String cmd = cmdStack.pop();
-				if (isCS(cmd)){
-					while (!lstStack.empty()){
-						lstStack.pop();
-						curArg --;
-					}
-					double cst = cstStack.pop();
-//					for (int i=0; i<curArg; i++)
-//						cstStack.pop();
-					result = cmdCall(cmd, cst);
+				Object[] params = new Object[curArg];
+				while (!lstStack.empty()){
+					curArg --;
+					params[curArg] = lstStack.pop();
 				}
-				else {	
-					double cst = cstStack.pop();
-//					for (int i=0; i<curArg; i++)
-//						cstStack.pop();
-					result = cmdCall(cmd,cst);
+				while (curArg > 0){
+					curArg --;
+					params[curArg] = cstStack.pop();
 				}
-				cstStack.push(result);
-				System.out.println("reached");
+				
+				cstStack.push(cmdCall(cmd, params));
 				if (cmdStack.empty()){
 					curArg = -1;
 					curNum = 0;
@@ -122,15 +132,17 @@ public class Program {
 			//report error; where to put that method? has something to do with the view
 		}
 		
-		return result;
+		return cstStack.pop();
 	}
 	
 	public String cmdType(String cmd){
-		String constant = "-?[0-9]+.?[0-9]*";
+		if (cmd.equals("]"))
+			return cmd;
+		String constant = "-?[0-9]+\\.?[0-9]*";
 		if (cmd.matches(constant)){
 			return "Constant";
 		}
-		if (cmd.matches("[a-zA-z_]+(/?)?")){
+		if (cmd.matches("[a-zA-z_]+(\\?)?")){
 			return "Command";
 		}
 		return cmd;
@@ -143,35 +155,46 @@ public class Program {
 	}
 	
 	public int cmdArg(String cmd){
-		if (cmd.equals("SetHeading")){
-			return 1;
-		}
-		if (cmd.equals("Forward")){
-			return 1;
-		}
-		if (cmd.equals("Sum")){
-			return 2;
-		}
-		return 0;
+		return myCmdMap.get(cmd).getParameterTypes().length;
 	}
 	
-	public double cmdCall(String cmd, Double cst){
-		if (cmd.equals("SetHeading")){
-			return myTurtleCommands.setheading(cst);
+	public double cmdCall(String cmd, Object[] params){
+		if (!myCmdMap.containsKey(cmd)){
+			return -1;
 		}
-		if (cmd.equals("Forward")){
-			return myTurtleCommands.forward(cst);
+		Method method = myCmdMap.get(cmd);
+		Field[] fields = this.getClass().getDeclaredFields();
+		List<Field> list = Arrays.asList(fields);
+		Object obj = new Object();
+		for (Field field: list){
+			if (field.getType() == method.getDeclaringClass())
+				try {
+					obj = field.get(this);
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
 		}
-		if (cmd.equals("Sum")){
-			return myMathOperations.sum(cst,cst);
+		//System.out.println(obj);
+		try {
+//			if (params[0] == null)
+//				System.out.println(method);
+			return (Double) method.invoke(obj, params);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return 0;
-	}
-	
-	public boolean isCS(String cmd){
-		String[] array = {"repeat", "if", "ifelse"};
-		List<String> cs = Arrays.asList(array);
-		return cs.contains(cmd);
+		return -1;
 	}
 	
 	public List<String> tempSplit(String input){
@@ -181,8 +204,11 @@ public class Program {
 	public static void main(String[] args) {
 		TurtleState turtle = new TurtleState(0,0,0);
 		Program prog = new Program(turtle);
-		List<String> list = prog.tempSplit("Repeat 4 [ Forward 5 ]");
+
+		prog.makeMenu();
+		List<String> list = prog.tempSplit("left 90 REPEAT 5 [ forward sum 5 sum 6 6 ]");
+
 		double result = prog.execute(list);
-		System.out.println(turtle.getAngle());
+		System.out.format("%f %f %f", turtle.getX(), turtle.getY(), turtle.getAngle());
 	}
 }

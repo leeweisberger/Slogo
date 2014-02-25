@@ -52,15 +52,13 @@ public class Parser {
 			node.addToChildrenList(commandList.get(0));
 			buildTree(commandList,node.getLastChild());
 		}
-
 		if(root instanceof CommandList){
 			addBracketCommands(commandList, root, node);
 		}
 		return node;	
 	}
 
-	private void addBracketCommands(List<Command> commandList, Command root,
-			Node node) {		
+	private void addBracketCommands(List<Command> commandList, Command root,Node node) {		
 		while(commandList.size()>0 && bracketCommands.contains(commandList.get(0))){
 			node.addToChildrenList(commandList.get(0));
 			((CommandList) root).incrementNumInputs();
@@ -74,22 +72,13 @@ public class Parser {
 			return command;
 		}
 		//All commands must be in the commands package
-
-		try {
-			Command command;	
-
-
-			command = (Command) Class.forName("commands."+token.data).newInstance();
-			return command;
-
+		try {	
+			return (Command) Class.forName("commands."+token.data).newInstance();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
