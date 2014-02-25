@@ -12,7 +12,7 @@ public abstract class Movement extends CommandOneInput{
 	
 	//calculate the new position that is to be moved to
 	public Double doCommand(Model model){
-		Command commandPixels =  (getInputs()[0]);
+		Command commandPixels =  this.getInputs().get(0);
 		
 		
 		double pixels = (double) commandPixels.doCommand(model);

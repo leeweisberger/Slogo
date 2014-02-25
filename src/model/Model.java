@@ -29,34 +29,22 @@ public class Model {
 		return nodeList;
 	}
 	public void doCommand(Command command){
-
 			command.doCommand(this);
-			System.out.println("x: " + myCurrentState.getX() + " y: " + myCurrentState.getY() + " angle: " + myCurrentState.getAngle());
-			
-		
-
-			
+			System.out.println("x: " + myCurrentState.getX() + " y: " + myCurrentState.getY() + " angle: " + myCurrentState.getAngle());	
 	}
 
 	public Command setCommandInputs(Node node, Command command){
 		if(command instanceof CommandZeroInputs)
 			return null;
 		else {
-			command.setInput1((Command)node.getLeftChild().getCommand());
-			setCommandInputs(node.getLeftChild(),(Command)node.getLeftChild().getCommand());
+			for(int i=0; i<command.myNumInputs; i++){
+				for(Node child:node.getChildrenList()){
+					command.setInput(child.getCommand());
+					setCommandInputs(child, child.getCommand());
+				}
+			}
 		}
 		return command;
-//		Command command = node.getCommand();
-//		if(node instanceof CommandZeroInputs)
-//			return;
-//		else {
-//			node.setInput1((Command)node.getLeftChild().getCommand());
-//			nodeToCommand(node.getLeftChild());
-//		}
-//		if(node instanceof CommandTwoInputs){
-//			node.setInput2((Command)node.getRightChild().getCommand());
-//		}
-//		return node;
 
 	}
 	public double getX(){

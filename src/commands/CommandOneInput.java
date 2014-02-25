@@ -7,9 +7,7 @@ public abstract class CommandOneInput extends Command {
 		
 		super.myNumInputs=1;
 	}
-	public Command[] getInputs(){
-		return new Command[] {myInput1};
-	}
+
 	
 
 }

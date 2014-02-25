@@ -52,32 +52,36 @@ public class Parser {
 		Command root = commandList.get(0);
 		commandList.remove(0);
 		Node node = n;
-		if(root instanceof CommandZeroInputs){
-			return node;
+		for(int i=0; i<root.myNumInputs; i++){
+			node.addToChildrenList(commandList.get(0));
+			buildTree(commandList,node.getLastChild());
 		}
-		else if(root instanceof CommandOneInput){
-			node.setLeftChild(commandList.get(0));
-			buildTree(commandList,node.getLeftChild());
-			return node;
-		}
-		else if(root instanceof CommandTwoInputs){
-			
-			node.setLeftChild(commandList.get(0));
-			node.setRightChild(commandList.get(1));
-			commandList.remove(0); commandList.remove(0);
-			return node;
-		}
-		else if(root instanceof CommandList){
-			node.setLeftChild(commandList.get(0));
-			commandList.remove(0);
-			
+		
+//		if(root instanceof CommandZeroInputs){
+//			return node;
+//		}
+//		else if(root instanceof CommandOneInput){
+//			node.addToChildrenList((commandList.get(0)));
+//			buildTree(commandList,node.getChildrenList().get(0));
+//			return node;
+//		}
+//		else if(root instanceof CommandTwoInputs){
+//			
+//			node.addToChildrenList((commandList.get(0)));
+//			node.setRightChild(commandList.get(1));
+//			commandList.remove(0); commandList.remove(0);
+//			return node;
+//		}
+		
+		if(root instanceof CommandList){
+			node.addToChildrenList((commandList.get(0)));
+			root.myNumInputs++;
+			commandList.remove(0);			
 			while(commandList.size()>0 && bracketCommands.contains(commandList.get(0))){
 				node.addToChildrenList(commandList.get(0));
+				root.myNumInputs++;
 				buildTree(commandList,node.getChildrenList().get(node.getChildrenList().size()-1));
 			}
-					
-		
-			
 		}
 		return node;
 		
