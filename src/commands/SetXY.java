@@ -6,13 +6,12 @@ import slogo_team02.TurtleState;
 public class SetXY extends CommandTwoInputs {
 
 	@Override
-	public Double doCommand(Model model) {
-		double oldX=model.getX();
-		double oldY=model.getY();
-		double newX=(double) getInputs().get(0).doCommand(model);
-		double newY=(double) getInputs().get(1).doCommand(model);
-		double distance = calculateDistance(oldX,newX,oldY,newY);
-		model.setState(newX,newY,model.getAngle());
+	public Double doCommand(TurtleState state) {
+		double newX=(double) getInput1().doCommand(state);
+		double newY=(double) getInput2().doCommand(state);
+		double distance = calculateDistance(state.getX(),newX,state.getY(),newY);
+		state.setX(newX);
+		state.setY(newY);
 		return distance;
 	}
 	public double calculateDistance(double x1, double x2, double y1, double y2){

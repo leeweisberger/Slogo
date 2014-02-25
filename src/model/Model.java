@@ -16,16 +16,20 @@ public class Model {
 		myCurrentState = new TurtleState(xpos,ypos,angle);
 		System.out.println("x: " + myCurrentState.getX() + " y: " + myCurrentState.getY() + " angle: " + myCurrentState.getAngle());
 	}
-
+	
+	public void doCommands(String input){
+		for(Node node: parseToNodeList(input)){
+			Command command = node.getCommand();
+			command = setCommandInputs(node, command);
+			command.doCommand(myCurrentState);
+			System.out.println("x: " + myCurrentState.getX() + " y: " + myCurrentState.getY() + " angle: " + myCurrentState.getAngle());	
+		}
+		
+	}
 	public List<Node> parseToNodeList(String input){
 		Parser parser = new Parser(input);
 		List<Node> nodeList= parser.parseToNodeList();
 		return nodeList;
-	}
-
-	public void doCommand(Command command){
-		command.doCommand(this);
-		System.out.println("x: " + myCurrentState.getX() + " y: " + myCurrentState.getY() + " angle: " + myCurrentState.getAngle());	
 	}
 
 	public Command setCommandInputs(Node node, Command command){
@@ -36,15 +40,5 @@ public class Model {
 			}
 		}
 		return command;
-	}
-	
-	public double getX(){
-		return myCurrentState.getX();
-	}
-	public double getY(){
-		return myCurrentState.getY();
-	}
-	public double getAngle(){
-		return myCurrentState.getAngle();
 	}
 }

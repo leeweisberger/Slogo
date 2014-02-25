@@ -6,11 +6,10 @@ import slogo_team02.TurtleState;
 public class SetHeading extends CommandOneInput {
 
 	@Override
-	public Double doCommand(Model model) {
-		double degrees = Math.toRadians((double) getInputs().get(0).doCommand(model));
-		double degreeChange = degreesMoved(model.getAngle(),degrees);
-		double newAngle = degrees;
-		model.setState(model.getX(),model.getY(),newAngle);
+	public Double doCommand(TurtleState state) {
+		double degrees = Math.toRadians((double) getInput1().doCommand(state));
+		double degreeChange = degreesMoved(state.getAngle(),degrees);
+		state.setAngle(degrees);
 		return degreeChange;
 	}
 	public double degreesMoved(double oldDegrees, double newDegrees){

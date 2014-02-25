@@ -11,15 +11,11 @@ public abstract class Movement extends CommandOneInput{
 	//get pixels from the tree
 	
 	//calculate the new position that is to be moved to
-	public Double doCommand(Model model){
-		Command commandPixels =  getInputs().get(0);
-		double pixels = (double) commandPixels.doCommand(model);
-		double currentAngle = model.getAngle();
-		double currentX=model.getX();
-		double currentY=model.getY();
-		double newX = currentX+move(pixels)*Math.sin(currentAngle);
-		double newY = currentY+move(pixels)*Math.cos(currentAngle);
-		model.setState(newX,newY,currentAngle);
+	public Double doCommand(TurtleState state){
+		double pixels = (double) getInput1().doCommand(state);
+		state.setX(state.getX()+move(pixels)*Math.sin(state.getAngle()));
+		state.setY(state.getY()+move(pixels)*Math.cos(state.getAngle()));
+		//model.setState(newX,newY,model.getAngle());
 		return move(pixels);
 	}
 	public  abstract double move(double pixels);

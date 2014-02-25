@@ -3,6 +3,7 @@ package commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import slogo_team02.TurtleState;
 import model.Model;
 
 /*
@@ -27,5 +28,5 @@ public abstract class Command {
 		return myInputs;
 	}
 	
-	public abstract Object doCommand(Model model);
+	public abstract Object doCommand(TurtleState turtleState);
 }
