@@ -12,8 +12,6 @@ public abstract class Command {
 	private int myNumInputs;
 	private List<Command> myInputs = new ArrayList<Command>();
 
-	
-	
 	public int getNumInputs(){
 		return myNumInputs;
 	}
@@ -21,13 +19,13 @@ public abstract class Command {
 	public void setNumInputs(int numInputs){
 		myNumInputs = numInputs;
 	}
-	public void setInput(Command command){
+	
+	public void addInput(Command command){
 		myInputs.add(command);
 	}
 	public List<Command> getInputs(){
 		return myInputs;
 	}
-	
 	
 	public abstract Object doCommand(Model model);
 }

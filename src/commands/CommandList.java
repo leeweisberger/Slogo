@@ -7,7 +7,8 @@ import parse.Node;
 
 public abstract class CommandList extends Command{
 	public CommandList() {
-		super.setNumInputs(0);
+		//Assume there will be at least 1 command for the constant
+		super.setNumInputs(1);
 	}
 	private List<Node> myNodeList;
 	private List<Command> myCommandList = new ArrayList<Command>();

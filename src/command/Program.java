@@ -181,7 +181,7 @@ public class Program {
 	public static void main(String[] args) {
 		TurtleState turtle = new TurtleState(0,0,0);
 		Program prog = new Program(turtle);
-		List<String> list = prog.tempSplit("SetHeading 350 Forward 50");
+		List<String> list = prog.tempSplit("Repeat 4 [ Forward 5 ]");
 		double result = prog.execute(list);
 		System.out.println(turtle.getAngle());
 	}
