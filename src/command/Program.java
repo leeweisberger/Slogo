@@ -67,7 +67,6 @@ public class Program {
 					inList += 1;
 				if (token.equals("]"))
 					inList -= 1;
-				
 				if (inList > 0){
 					inBracket.add(token);
 					continue;
@@ -112,7 +111,7 @@ public class Program {
 					curArg --;
 					params[curArg] = lstStack.pop();
 				}
-				for (int i=0; i<curArg; i++){
+				while (curArg > 0){
 					curArg --;
 					params[curArg] = cstStack.pop();
 				}
@@ -137,6 +136,8 @@ public class Program {
 	}
 	
 	public String cmdType(String cmd){
+		if (cmd.equals("]"))
+			return cmd;
 		String constant = "-?[0-9]+\\.?[0-9]*";
 		if (cmd.matches(constant)){
 			return "Constant";
@@ -180,6 +181,8 @@ public class Program {
 		}
 		//System.out.println(obj);
 		try {
+//			if (params[0] == null)
+//				System.out.println(method);
 			return (Double) method.invoke(obj, params);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
@@ -202,7 +205,7 @@ public class Program {
 		TurtleState turtle = new TurtleState(0,0,0);
 		Program prog = new Program(turtle);
 		prog.makeMenu();
-		List<String> list = prog.tempSplit("setheading 350 forward 50");
+		List<String> list = prog.tempSplit("REPEAT 5 [ forward sum 5 sum 6 6 ]");
 		double result = prog.execute(list);
 		System.out.format("%f %f %f", turtle.getX(), turtle.getY(), turtle.getAngle());
 	}
