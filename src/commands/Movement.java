@@ -19,7 +19,7 @@ public abstract class Movement extends CommandOneInput{
 		double currentY=model.getY();
 		double newX = currentX+move(pixels)*Math.sin(currentAngle);
 		double newY = currentY+move(pixels)*Math.cos(currentAngle);
-		model.setState(new TurtleState(newX,newY,currentAngle));
+		model.setState(newX,newY,currentAngle);
 		return move(pixels);
 	}
 	public  abstract double move(double pixels);

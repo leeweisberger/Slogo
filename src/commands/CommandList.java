@@ -7,7 +7,7 @@ import parse.Node;
 
 public abstract class CommandList extends Command{
 	public CommandList() {
-		super.myNumInputs=0;
+		super.setNumInputs(0);
 	}
 	private List<Node> myNodeList;
 	private List<Command> myCommandList = new ArrayList<Command>();
@@ -15,9 +15,11 @@ public abstract class CommandList extends Command{
 	public void setCommandList(List<Node> list){
 		myNodeList = list;
 	}
-	public void setNumInputs(int numInputs){
-		super.myNumInputs = numInputs;
+	
+	public void incrementNumInputs(){
+		super.setNumInputs(super.getNumInputs()+1);
 	}
+	
 
 //
 //	public Command getConstantInput(){

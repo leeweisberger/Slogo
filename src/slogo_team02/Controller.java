@@ -23,9 +23,7 @@ public class Controller {
 	//main method to test
 	public static void main(String[] args) {
 		Controller c = new Controller();
-		c.initModel("SetHeading 350"
-				+ "Forward 50"
-				+ "Repeat 5 [ Forward Sum 5 6 ]");
+		c.initModel("Repeat 5 [ Forward Sum 5 Sum 6 6 ]");
 	}
 	
 
