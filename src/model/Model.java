@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import parse.Node;
@@ -8,9 +9,12 @@ import slogo_team02.State;
 
 import commands.Command;
 import commands.CommandList;
+import commands.CommandTwoInputs;
+import commands.CommandZeroInputs;
 
 public class Model { 
 	private State myCurrentState;
+	private List<Command> myCommandList = new ArrayList<Command>();
 	//set where turtle is initally. Eventually will be in the middle of the screen
 	public void setState(double xpos, double ypos, double angle){
 		myCurrentState = new State(xpos,ypos,angle);
@@ -24,20 +28,36 @@ public class Model {
 		List<Node> nodeList= parser.doParse();
 		return nodeList;
 	}
-	public void doCommands(List<Node> nodeList){
-		for(Node node:nodeList){
-			
-			Command curCommand=node.getCommand();
-			
-			if(node.getLeftChild()!=null)
-				curCommand.setInput1((Command)node.getLeftChild().getCommand());
-			if(curCommand instanceof CommandList)
-				((CommandList) curCommand).setCommandList(node.getChildrenList());
-			else if(node.getRightChild()!=null)
-				curCommand.setInput2((Command)node.getRightChild().getCommand());		
-			myCurrentState=curCommand.doCommand(this);		
+	public void doCommand(Command command){
+
+			command.doCommand(this);
 			System.out.println("x: " + myCurrentState.getX() + " y: " + myCurrentState.getY() + " angle: " + myCurrentState.getAngle());
+			
+		
+
+			
+	}
+
+	public Command setCommandInputs(Node node, Command command){
+		if(command instanceof CommandZeroInputs)
+			return null;
+		else {
+			command.setInput1((Command)node.getLeftChild().getCommand());
+			setCommandInputs(node.getLeftChild(),(Command)node.getLeftChild().getCommand());
 		}
+		return command;
+//		Command command = node.getCommand();
+//		if(node instanceof CommandZeroInputs)
+//			return;
+//		else {
+//			node.setInput1((Command)node.getLeftChild().getCommand());
+//			nodeToCommand(node.getLeftChild());
+//		}
+//		if(node instanceof CommandTwoInputs){
+//			node.setInput2((Command)node.getRightChild().getCommand());
+//		}
+//		return node;
+
 	}
 	public double getX(){
 		return myCurrentState.getX();
@@ -48,6 +68,6 @@ public class Model {
 	public double getAngle(){
 		return myCurrentState.getAngle();
 	}
-	
+
 
 }

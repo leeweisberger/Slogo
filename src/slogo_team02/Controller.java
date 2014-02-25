@@ -1,6 +1,9 @@
 package slogo_team02;
 
+import commands.Command;
+
 import model.Model;
+import parse.Node;
 
 public class Controller {
 /*
@@ -8,14 +11,19 @@ public class Controller {
  */
 	private void initModel(String input){
 		Model model = new Model();		
-		model.setState(30, 50, 0);		
-		model.doCommands(model.parse(input));
+		model.setState(30, 50, 0);	
+		for(Node node: model.parse(input)){
+			Command command = node.getCommand();
+			command = model.setCommandInputs(node, command);
+			model.doCommand(command);
+		}
+		
 	}
 	
 	//main method to test
 	public static void main(String[] args) {
 		Controller c = new Controller();
-		c.initModel("Forward 50 Back 45 Repeat 6 [ Forward 10 Back 10 ]");
+		c.initModel("Forward Back Forward 50");
 	}
 	
 

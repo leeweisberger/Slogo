@@ -57,7 +57,7 @@ public class Parser {
 		}
 		else if(root instanceof CommandOneInput){
 			node.setLeftChild(commandList.get(0));
-			commandList.remove(0);
+			buildTree(commandList,node.getLeftChild());
 			return node;
 		}
 		else if(root instanceof CommandTwoInputs){

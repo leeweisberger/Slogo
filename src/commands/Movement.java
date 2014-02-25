@@ -11,14 +11,18 @@ public abstract class Movement extends CommandOneInput{
 	//get pixels from the tree
 	
 	//calculate the new position that is to be moved to
-	public State doCommand(Model model){
-		double pixels =  ((Constant)getInputs()[0]).getValue();
+	public Double doCommand(Model model){
+		Command commandPixels =  (getInputs()[0]);
+		
+		
+		double pixels = (double) commandPixels.doCommand(model);
 		double currentAngle = model.getAngle();
 		double currentX=model.getX();
 		double currentY=model.getY();
 		double newX = currentX+move(pixels)*Math.sin(currentAngle);
 		double newY = currentY+move(pixels)*Math.cos(currentAngle);
-		return new State(newX,newY,currentAngle);
+		model.setState(new State(newX,newY,currentAngle));
+		return move(pixels);
 	}
 	public  abstract double move(double pixels);
 		

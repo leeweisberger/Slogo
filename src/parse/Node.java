@@ -45,10 +45,5 @@ public class Node {
 	public Command getCommand(){
 		return this.myData;
 	}
-
-
-
-
-
 }
 

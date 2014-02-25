@@ -5,11 +5,12 @@ import slogo_team02.State;
 
 public abstract class Direction extends CommandOneInput{
 	
-	public State doCommand(Model model){
+	public Double doCommand(Model model){
 		double degrees = Math.toRadians(((Constant) getInputs()[0]).getValue());
 		double currentAngle = model.getAngle();
 		double newAngle = currentAngle+changeDirection(degrees);
-		return new State(model.getX(),model.getY(),newAngle);
+		model.setState(new State(model.getX(),model.getY(),newAngle));
+		return changeDirection(degrees);
 	}
 	public  abstract double changeDirection(double degrees);
 

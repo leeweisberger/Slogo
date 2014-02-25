@@ -25,5 +25,5 @@ public abstract class Command {
 	public abstract Command[] getInputs();
 	
 	
-	public abstract State doCommand(Model model);
+	public abstract Object doCommand(Model model);
 }

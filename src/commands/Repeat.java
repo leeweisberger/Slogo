@@ -17,9 +17,7 @@ public class Repeat extends CommandList{
 		for(Command command:commandList){
 			
 			for(int i=0; i<numTimes; i++){
-				state = command.doCommand(model);
-				
-				model.setState(state);
+				command.doCommand(model);
 			}
 			
 			

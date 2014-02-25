@@ -4,24 +4,15 @@ import slogo_team02.State;
 import model.Model;
 
 
-public class Constant extends Command{
+public class Constant extends CommandZeroInputs{
 	private double myValue;
 	
 	public Constant(double value) {
 		myValue=value;
 	}
-	public double getValue(){
+	@Override
+	public Double doCommand(Model model) {
 		return myValue;
-	}
-	@Override
-	public State doCommand(Model model) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Command[] getInputs() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 
