@@ -7,7 +7,7 @@ public class SetHeading extends CommandOneInput {
 
 	@Override
 	public Double doCommand(Model model) {
-		double degrees = Math.toRadians(((Constant) getInputs()[0]).getValue());
+		double degrees = Math.toRadians((double) getInputs().get(0).doCommand(model));
 		double degreeChange = degreesMoved(model.getAngle(),degrees);
 		double newAngle = degrees;
 		model.setState(new State(model.getX(),model.getY(),newAngle));
