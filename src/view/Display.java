@@ -3,6 +3,7 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -21,15 +22,6 @@ import javax.swing.JTextField;
 import model.Model;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.ButtonGroup;
-import javax.swing.JMenuBar;
-import javax.swing.KeyStroke; 
-import javax.swing.JTextArea;
-import javax.swing.JFrame;
 import javax.swing.*;
 import java.util.*;
 import javax.swing.event.DocumentEvent;
@@ -39,7 +31,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.GroupLayout.*;
 
 
-public class Display extends JPanel{
+public class Display extends JPanel implements DocumentListener{
     private static final Dimension SIZE = new Dimension(800, 600);
     private static final String DRAW_BOX_TITLE = "Draw";
     private static final String HISTORY_BOX_TITLE = "History";
@@ -57,21 +49,21 @@ public class Display extends JPanel{
         setLayout(new BorderLayout());
         // must be first since other panels may refer to page
         add(makeCommandInputBox(), BorderLayout.SOUTH);
-        add(makeCommandHistoryBox(), BorderLayout.EAST);
-        add(makeTurtleStatusBox(), BorderLayout.SOUTH);
-        add(makeDrawTurtleWindow(), BorderLayout.CENTER);
+//        add(makeCommandHistoryBox(), BorderLayout.EAST);
+//        add(makeTurtleStatusBox(), BorderLayout.SOUTH);
+//        add(makeDrawTurtleWindow(), BorderLayout.CENTER);
         add(makeMenuBar(), BorderLayout.NORTH);
         // control the navigation
         enableButtons();
     }
-
+    
     public JMenuBar makeMenuBar() {
         JMenuBar menuBar;
         JMenu menu, submenu;
         JMenuItem menuItem;
         JRadioButtonMenuItem rbMenuItem;
         JCheckBoxMenuItem cbMenuItem;
-
+        
         //Create the menu bar.
         menuBar = new JMenuBar();
 
@@ -94,17 +86,31 @@ public class Display extends JPanel{
         return menuBar;
     }
 
+    public JTextArea makeCommandInputBox() {
+        JTextArea textArea = new JTextArea(
+                                          "Please enter here the command according to which the turtle will move."
+                );
+        textArea.setFont(new Font("Serif", Font.ITALIC, 16));
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.getDocument().addDocumentListener(this);
 
+        JScrollPane areaScrollPane = new JScrollPane(textArea);
+        areaScrollPane.setVerticalScrollBarPolicy(
+                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        areaScrollPane.setPreferredSize(new Dimension(1200, 250));
+//        getTypedCommand();
+        return textArea;
+
+    }    
 
     private void enableButtons () {
         // TODO Auto-generated method stub
 
     }
 
-    private Component makeCommandInputBox () {
-        // TODO Auto-generated method stub
-        return null;
-    }
+
+
 
     private Component makeCommandHistoryBox () {
         // TODO Auto-generated method stub
@@ -120,6 +126,25 @@ public class Display extends JPanel{
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public void insertUpdate (DocumentEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void removeUpdate (DocumentEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void changedUpdate (DocumentEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 
 

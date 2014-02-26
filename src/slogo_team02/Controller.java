@@ -1,5 +1,6 @@
 package slogo_team02;
 
+import java.awt.Dimension;
 import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
@@ -14,7 +15,8 @@ public class Controller {
 	 * The Controller class serves as a bridge between the View and the Model
 	 */
 	private static final String TITLE = "SLogo";
-	 
+	public static final Dimension SIZE = new Dimension(1200, 900);
+	
 	private void doModel(String input){
 		Model model = new Model();		
 		model.setState(0, 0, 0);
@@ -28,8 +30,9 @@ public class Controller {
 		
         // add our user interface components to Frame and show it
         frame.getContentPane().add(display);
-        frame.pack();
+        frame.setSize(SIZE);
         frame.setVisible(true);
+        
 	}
 	
 	//main method to test
