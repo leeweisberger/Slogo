@@ -24,13 +24,19 @@ public class Controller {
 	private void doView(){
 		Display display = new Display(); 
 		JFrame frame = new JFrame(TITLE); 
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+        // add our user interface components to Frame and show it
+        frame.getContentPane().add(display);
+        frame.pack();
+        frame.setVisible(true);
 	}
 	
 	//main method to test
 	public static void main(String[] args) {
 		Controller c = new Controller();
 		c.doView();
-		c.doModel("rePEat 5 [ fd sum 4 sum 4 5 ]");
+		//c.doModel("rePEat 5 [ fd sum 4 sum 4 5 ]");
 	}
 
 
