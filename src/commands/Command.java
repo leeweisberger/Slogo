@@ -3,8 +3,8 @@ package commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import slogo_team02.TurtleState;
 import model.Model;
+import model.TurtleState;
 
 /*
  * Abstract super class that defines a general Command

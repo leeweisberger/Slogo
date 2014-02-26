@@ -11,34 +11,30 @@ public class Node {
 	private Node myParent;
 
 	private List<Node> myChildrenList = new ArrayList<Node>();
+	private List<Node> myFalseChildrenList = new ArrayList<Node>();
 	
 	public Node(Command command){
 		myData=command;
 	}
-//	public void setLeftChild(Command command){
-//		Node node = new Node(command);
-//		node.myParent=this;
-//		this.myChildren[0]=node;
-//	}
-//	public void setRightChild(Command command){
-//		Node node = new Node(command);
-//		node.myParent=this;
-//		this.myChildren[1]=node;
-//	}
+
 	public void addToChildrenList(Command command){
 		Node node = new Node(command);
 		node.myParent=this;
 		this.myChildrenList.add(node);
 	}
-//	public Node getLeftChild(){
-//		return this.myChildren[0];
-//	}
-//	public Node getRightChild(){
-//		return this.myChildren[1];
-//	}
+	public void addToFalseChildrenList(Command command){
+		Node node = new Node(command);
+		node.myParent=this;
+		this.myFalseChildrenList.add(node);
+	}
+
 	public List<Node> getChildrenList(){
 		return this.myChildrenList;
 	}
+	public List<Node> getFalseChildrenList(){
+		return this.myFalseChildrenList;
+	}
+	
 	public Node getParent(){
 		return this.myParent;
 	}
@@ -47,6 +43,9 @@ public class Node {
 	}
 	public Node getLastChild(){
 		return this.myChildrenList.get(this.myChildrenList.size()-1);
+	}
+	public Node getLastFalseChild(){
+		return this.myFalseChildrenList.get(this.myFalseChildrenList.size()-1);
 	}
 }
 

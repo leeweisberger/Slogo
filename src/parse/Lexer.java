@@ -9,16 +9,18 @@ import java.util.regex.Matcher;
  * Class Lexer receives a string input and converts this string to tokens
  */
 public class Lexer {
+	boolean isFalse = false;
 
 	enum TokenType {
-		CONSTANT("-?[0-9]+\\.?[0-9]*"), INBRACKETS("\\[(.*?)\\]"),  COMMAND("[a-zA-z_]+(\\?)?"), WHITESPACE("[ \t\f\r\n]+"); 
+		 CONSTANT("-?[0-9]+\\.?[0-9]*"), INBRACKETS("\\[(.*?)\\]"),  
+		 COMMAND("[a-zA-z_]+(\\?)?"),  WHITESPACE("[ \t\f\r\n]+"), FALSE(""); 
 
 		public final String pattern;
 		private static final List<TokenType> tokenTypes;
 		static
 		{
 			tokenTypes = new ArrayList<TokenType>();		
-			tokenTypes.add(CONSTANT);  tokenTypes.add(COMMAND); tokenTypes.add(WHITESPACE);tokenTypes.add(INBRACKETS);  
+			 tokenTypes.add(CONSTANT);  tokenTypes.add(COMMAND);  tokenTypes.add(WHITESPACE);tokenTypes.add(INBRACKETS);  
 		}
 
 		private TokenType(String pattern) {
@@ -55,17 +57,26 @@ public class Lexer {
 
 
 	private List<Token> matchTokenTypes(List<Token> tokens, Matcher matcher) {
-		for(TokenType token:TokenType.tokenTypes){			
+		
+		for(TokenType tokenType:TokenType.tokenTypes){			
 			if (matcher.group(TokenType.WHITESPACE.name()) != null){
 				//do nothing
 			}			
+<<<<<<< HEAD
+			else if(matcher.group(tokenType.name())!=null){
+				if(tokenType.toString().equals("INBRACKETS")){
+					makeTokensFromBrackets(tokens, matcher, tokenType);
+					isFalse = true;
+=======
 			else if(matcher.group(token.name())!=null){
 //			    System.out.println(matcher.group());
 				if(token.toString().equals("INBRACKETS")){
 					makeTokensFromBrackets(tokens, matcher, token);
+>>>>>>> 687f70ea92a4a43ec0883c8a317a30295d7f0dc9
 				}			
 				else{
-					tokens.add(new Token(token, matcher.group(token.name())));				
+					tokens.add(new Token(tokenType, matcher.group(tokenType.name())));	
+					isFalse=false;
 				}
 			}
 		}	
@@ -73,19 +84,21 @@ public class Lexer {
 	}
 
 
-	private void makeTokensFromBrackets(List<Token> tokens,
-			Matcher matcher, TokenType token) {
-		String data = matcher.group(token.name());
+	private void makeTokensFromBrackets(List<Token> tokens,Matcher matcher, TokenType tokenType) {
+		String data = matcher.group(tokenType.name());
+		if(isFalse)
+			tokenType = TokenType.FALSE;
 		data = data.substring(2,data.length()-2);
 		for(String element:data.split(" "))
-			tokens.add(new Token(token, element));
+			tokens.add(new Token(tokenType, element));
 	}
 
 //	    public static void main(String[] args) {
-//	        String input = "fd 11.5 + repeat 9 [ fd 7 back 6 ]";
+//	        String input = "ifelse 5 [ asfd ][ peter ] repeat [ 5adf ]";
 //	        // Create tokens and print them
-//	        List<Token> tokens = lex(input);
+//	        Lexer l = new Lexer();
+//	        List<Token> tokens = l.lex(input);
 //	        for (Token token : tokens)
-//	            System.out.println(token.data + token.type);
+//	            System.out.println(token.data + " : " + token.type);
 //	    }
 }

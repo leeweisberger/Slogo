@@ -1,7 +1,7 @@
 package commands;
 
-import slogo_team02.TurtleState;
 import model.Model;
+import model.TurtleState;
 
 
 public class Constant extends CommandZeroInputs{

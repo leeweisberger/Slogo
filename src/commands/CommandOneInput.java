@@ -10,7 +10,4 @@ public abstract class CommandOneInput extends Command {
 	public Command getInput1(){
 		return getInputs().get(0);
 	}
-
-	
-
 }

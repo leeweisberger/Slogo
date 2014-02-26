@@ -6,15 +6,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import parse.Lexer.Token;
+
 import commands.Command;
 import commands.CommandList;
 import commands.Constant;
+import commands.IfElse;
 /*
  * Takes raw input in string form, parses the information, and returns a list of trees with all of the commands
  */
 public class Parser {
 	private String myInput;
-	private HashSet<Command> bracketCommands = new HashSet<Command>();
+	private HashSet<Command> trueBracketCommands = new HashSet<Command>();
+	private HashSet<Command> falseBracketCommands = new HashSet<Command>();
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources.";
 	ResourceBundle myResources; 
 	
@@ -45,7 +48,9 @@ public class Parser {
 			Command curCommand = getCommandType(token);
 			commandList.add(curCommand);
 			if(token.type.toString().equals("INBRACKETS"))
-				bracketCommands.add(curCommand);
+				trueBracketCommands.add(curCommand);
+			if(token.type.toString().equals("FALSE"))
+				falseBracketCommands.add(curCommand);
 		}
 		return commandList;
 	}
@@ -65,11 +70,18 @@ public class Parser {
 	}
 
 	private void addBracketCommands(List<Command> commandList, Command root,Node node) {		
-		while(commandList.size()>0 && bracketCommands.contains(commandList.get(0))){
+		while(commandList.size()>0 && trueBracketCommands.contains(commandList.get(0))){
 			node.addToChildrenList(commandList.get(0));
 			((CommandList) root).incrementNumInputs();
 			buildTree(commandList,node.getLastChild());
 		}
+		
+		while(commandList.size()>0 && falseBracketCommands.contains(commandList.get(0))){
+			node.addToFalseChildrenList(commandList.get(0));
+			((CommandList) root).incrementNumFalseInputs();
+			buildTree(commandList,node.getLastFalseChild());
+		}
+		
 	}
 
 	private Command getCommandType(Token token){
@@ -78,6 +90,7 @@ public class Parser {
 		//All commands must be in the commands package
 		try {	
 			token.data = myResources.getString(token.data.toLowerCase());
+			
 			return (Command) Class.forName("commands."+token.data).newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
