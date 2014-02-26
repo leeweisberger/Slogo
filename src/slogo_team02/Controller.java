@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import commands.Command;
 import model.Model;
 import parse.Node;
-import view.Display;
+import View.Display;
 
 public class Controller {
 	/*
@@ -22,7 +22,7 @@ public class Controller {
 	}
 	
 	private void doView(){
-		Display display = new Display(); 
+		Display display = new Display(null, null); 
 		JFrame frame = new JFrame(TITLE); 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
