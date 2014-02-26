@@ -7,8 +7,8 @@ public class SetXY extends CommandTwoInputs {
 
 	@Override
 	public Double doCommand(TurtleState state) {
-		double newX=(double) getInput1().doCommand(state);
-		double newY=(double) getInput2().doCommand(state);
+		double newX=(Double) getInput1().doCommand(state);
+		double newY=(Double) getInput2().doCommand(state);
 		double distance = calculateDistance(state.getX(),newX,state.getY(),newY);
 		state.setX(newX);
 		state.setY(newY);
