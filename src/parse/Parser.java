@@ -3,6 +3,7 @@ package parse;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import parse.Lexer.Token;
 import commands.Command;
@@ -14,8 +15,13 @@ import commands.Constant;
 public class Parser {
 	private String myInput;
 	private HashSet<Command> bracketCommands = new HashSet<Command>();
-	public Parser(String input) {
+	private static final String DEFAULT_RESOURCE_PACKAGE = "resources.";
+	ResourceBundle myResources; 
+	
+	public Parser(String input, String language) {
 		myInput=input;
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+		
 	}
 
 	public List<Node> parseToNodeList(){
@@ -70,7 +76,8 @@ public class Parser {
 		if(isNumeric(token.data))
 			return new Constant(Double.parseDouble(token.data));
 		//All commands must be in the commands package
-		try {				
+		try {	
+			token.data = myResources.getString(token.data.toLowerCase());
 			return (Command) Class.forName("commands."+token.data).newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -83,7 +90,7 @@ public class Parser {
 	}
 
 	private boolean isNumeric(String str){  
-		try{ double d = Double.parseDouble(str);  } 
+		try{ Double.parseDouble(str);  } 
 		catch(NumberFormatException nfe){return false;}  
 		return true;  
 	}

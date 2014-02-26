@@ -1,7 +1,8 @@
 package slogo_team02;
 
-import commands.Command;
+import java.util.ResourceBundle;
 
+import commands.Command;
 import model.Model;
 import parse.Node;
 
@@ -18,7 +19,8 @@ public class Controller {
 	//main method to test
 	public static void main(String[] args) {
 		Controller c = new Controller();
-		c.doModel("Repeat 5 [ Forward Sum 5 Sum 10 5 ] Forward 50 Back 20");
+		
+		c.doModel("rePEat 5 [ fd sum 4 sum 4 5 ]");
 	}
 
 

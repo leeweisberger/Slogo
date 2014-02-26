@@ -27,7 +27,7 @@ public class Model {
 		
 	}
 	public List<Node> parseToNodeList(String input){
-		Parser parser = new Parser(input);
+		Parser parser = new Parser(input, "English");
 		List<Node> nodeList= parser.parseToNodeList();
 		return nodeList;
 	}
