@@ -2,7 +2,7 @@ package commands;
 
 public class Right extends Direction {
 
-	public double changeDirection(double degrees){
+	public double changeDirection(Double degrees){
 		return -degrees;
 		
 	}

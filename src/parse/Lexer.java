@@ -60,6 +60,7 @@ public class Lexer {
 				//do nothing
 			}			
 			else if(matcher.group(token.name())!=null){
+//			    System.out.println(matcher.group());
 				if(token.toString().equals("INBRACKETS")){
 					makeTokensFromBrackets(tokens, matcher, token);
 				}			
