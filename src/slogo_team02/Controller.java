@@ -19,8 +19,7 @@ public class Controller {
 	//main method to test
 	public static void main(String[] args) {
 		Controller c = new Controller();
-		
-		c.doModel("rePEat 5 [ fd sum 4 sum 4 5 ]");
+		c.doModel("ifelse 0 [ fd 5 ] [ back 20 ]");
 	}
 
 

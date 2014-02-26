@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
-import slogo_team02.TurtleState;
+import model.TurtleState;
 
 public class Program {
 	
