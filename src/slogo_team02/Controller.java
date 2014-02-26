@@ -38,15 +38,9 @@ public class Controller {
 	//main method to test
 	public static void main(String[] args) {
 		Controller c = new Controller();
-<<<<<<< HEAD
 		c.doModel("ifelse 0 [ fd 5 ] [ back 20 ]");
-=======
-
 		c.doView();
-
 		//c.doModel("rePEat 5 [ fd sum 4 sum 4 5 ]");
-
->>>>>>> 687f70ea92a4a43ec0883c8a317a30295d7f0dc9
 	}
 
 

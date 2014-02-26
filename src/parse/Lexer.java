@@ -62,17 +62,11 @@ public class Lexer {
 			if (matcher.group(TokenType.WHITESPACE.name()) != null){
 				//do nothing
 			}			
-<<<<<<< HEAD
-			else if(matcher.group(tokenType.name())!=null){
-				if(tokenType.toString().equals("INBRACKETS")){
-					makeTokensFromBrackets(tokens, matcher, tokenType);
-					isFalse = true;
-=======
+
 			else if(matcher.group(token.name())!=null){
 //			    System.out.println(matcher.group());
 				if(token.toString().equals("INBRACKETS")){
 					makeTokensFromBrackets(tokens, matcher, token);
->>>>>>> 687f70ea92a4a43ec0883c8a317a30295d7f0dc9
 				}			
 				else{
 					tokens.add(new Token(tokenType, matcher.group(tokenType.name())));	
