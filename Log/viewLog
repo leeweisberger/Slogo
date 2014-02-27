@@ -4,7 +4,7 @@ Steve: draw window
 		refactoring
 		drawing the stuff
 Anthony:
-		menu bar
+		menu bar(functionality remaining)
 		buttons
 
 Menu bar 
@@ -32,6 +32,11 @@ History
 
 HTML formatted help page 
 
+
+
+****Notes
+MenuBar refactored but still doesn't obey open closed principle
+determine what methods in the GUI are to be public/ part of the API
 
 
 
