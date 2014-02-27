@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import commands.Command;
 import model.Model;
 import parse.Node;
-import View.Display;
+import view.*;
 
 public class Controller {
 	/*
