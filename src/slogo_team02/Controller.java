@@ -36,11 +36,9 @@ public class Controller {
 	public static void main(String[] args) {
 		Controller c = new Controller();
 
-
+		c.doModel("ifelse 0 [ fd 5 ] [ back 20 ]");
 		c.doView();
-
 		//c.doModel("rePEat 5 [ fd sum 4 sum 4 5 ]");
-
 
 	}
 
