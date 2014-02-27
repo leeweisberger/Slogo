@@ -1,4 +1,4 @@
-package View;
+package view;
  
 /*
  * TextAreaDemo.java requires no other files.
