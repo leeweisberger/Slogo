@@ -6,48 +6,28 @@ import java.util.List;
 import parse.Node;
 
 public abstract class CommandList extends Command{
+	private List<Command> myFalseInputs = new ArrayList<Command>();
+	private int myNumFalseInputs = 0;
 	public CommandList() {
 		//Assume there will be at least 1 command for the constant
 		super.setNumInputs(1);
-	}
-	private List<Node> myNodeList;
-	private List<Command> myCommandList = new ArrayList<Command>();
-
-	public void setCommandList(List<Node> list){
-		myNodeList = list;
 	}
 	
 	public void incrementNumInputs(){
 		super.setNumInputs(super.getNumInputs()+1);
 	}
 	
-
-//
-//	public Command getConstantInput(){
-//		return myInput1;
-//	}
+	public void addFalseInput(Command command){
+		myFalseInputs.add(command);
+	}
+	public List<Command> getFalseInputs(){
+		return myFalseInputs;
+	}
 	
-//	public List<Command> getCommandList(){
-//		setInnerCommands();
-//		return myCommandList;
-//	}
-
-//	public void setInnerCommands(){
-//		for(Node commandNode: myNodeList){	
-//			Command curCommand = commandNode.getCommand();
-//			if(commandNode.getLeftChild()!=null)
-//				curCommand.setInput1((Command)commandNode.getLeftChild().getCommand());
-//			if(commandNode.getRightChild()!=null)
-//				curCommand.setInput2((Command)commandNode.getRightChild().getCommand());
-//			myCommandList.add(curCommand);
-//		}
-//	}
-
-
-
-
-
-
-
-
+	public int getNumFalseInputs(){
+		return myNumFalseInputs;
+	}
+	public void incrementNumFalseInputs(){
+		myNumFalseInputs++;
+	}
 }

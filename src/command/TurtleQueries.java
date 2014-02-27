@@ -1,6 +1,6 @@
 package command;
 
-import slogo_team02.TurtleState;
+import model.TurtleState;
 
 public class TurtleQueries {
 

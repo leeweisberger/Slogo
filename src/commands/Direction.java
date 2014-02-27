@@ -1,7 +1,7 @@
 package commands;
 
 import model.Model;
-import slogo_team02.TurtleState;
+import model.TurtleState;
 
 public abstract class Direction extends CommandOneInput{
 	

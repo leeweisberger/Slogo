@@ -45,15 +45,12 @@ public class Display extends JPanel implements DocumentListener{
     public Display (Model model, String language){
         myModel = model;
         //    myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-        // add components to frame
         setLayout(new BorderLayout());
-        // must be first since other panels may refer to page
         add(makeCommandInputBox(), BorderLayout.SOUTH);
 //        add(makeCommandHistoryBox(), BorderLayout.EAST);
 //        add(makeTurtleStatusBox(), BorderLayout.SOUTH);
 //        add(makeDrawTurtleWindow(), BorderLayout.CENTER);
         add(makeMenuBar(), BorderLayout.NORTH);
-        // control the navigation
         enableButtons();
     }
     
@@ -98,7 +95,7 @@ public class Display extends JPanel implements DocumentListener{
         JScrollPane areaScrollPane = new JScrollPane(textArea);
         areaScrollPane.setVerticalScrollBarPolicy(
                         JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        areaScrollPane.setPreferredSize(new Dimension(1200, 250));
+//        areaScrollPane.setPreferredSize(new Dimension(1200, 250));
 //        getTypedCommand();
         return textArea;
 
@@ -109,7 +106,7 @@ public class Display extends JPanel implements DocumentListener{
 
     }
 
-
+    
 
 
     private Component makeCommandHistoryBox () {
@@ -145,6 +142,7 @@ public class Display extends JPanel implements DocumentListener{
         
     }
 
+//    TODO: figure out how to set the drawing plate
 
 
 

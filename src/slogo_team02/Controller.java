@@ -1,14 +1,13 @@
 package slogo_team02;
 
 import java.awt.Dimension;
-import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 
-import commands.Command;
 import model.Model;
 import parse.Node;
 import view.*;
+
 
 public class Controller {
 	/*
@@ -39,8 +38,8 @@ public class Controller {
 	public static void main(String[] args) {
 		Controller c = new Controller();
 
-		c.doView();
-
+		c.doModel("ifelse 1 [ fd 5 ] [ fd 7 ]");
+		//c.doView();
 		//c.doModel("rePEat 5 [ fd sum 4 sum 4 5 ]");
 
 	}
