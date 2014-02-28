@@ -15,7 +15,6 @@ public class IfElse extends CommandList{
 		}
 
 		for(int i=0; i<getNumFalseInputs(); i++){
-			System.out.println("hi");
 			getFalseInputs().get(i).doCommand(turtleState);
 		}
 		return null;

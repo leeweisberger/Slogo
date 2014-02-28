@@ -28,19 +28,14 @@ public class Controller {
         // add our user interface components to Frame and show it
         frame.getContentPane().add(display);
         frame.setSize(SIZE);
-        frame.setVisible(true);
-        
+        frame.setVisible(true);   
 	}
 	
 	//main method to test
 	public static void main(String[] args) {
 		Controller c = new Controller();
-
-		c.doModel("ifelse 1 [ fd 5 ] [ fd 7 ]");
+		c.doModel("repeat 5 [ fd sum 5 7 ]");
 		//c.doView();
 		//c.doModel("rePEat 5 [ fd sum 4 sum 4 5 ]");
-
 	}
-
-
 }

@@ -3,8 +3,8 @@ package commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Model;
 import model.TurtleState;
+import parse.Node;
 
 /*
  * Abstract super class that defines a general Command
@@ -26,6 +26,14 @@ public abstract class Command {
 	}
 	public List<Command> getInputs(){
 		return myInputs;
+	}
+	public void setInputsFromNode(Node node){
+		for(int i=0; i<myNumInputs; i++){
+			for(Node child:node.getChildrenList()){
+				addInput(child.getCommand());
+				child.getCommand().setInputsFromNode(child);
+			}
+		}
 	}
 	
 	public abstract Object doCommand(TurtleState turtleState);
