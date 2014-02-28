@@ -43,8 +43,17 @@ public class Display extends JPanel implements DocumentListener{
 	private MenuBar menuBar;
 	private CommandInput commandInput; 
 	private Buttons buttons; 
+	private Container pane;
+	private JButton run;
+	private JButton stop;
+	private JButton clear;
+	private JButton history;
+	private JTextPane turtleStatus = new JTextPane(); 
+	private JEditorPane turtleGraphicsWindow; 
+	
 
 	public Display (Model model, String language){
+
 		myModel = model;
 		//    myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
 		setLayout(new BorderLayout());
@@ -53,14 +62,39 @@ public class Display extends JPanel implements DocumentListener{
 		//        add(makeDrawTurtleWindow(), BorderLayout.CENTER);
 		menuBar = new MenuBar(); 
 		commandInput = new CommandInput(); 
-		buttons = new Buttons(); 
+		turtleGraphicsWindow= new JEditorPane(); 
+		
+		run = new JButton("run");
+		stop = new JButton("stop");
+		clear = new JButton("clear");
+		history = new JButton("History");
 
 		add(menuBar.getMenuBar(), BorderLayout.NORTH);
 		add(commandInput.getCommandInput(), BorderLayout.SOUTH);
-		add(buttons.getRun());
-		add(buttons.getStop(), BorderLayout.CENTER);
-		add(buttons.getClear(), BorderLayout.CENTER);
-		add(buttons.getUndo(), BorderLayout.CENTER);
+
+		pane = new Container();	
+		add(layoutButtons(pane),  BorderLayout.EAST);
+		add(history,  BorderLayout.WEST);
+		add(turtleGraphicsWindow, BorderLayout.CENTER);
+
+	}
+	
+	private Container layoutButtons(Container pane){
+		pane.setLayout(new GridBagLayout()); 
+		pane.add(turtleStatus, setComponentConstraints(0,0));
+		pane.add(run, setComponentConstraints(0,1));
+		pane.add(stop, setComponentConstraints(0,2));
+		pane.add(clear, setComponentConstraints(0,3));
+		
+		return pane; 
+	}
+
+	private GridBagConstraints setComponentConstraints(int x, int y){
+		GridBagConstraints c = new GridBagConstraints();
+		c.weightx= 0.5;
+		c.gridx = x; 
+		c.gridy = y; 
+		return c; 
 	}
 
 	private Component makeCommandHistoryBox () {

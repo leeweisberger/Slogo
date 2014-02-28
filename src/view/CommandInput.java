@@ -13,11 +13,11 @@ public class CommandInput {
 	CommandInput(){
 		commandIn = new JTextArea(10, 10);
 		commandInScrollPane  = new JScrollPane(commandIn);
-		setProperties(); 
+		setProperties("Serif", 16); 
 	}
 
-	public void setProperties(){
-		commandIn.setFont(new Font("Serif", Font.ITALIC, 16));
+	public void setProperties(String fontName, int fontSize){
+		commandIn.setFont(new Font(fontName, Font.ITALIC, fontSize));
 		commandIn.setLineWrap(true);
 		commandIn.setWrapStyleWord(true);
 	}
