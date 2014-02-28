@@ -10,7 +10,7 @@ public class Repeat extends CommandList{
 	public Object doCommand(TurtleState state) {
 
 		List<Command> inputs = getInputs(); 
-		double numTimes = (double) inputs.get(0).doCommand(state);
+		double numTimes = (Double) inputs.get(0).doCommand(state);
 
 		for(int i=1; i<getNumInputs(); i++){
 			for(int j=0; j<numTimes; j++){
