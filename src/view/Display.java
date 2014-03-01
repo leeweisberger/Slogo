@@ -29,7 +29,7 @@ import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.GroupLayout.*;
-import view.TurtleGraphicsWindow;
+import view.*;
 
 
 public class Display extends JPanel implements DocumentListener{
@@ -77,7 +77,6 @@ public class Display extends JPanel implements DocumentListener{
 		add(layoutButtons(pane),  BorderLayout.EAST);
 		add(history,  BorderLayout.WEST);
 		add(turtleGraphicsWindow, BorderLayout.CENTER);
-		
 
 	}
 	
