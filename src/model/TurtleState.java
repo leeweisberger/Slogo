@@ -60,6 +60,10 @@ public class TurtleState {
     public void setShow(boolean isShown) {
         setState(myX, myY, myAngle,myPenDown,isShown);
     }
+    
+    public void updateStateHistory(){
+    	myStateHistory.add(this);
+    }
 
     public double getX() {
         return myX;

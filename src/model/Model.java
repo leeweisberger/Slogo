@@ -21,6 +21,7 @@ public class Model {
 			Command command = node.getCommand();
 			command.setInputsFromNode(node);
 			command.doCommand(myCurrentState);
+			myCurrentState.updateStateHistory();
 //			viewUpdateState()
 		}
 	}
