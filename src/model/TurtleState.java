@@ -24,7 +24,7 @@ public class TurtleState {
         return myCurrentState;
     }
 
-    public void setState(double x, double y, double angle, boolean penDown, boolean showing){
+    public List<TurtleState> setState(double x, double y, double angle, boolean penDown, boolean showing){
         myX=x;
         myY=y;
         myAngle=angle;
@@ -32,8 +32,9 @@ public class TurtleState {
         myShowing=showing;
         //Whenever setState is called, we know that the state has changed and we will add the state to our history
         myStateHistory.add(this);
+//        System.out.println(myStateHistory.toString());
         System.out.println("x: " + myX + " y: " + myY + " angle: " + myAngle + " penDown: " + myPenDown + " showing: " + myShowing);
-
+        return myStateHistory;
     }
     public List<TurtleState> getStateHistory(){
         return myStateHistory;

@@ -30,17 +30,16 @@ public class Controller {
 		model.setState(0, 0, 0);
 		model.doCommands(input);	
 	}
-	
-	private void doView(){
-		Display display = new Display(null, null); 
-		JFrame frame = new JFrame(TITLE); 
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-        // add our user interface components to Frame and show it
-        frame.getContentPane().add(display);        
-        frame.setSize(SIZE);
 
-        frame.setVisible(true);
+	private void doView(){
+	    Display display = new Display(null, null); 
+	    JFrame frame = new JFrame(TITLE); 
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	    // add our user interface components to Frame and show it
+	    frame.getContentPane().add(display);        
+	    frame.setSize(SIZE);
+	    frame.setVisible(true);
 	}
 	
 
