@@ -29,6 +29,7 @@ import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.GroupLayout.*;
+import view.*;
 
 
 public class Display extends JPanel implements ActionListener{
@@ -49,9 +50,7 @@ public class Display extends JPanel implements ActionListener{
 	private JButton history;
 	private JLabel historyLabel;
 	private JTextPane turtleStatus = new JTextPane(); 
-	private JEditorPane turtleGraphicsWindow; 
-
-
+	private TurtleGraphicsWindow turtleGraphicsWindow; 
 	public Display (Model model, String language){
 
 		myModel = model;
@@ -62,8 +61,7 @@ public class Display extends JPanel implements ActionListener{
 		//        add(makeDrawTurtleWindow(), BorderLayout.CENTER);
 		menuBar = new MenuBar(); 
 		commandInput = new CommandInput(); 
-		turtleGraphicsWindow= new JEditorPane(); 
-
+		turtleGraphicsWindow = new TurtleGraphicsWindow(); 
 		run = new JButton("run");
 		stop = new JButton("stop");
 		clear = new JButton("clear");
