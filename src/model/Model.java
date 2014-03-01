@@ -7,6 +7,7 @@ import parse.Parser;
 
 import commands.Command;
 import commands.CommandList;
+import view.TurtleGraphicsWindow;
 
 public class Model { 
 	private TurtleState myCurrentState;
@@ -20,10 +21,22 @@ public class Model {
 			Command command = node.getCommand();
 			command.setInputsFromNode(node);
 			command.doCommand(myCurrentState);
+			myCurrentState.updateStateHistory();
+//			viewUpdateState()
 		}
 	}
+	
 	public List<Node> parseToNodeList(String input){
 		Parser parser = new Parser(input, "English");
 		return parser.parseToNodeList();
 	}
+
+	public void viewUpdateState(TurtleState myCurrentState){  // need to find place to call this??
+	        this.myCurrentState = myCurrentState;
+	        TurtleGraphicsWindow tg = new TurtleGraphicsWindow();
+	        tg.drawUpdate(myCurrentState);
+	        
+	}
+	
+	
 }
