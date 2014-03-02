@@ -11,7 +11,4 @@ public class Make extends CommandTwoInputs{
 		variable.setValue((double) command.doCommand(turtleState));
 		return null;
 	}
-
-	
-
 }
