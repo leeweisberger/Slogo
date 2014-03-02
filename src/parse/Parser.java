@@ -5,13 +5,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import model.Model;
 import parse.Lexer.Token;
 import commands.Command;
 import commands.CommandList;
 import commands.Constant;
+import commands.CustomCommand;
 import commands.IfElse;
 import commands.Variable;
 /*
@@ -19,6 +22,7 @@ import commands.Variable;
  */
 public class Parser {
 	private String myInput;
+	private boolean isNewCommand=false;
 	private Set<Command> trueBracketCommands = new HashSet<Command>();
 	private Set<Command> falseBracketCommands = new HashSet<Command>();
 	private Map<String,Variable> variableMap = new HashMap<String,Variable>();
@@ -63,6 +67,7 @@ public class Parser {
 		Command root = commandList.get(0);
 		commandList.remove(0);
 		Node node = n;
+
 		for(int i=0; i<root.getNumInputs(); i++){
 			node.addToChildrenList(commandList.get(0));
 			buildTree(commandList,node.getLastChild());
@@ -70,6 +75,7 @@ public class Parser {
 		if(root instanceof CommandList){
 			addBracketCommands(commandList, root, node);
 		}
+
 		return node;	
 	}
 
@@ -93,7 +99,6 @@ public class Parser {
 			return new Constant(Double.parseDouble(token.data));
 		if(token.data.startsWith(":")){
 			if(!variableMap.keySet().contains(token.data)){
-				
 				Variable var = new Variable(0);
 				variableMap.put(token.data,var);
 				return var;
@@ -102,16 +107,30 @@ public class Parser {
 
 		}
 		//All commands must be in the commands package
-		try {	
+		try {
+			if(Model.customCommandList.keySet().contains(token.data)){
+				return Model.customCommandList.get(token.data);
+			}
 			token.data = myResources.getString(token.data.toLowerCase());
-
+			if(token.data.equals("To"))
+				isNewCommand = true;
 			return (Command) Class.forName("commands."+token.data).newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			if(isNewCommand){
+				System.out.println("hi");
+			}
+		}
+		catch (MissingResourceException e){
+			if(isNewCommand){
+				isNewCommand = false;
+				return new CustomCommand(token.data);
+			}
 			e.printStackTrace();
+
 		}
 		return null;
 	}

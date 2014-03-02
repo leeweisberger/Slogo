@@ -1,8 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 //import view.TurtleGraphics;
+import java.util.Set;
+
+import commands.Command;
 
 public class TurtleState {
     private double myX;
@@ -11,7 +15,7 @@ public class TurtleState {
     private boolean myPenDown;
     private boolean myShowing;
     private List<TurtleState> myStateHistory = new ArrayList<TurtleState>();
-    //	private TurtleGraphics tg;
+    
     private static TurtleState _instanceState;
     private static TurtleState myCurrentState;
 
@@ -92,5 +96,6 @@ public class TurtleState {
         }
         return _instanceState;
     }
+  
 
 }

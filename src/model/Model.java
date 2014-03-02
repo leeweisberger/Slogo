@@ -1,16 +1,18 @@
 package model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import parse.Node;
 import parse.Parser;
+import view.TurtleGraphicsWindow;
 
 import commands.Command;
-import commands.CommandList;
-import view.TurtleGraphicsWindow;
 
 public class Model { 
 	private TurtleState myCurrentState;
+	public static Map<String,Command> customCommandList = new HashMap<String,Command>();
 
 	public void setState(double xpos, double ypos, double angle){
 		myCurrentState = new TurtleState(xpos,ypos,angle);
@@ -37,6 +39,7 @@ public class Model {
 	        tg.drawUpdate(myCurrentState);
 	        
 	}
+	
 	
 	
 }
