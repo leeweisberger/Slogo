@@ -5,15 +5,19 @@ import model.TurtleState;
 
 
 public class Constant extends CommandZeroInputs{
-	private double myValue;
+	protected double myValue;
 	
 	public Constant(double value) {
-		myValue=value;
+		myValue = value;
 	}
 	@Override
 	public Double doCommand(TurtleState turtleState) {
+		return getMyValue();
+	}
+	public double getMyValue() {
 		return myValue;
 	}
+
 
 
 
