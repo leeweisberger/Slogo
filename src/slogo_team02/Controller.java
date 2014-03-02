@@ -20,7 +20,7 @@ public class Controller {
 	public static void main(String[] args) {
 		Controller c = new Controller();
 
-		c.doModel("repeat 4 [ fd 5 rt 90 ]");
+		c.doModel("dotimes [ :a 9 ] [ fd 5 ]");
 	//	c.doView();
 		//c.doModel("rePEat 5 [ fd sum 4 sum 4 5 ]");
 	}

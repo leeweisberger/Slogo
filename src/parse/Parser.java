@@ -91,7 +91,7 @@ public class Parser {
 	private Command getCommandType(Token token){
 		if(isNumeric(token.data))
 			return new Constant(Double.parseDouble(token.data));
-		if(token.type.name().equals("VARIABLE")){
+		if(token.data.startsWith(":")){
 			if(!variableMap.keySet().contains(token.data)){
 				
 				Variable var = new Variable(0);
