@@ -1,9 +1,13 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
+
 import jgame.JGColor;
 import jgame.platform.JGEngine;
 import model.*;
@@ -16,7 +20,7 @@ public class TurtleGraphicsWindow extends JGEngine{
 //    JFrame turtleGraphicsWindow ;
     TurtleState myCurrentState;
     List<TurtleState> myStateHistory = new ArrayList<TurtleState>();
-    
+    private boolean test = true;
     public TurtleGraphicsWindow(){
 //        TurtleState.getStateInstant(x, y, angle);
 //        turtleGraphicsWindow = new JFrame();
@@ -50,12 +54,22 @@ public class TurtleGraphicsWindow extends JGEngine{
     @Override
     public void doFrame() {
         // TODO Auto-generated method stub
-        simpeDraw();
+    	 drawLine(200.0, 200.0, 200.0, 250.0, 5.0, JGColor.blue);
+    	//this.setBackground(Color.white);
+      // if(test) simpeDraw();
+    	setColor(JGColor.red);
+    	drawRect(200, 200, 10, 10, true, true);
+    	repaint();
+    	
     }
-    
+    public void paint(Graphics g){
+    	g.setColor(Color.white);
+    	g.drawOval(100, 100, 20, 20);
+    }
     private void simpeDraw () {
         // TODO Auto-generated method stub
         drawLine(200.0, 200.0, 200.0, 250.0, 5.0, JGColor.blue);
+        test = false;
     }
 
     public void drawUpdate(TurtleState myCurrentState){
