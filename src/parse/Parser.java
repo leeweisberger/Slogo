@@ -11,11 +11,12 @@ import java.util.Set;
 
 import model.Model;
 import parse.Lexer.Token;
+
 import commands.Command;
 import commands.CommandList;
 import commands.Constant;
 import commands.CustomCommand;
-import commands.IfElse;
+import commands.MultipleTurtleCommand;
 import commands.Variable;
 /*
  * Takes raw input in string form, parses the information, and returns a list of trees with all of the commands

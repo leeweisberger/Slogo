@@ -8,34 +8,33 @@ import java.util.Map;
 import parse.Node;
 import parse.Parser;
 
-import commands.Ask;
-import commands.AskWith;
 import commands.Command;
+import commands.MultipleTurtleCommand;
 import commands.Tell;
 
 public class Model { 
-	public static Map<Integer,TurtleState> myStates = new HashMap<Integer,TurtleState>();
-	public static List<Integer> activeTurtles = new ArrayList<Integer>();
+	public static Map<Integer,TurtleState> myStatesMap = new HashMap<Integer,TurtleState>();
+	public static List<Integer> myActiveTurtles = new ArrayList<Integer>();
 	public static Map<String,Command> customCommandList = new HashMap<String,Command>();
 
-	public static void setState(double xpos, double ypos, double angle, int whichTurtle){
-		TurtleState CurrentState = new TurtleState(xpos,ypos,angle);
-		myStates.put(whichTurtle,CurrentState);
-		activeTurtles.add(whichTurtle);
+	public static void setState(double xpos, double ypos, double angle, int turtleID){
+		TurtleState CurrentState = new TurtleState(xpos,ypos,angle,turtleID);
+		myStatesMap.put(turtleID,CurrentState);
+		myActiveTurtles.add(turtleID);
 	}
 
 	public void doCommands(String input){
 		for(Node node: parseToNodeList(input)){
 			Command command = node.getCommand();
 			command.setInputsFromNode(node);
-			if(command instanceof Ask || command instanceof AskWith){
-				command.doCommand(null);
+			if(command instanceof MultipleTurtleCommand){
+				((MultipleTurtleCommand) command).commandTurtles(myActiveTurtles, myStatesMap);
 
 			}
 			else{
-				for(int turtle:activeTurtles){
-					command.doCommand(myStates.get(turtle));
-					myStates.get(turtle).updateStateHistory();
+				for(int turtle:myActiveTurtles){
+					command.doCommand(myStatesMap.get(turtle));
+					myStatesMap.get(turtle).updateStateHistory();
 					if(command instanceof Tell)break;
 
 				}

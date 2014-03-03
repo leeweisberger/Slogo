@@ -16,13 +16,14 @@ public class TurtleState {
     private double myAngle;
     private boolean myPenDown;
     private boolean myShowing;
+    private int myID;
     private List<TurtleState> myStateHistory = new ArrayList<TurtleState>();
     
     private static TurtleState _instanceState;
     private static TurtleState myCurrentState;
 
-    public TurtleState(double x, double y, double angle) {
-        setState(x,y,angle,true,true);
+    public TurtleState(double x, double y, double angle, int turtleID) {
+        setState(x,y,angle,true,true,turtleID);
         //		checkInstance of whether 
     }
 
@@ -30,12 +31,13 @@ public class TurtleState {
         return myCurrentState;
     }
 
-    public void setState(double x, double y, double angle, boolean penDown, boolean showing){
+    public void setState(double x, double y, double angle, boolean penDown, boolean showing, int TurtleID){
         myX=x;
         myY=y;
         myAngle=angle;
         myPenDown=penDown;
         myShowing=showing;
+        myID = TurtleID;
         //Whenever setState is called, we know that the state has changed and we will add the state to our history
         myStateHistory.add(this);
         System.out.println("x: " + myX + " y: " + myY + " angle: " + myAngle + " penDown: " + myPenDown + " showing: " + myShowing);
@@ -46,25 +48,25 @@ public class TurtleState {
     }
 
     public void setX(double x) {
-        setState(x, myY, myAngle,myPenDown,myShowing);
+        setState(x, myY, myAngle,myPenDown,myShowing,myID);
     }
 
     public void setY(double y) {
-        setState(myX, y, myAngle,myPenDown,myShowing);
+        setState(myX, y, myAngle,myPenDown,myShowing,myID);
     }
 
     public void setAngle(double angle) {
-        setState(myX, myY, angle,myPenDown,myShowing);
+        setState(myX, myY, angle,myPenDown,myShowing,myID);
     }
 
     public void setPosition(double x, double y){
-        setState(x,y,myAngle,myPenDown,myShowing);
+        setState(x,y,myAngle,myPenDown,myShowing,myID);
     }
     public void setPen(boolean isDown) {
-        setState(myX, myY, myAngle,isDown,myShowing);	}
+        setState(myX, myY, myAngle,isDown,myShowing,myID);	}
 
     public void setShow(boolean isShown) {
-        setState(myX, myY, myAngle,myPenDown,isShown);
+        setState(myX, myY, myAngle,myPenDown,isShown,myID);
     }
     
     public void updateStateHistory(){
@@ -90,14 +92,17 @@ public class TurtleState {
     public boolean getShowing() {
         return myShowing;
     }
-
-    public static TurtleState getStateInstant(double x, double y, double angle){
-        if (_instanceState == null){
-            _instanceState = new TurtleState(x, y, angle);
-            return _instanceState;
-        }
-        return _instanceState;
+    public int getID(){
+    	return myID;
     }
+
+//    public static TurtleState getStateInstant(double x, double y, double angle){
+//        if (_instanceState == null){
+//            _instanceState = new TurtleState(x, y, angle);
+//            return _instanceState;
+//        }
+//        return _instanceState;
+//    }
   
 
 }

@@ -1,28 +1,30 @@
 package commands;
 
 import java.util.List;
+import java.util.Map;
 
 import model.Model;
 import model.TurtleState;
 
-public class Ask extends CommandList{
-	
+public class Ask extends MultipleTurtleCommand {
+
 	@Override
 	public Object doCommand(TurtleState turtleState) {
-		for(int j=0; j<getNumInputs();j++){
-			Double whichTurtled = (Double) getInputs().get(j).doCommand(turtleState);
-			int whichTurtle = whichTurtled.intValue();
-			if(!Model.myStates.keySet().contains(whichTurtle)){
-				Model.myStates.put(whichTurtle, new TurtleState(0,0,0));
-			}
-			TurtleState state = Model.myStates.get(whichTurtle);
-			for(int i=0; i<this.getNumFalseInputs(); i++){
-				getFalseInputs().get(i).doCommand(state);
-			}
+		for (int i = 0; i < this.getNumFalseInputs(); i++) {
+			getFalseInputs().get(i).doCommand(turtleState);
 		}
+
 		return null;
 	}
-	
-	
+
+	@Override
+	public void commandTurtles(List<Integer> activeTurtles,
+			Map<Integer, TurtleState> statesMap) {
+		for (int i = 0; i < getNumInputs(); i++) {
+			int turtleID = (int) ((double) getInputs().get(i).doCommand(null));
+			doCommand(getTurtle(turtleID, activeTurtles, statesMap));
+		}
+
+	}
 
 }
