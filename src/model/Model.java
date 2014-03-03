@@ -9,6 +9,7 @@ import parse.Node;
 import parse.Parser;
 
 import commands.Ask;
+import commands.AskWith;
 import commands.Command;
 import commands.Tell;
 
@@ -27,7 +28,7 @@ public class Model {
 		for(Node node: parseToNodeList(input)){
 			Command command = node.getCommand();
 			command.setInputsFromNode(node);
-			if(command instanceof Ask){
+			if(command instanceof Ask || command instanceof AskWith){
 				command.doCommand(null);
 
 			}
