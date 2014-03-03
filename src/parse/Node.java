@@ -6,7 +6,6 @@ import java.util.List;
 import commands.Command;
 
 public class Node {
-	private Node myRoot;
 	private Command myData;
 	private Node myParent;
 

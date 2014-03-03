@@ -1,51 +1,46 @@
 package slogo_team02;
 
 import java.awt.Dimension;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 
 import model.Model;
-import parse.Node;
-import view.*;
-
+import model.TurtleState;
+import view.Display;
 
 public class Controller {
 	/*
 	 * The Controller class serves as a bridge between the View and the Model
 	 */
-	private static final String TITLE = "SLogo";
 	public static final Dimension SIZE = new Dimension(1200, 900);
+	public static final String TITLE = "Slogo";
 
-	//main method to test
-	public static void main(String[] args) {
-		Controller c = new Controller();
-
-		c.doModel("ifelse 1 [ fd 5 ] [ fd 7 ]");
-		c.doView();
-		//c.doModel("rePEat 5 [ fd sum 4 sum 4 5 ]");
+	public void doModel(String input, Model model) {
+		model.doCommands(input);
+		Map<Integer, List<TurtleState>> historyMap = model.getMyHistoryMap();
 	}
 
-	private void doModel(String input){
-		Model model = new Model();		
-		model.setState(0, 0, 0);
-		model.doCommands(input);	
-	}
-
-	private void doView(){
-		Display display = new Display(null, null); 
-		JFrame frame = new JFrame(TITLE); 
+	private void doView() {
+		Display display = new Display(null, null);
+		JFrame frame = new JFrame(TITLE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// add our user interface components to Frame and show it
-		frame.getContentPane().add(display);        
+		frame.getContentPane().add(display);
 		frame.setSize(SIZE);
-
 		frame.setVisible(true);
 	}
 
+	public void go(Model model) {
+		while (true) {
+			Scanner scanner = new Scanner(System.in);
+			String input = scanner.nextLine();
+			doModel(input, model);
+		}
 
+	}
 
 }
-
-
-
