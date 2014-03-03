@@ -17,6 +17,11 @@ public class TurtleState {
 
     public TurtleState(double x, double y, double angle) {
         setState(x,y,angle,true,true);
+        myX = x;
+        myY = y;
+        myAngle = angle;
+        myPenDown = true;
+        myShowing = true;
         //		checkInstance of whether 
     }
 
@@ -60,6 +65,10 @@ public class TurtleState {
 
     public void setShow(boolean isShown) {
         setState(myX, myY, myAngle,myPenDown,isShown);
+    }
+    
+    public void updateStateHistory(){
+    	myStateHistory.add(this);
     }
 
     public double getX() {
