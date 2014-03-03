@@ -27,6 +27,9 @@ public abstract class Command {
 	public List<Command> getInputs(){
 		return myInputs;
 	}
+	public void clearInputs(){
+		myInputs= new ArrayList<Command>();
+	}
 	public void setInputsFromNode(Node node){
 		for(int i=0; i<myNumInputs; i++){
 			for(Node child:node.getChildrenList()){

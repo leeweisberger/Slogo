@@ -67,7 +67,7 @@ public class Parser {
 		Command root = commandList.get(0);
 		commandList.remove(0);
 		Node node = n;
-
+		
 		for(int i=0; i<root.getNumInputs(); i++){
 			node.addToChildrenList(commandList.get(0));
 			buildTree(commandList,node.getLastChild());
@@ -128,6 +128,8 @@ public class Parser {
 			if(isNewCommand){
 				isNewCommand = false;
 				return new CustomCommand(token.data);
+				
+				
 			}
 			e.printStackTrace();
 

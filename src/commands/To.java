@@ -9,6 +9,7 @@ public class To extends CommandList {
 	public Object doCommand(TurtleState turtleState) {
 		CustomCommand customCommand = (CustomCommand) getInputs().get(0);
 		Model.customCommandList.put(customCommand.getName(), customCommand);
+		customCommand.saveCommand(customCommand.getInputs(), customCommand.getFalseInputs());
 		return 1;
 	}
 
