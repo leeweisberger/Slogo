@@ -28,7 +28,7 @@ public class TurtleGraphicsWindow extends JGEngine{
         
         int height = 480;
         double aspect = 16.0 / 9.0;
-        initEngine((int) (height * aspect), height);      
+        initEngineComponent((int) (height * aspect), height);      
     }
 
     @Override

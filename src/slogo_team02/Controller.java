@@ -1,12 +1,15 @@
 package slogo_team02;
 
 import java.awt.Dimension;
-import java.io.Console;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
-import javax.swing.*;
 
-import view.*;
+import javax.swing.JFrame;
+
 import model.Model;
+import model.TurtleState;
+import view.Display;
 
 
 public class Controller {
@@ -18,6 +21,7 @@ public class Controller {
 
 	public void doModel(String input, Model model){	
 		model.doCommands(input);	
+		Map<Integer, List<TurtleState>> historyMap = model.getMyHistoryMap();
 	}
 
 
