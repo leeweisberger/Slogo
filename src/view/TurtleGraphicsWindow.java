@@ -24,7 +24,7 @@ public class TurtleGraphicsWindow extends JGEngine{
         
         int height = 480;
         double aspect = 16.0 / 9.0;
-        initEngineComponent((int) (height * aspect), height);      
+        initEngine((int) (height * aspect), height);      
     }
 
     @Override
@@ -60,7 +60,6 @@ public class TurtleGraphicsWindow extends JGEngine{
         // TODO Auto-generated method stub
         drawLine(300.0, 300.0, 200.0, 250.0, 5.0, JGColor.blue);
         System.out.println("simpleDraw called");
-        
     }
 //
 //    public void drawUpdate(TurtleState myCurrentState){
