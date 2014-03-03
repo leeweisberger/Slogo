@@ -1,12 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-//import view.TurtleGraphics;
-import java.util.Set;
-
-import commands.Command;
 
 public class TurtleState {
 

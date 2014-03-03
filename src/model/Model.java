@@ -10,7 +10,6 @@ import parse.Parser;
 
 import commands.Command;
 import commands.MultipleTurtleCommand;
-import commands.Tell;
 
 
 public class Model {
