@@ -16,7 +16,7 @@ public class Main {
 		Main main = new Main();
 		Controller c = new Controller();
 		Model model = new Model();
-		model.setState(0, 0, 0);
+		model.setState(0, 0, 0,0);
 		//main.initializeView();
 		c.go(model);
 		
