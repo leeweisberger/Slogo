@@ -12,7 +12,7 @@ public class Lexer {
 	boolean isFalse = false;
 
 	enum TokenType {
-		 CONSTANT("-?[0-9]+\\.?[0-9]*"), INBRACKETS("\\[(.*?)\\]"),  
+		 CONSTANT("-?[0-9]+\\.?[0-9]*"), VARIABLE(":[a-zA-z]+"), INBRACKETS("\\[(.*?)\\]"),  
 		 COMMAND("[a-zA-z_]+(\\?)?"),  WHITESPACE("[ \t\f\r\n]+"), FALSE(""); 
 
 		public final String pattern;
@@ -20,7 +20,7 @@ public class Lexer {
 		static
 		{
 			tokenTypes = new ArrayList<TokenType>();		
-			 tokenTypes.add(CONSTANT);  tokenTypes.add(COMMAND);  tokenTypes.add(WHITESPACE);tokenTypes.add(INBRACKETS);  
+			 tokenTypes.add(CONSTANT); tokenTypes.add(VARIABLE); tokenTypes.add(COMMAND);  tokenTypes.add(WHITESPACE);tokenTypes.add(INBRACKETS);  
 		}
 
 		private TokenType(String pattern) {
@@ -88,12 +88,12 @@ public class Lexer {
 			tokens.add(new Token(tokenType, element));
 	}
 
-//	    public static void main(String[] args) {
-//	        String input = "ifelse 5 [ asfd ][ peter ] repeat [ 5adf ]";
-//	        // Create tokens and print them
-//	        Lexer l = new Lexer();
-//	        List<Token> tokens = l.lex(input);
-//	        for (Token token : tokens)
-//	            System.out.println(token.data + " : " + token.type);
-//	    }
+	    public static void main(String[] args) {
+	        String input = "fd :get";
+	        // Create tokens and print them
+	        Lexer l = new Lexer();
+	        List<Token> tokens = l.lex(input);
+	        for (Token token : tokens)
+	            System.out.println(token.data + " : " + token.type);
+	    }
 }

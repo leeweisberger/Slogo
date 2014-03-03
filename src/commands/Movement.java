@@ -12,7 +12,6 @@ public abstract class Movement extends CommandOneInput{
 
 		double pixels = (Double) getInput1().doCommand(state);
 		state.setPosition(state.getX()+move(pixels)*Math.sin(state.getAngle()), state.getY()+move(pixels)*Math.cos(state.getAngle()));
-
 		return move(pixels);
 	}
 	public  abstract double move(double pixels);		

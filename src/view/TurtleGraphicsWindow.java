@@ -46,7 +46,6 @@ public class TurtleGraphicsWindow extends JGEngine{
         drawImage("myTurtle", 0.0, 0.0);
         // TODO Auto-generated method stub
         setFrameRate(6, 2);
-        
     }
     
     @Override
