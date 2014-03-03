@@ -17,6 +17,8 @@ public class TurtleState {
 	private boolean myShowing;
 	private int myID;
 	private List<TurtleState> myStateHistory = new ArrayList<TurtleState>();
+
+
 	private static TurtleState _instanceState;
 	private static TurtleState myCurrentState;
 	private boolean isnew = true;

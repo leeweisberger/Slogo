@@ -90,6 +90,12 @@ public class TurtleGraphicsWindow extends JGEngine{
     public void paintFrame(){
         
     }
+
+	@Override
+	public void drawImage(double x, double y, String imgname) {
+		// TODO Auto-generated method stub
+		
+	}
     
 //    public void main(String[] args){
             /*for test purpose*/

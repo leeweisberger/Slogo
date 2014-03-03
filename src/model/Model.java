@@ -17,7 +17,12 @@ public class Model {
 	private Map<Integer, TurtleState> myStatesMap = new HashMap<Integer, TurtleState>();
 	private List<Integer> myActiveTurtles = new ArrayList<Integer>();
 	public static Map<String, Command> customCommandList = new HashMap<String, Command>();
+	private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
 
+
+	public Map<Integer, List<TurtleState>> getMyHistoryMap() {
+		return myHistoryMap;
+	}
 
 	public void setState(double xpos, double ypos, double angle, int turtleID) {
 		TurtleState CurrentState = new TurtleState(xpos, ypos, angle, true, true, turtleID);
@@ -36,12 +41,16 @@ public class Model {
 			} else {
 				for (int turtle : myActiveTurtles) {
 					command.doCommand(myStatesMap.get(turtle));
-
+					
 				}
 			}
 
 			// viewUpdateState()
 		}
+		for(TurtleState turtle:myStatesMap.values()){
+			myHistoryMap.put(turtle.getID(), turtle.getStateHistory());
+		}
+		
 	}
 
 	public List<Node> parseToNodeList(String input) {
