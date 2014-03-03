@@ -18,13 +18,10 @@ public class TurtleState {
 	private List<TurtleState> myStateHistory = new ArrayList<TurtleState>();
 	private static TurtleState _instanceState;
 	private static TurtleState myCurrentState;
+	private boolean isnew = true;
 
 	public TurtleState(double x, double y, double angle,boolean penDown,boolean showing, int turtleID) {
 		setState(x, y, angle, penDown, showing, turtleID);
-	}
-
-	public TurtleState(TurtleState turtleState) {
-		myCurrentState = turtleState;
 	}
 
 	public  TurtleState getInstant() {
@@ -39,14 +36,14 @@ public class TurtleState {
 		myPenDown = penDown;
 		myShowing = showing;
 		myID = turtleID;
-		updateStateHistory();
+		if(!isnew)updateStateHistory();
 		for(TurtleState st : myStateHistory){
-			System.out.println("y + " + st.getY());
+			System.out.println("History: " + st.getID() + " x: " + st.getX() + " y: " + st.getY() + " angle: " + st.getAngle());
 		}
 		
-		System.out.println("x: " + myX + " y: " + myY + " angle: " + myAngle
-				+ " penDown: " + myPenDown + " showing: " + myShowing);
-		
+//		System.out.println("x: " + myX + " y: " + myY + " angle: " + myAngle
+//				+ " penDown: " + myPenDown + " showing: " + myShowing);
+		isnew = false;
 	}
 
 	public List<TurtleState> getStateHistory() {
@@ -79,8 +76,8 @@ public class TurtleState {
 	}
 
 	public void updateStateHistory() {
-		
-		myStateHistory.add(new TurtleState(this).myCurrentState);
+		isnew = true;
+		myStateHistory.add(new TurtleState(myX,myY,myAngle,myPenDown,myShowing,myID));
 	}
 
 	public double getX() {
