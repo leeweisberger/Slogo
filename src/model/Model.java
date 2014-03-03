@@ -7,7 +7,8 @@ import java.util.Map;
 
 import parse.Node;
 import parse.Parser;
-import view.TurtleGraphicsWindow;
+
+import commands.Ask;
 import commands.Command;
 import commands.Tell;
 
@@ -26,30 +27,36 @@ public class Model {
 		for(Node node: parseToNodeList(input)){
 			Command command = node.getCommand();
 			command.setInputsFromNode(node);
-			for(int turtle:activeTurtles){
-				command.doCommand(myStates.get(turtle));
-				myStates.get(turtle).updateStateHistory();
-				if(command instanceof Tell)break;
-				
+			if(command instanceof Ask){
+				command.doCommand(null);
+
 			}
-			
-//			viewUpdateState()
+			else{
+				for(int turtle:activeTurtles){
+					command.doCommand(myStates.get(turtle));
+					myStates.get(turtle).updateStateHistory();
+					if(command instanceof Tell)break;
+
+				}
+			}
+
+			//			viewUpdateState()
 		}
 	}
-	
+
 	public List<Node> parseToNodeList(String input){
 		Parser parser = new Parser(input, "English");
 		return parser.parseToNodeList();
 	}
 
 	//need to change this to accommodate multiple turtles
-//	public void viewUpdateState(TurtleState CurrentState){  // need to find place to call this??
-//	        this.myCurrentState = myCurrentState;
-//	        TurtleGraphicsWindow tg = new TurtleGraphicsWindow();
-//	        tg.drawUpdate(myCurrentState);
-//	        
-//	}
-	
-	
-	
+	//	public void viewUpdateState(TurtleState CurrentState){  // need to find place to call this??
+	//	        this.myCurrentState = myCurrentState;
+	//	        TurtleGraphicsWindow tg = new TurtleGraphicsWindow();
+	//	        tg.drawUpdate(myCurrentState);
+	//	        
+	//	}
+
+
+
 }
