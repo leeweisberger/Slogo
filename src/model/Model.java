@@ -12,10 +12,12 @@ import commands.Command;
 import commands.MultipleTurtleCommand;
 import commands.Tell;
 
+
 public class Model {
 	private Map<Integer, TurtleState> myStatesMap = new HashMap<Integer, TurtleState>();
 	private List<Integer> myActiveTurtles = new ArrayList<Integer>();
 	public static Map<String, Command> customCommandList = new HashMap<String, Command>();
+
 
 	public void setState(double xpos, double ypos, double angle, int turtleID) {
 		TurtleState CurrentState = new TurtleState(xpos, ypos, angle, true, true, turtleID);
@@ -47,6 +49,14 @@ public class Model {
 		return parser.parseToNodeList();
 	}
 
+
+	public void viewUpdateState(TurtleState myCurrentState){  // need to find place to call this??
+//	        this.myCurrentState = myCurrentState;
+//	        TurtleGraphicsWindow tg = new TurtleGraphicsWindow();
+//	        tg.drawUpdate(myCurrentState);
+	        
+	}
+
 	// need to change this to accommodate multiple turtles
 	// public void viewUpdateState(TurtleState CurrentState){ // need to find
 	// place to call this??
@@ -55,5 +65,6 @@ public class Model {
 	// tg.drawUpdate(myCurrentState);
 	//
 	// }
+
 
 }

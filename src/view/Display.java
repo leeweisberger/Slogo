@@ -77,7 +77,7 @@ public class Display extends JPanel implements DocumentListener{
 		add(layoutButtons(pane),  BorderLayout.EAST);
 		add(history,  BorderLayout.WEST);
 		add(turtleGraphicsWindow, BorderLayout.CENTER);
-
+		System.out.println("turtleGraphicsWindow added");
 	}
 	
 	private Container layoutButtons(Container pane){

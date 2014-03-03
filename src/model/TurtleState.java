@@ -9,6 +9,7 @@ import java.util.Set;
 import commands.Command;
 
 public class TurtleState {
+
 	private double myX;
 	private double myY;
 	private double myAngle;
@@ -24,7 +25,7 @@ public class TurtleState {
 		setState(x, y, angle, penDown, showing, turtleID);
 	}
 
-	public  TurtleState getInstant() {
+	public static  TurtleState getInstant() {
 		return myCurrentState;
 	}
 
@@ -112,5 +113,6 @@ public class TurtleState {
 	// }
 	// return _instanceState;
 	// }
+
 
 }

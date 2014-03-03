@@ -10,7 +10,8 @@ import javax.swing.JFrame;
 
 import jgame.JGColor;
 import jgame.platform.JGEngine;
-import model.*;
+import model.Model;
+import model.TurtleState;
 
 public class TurtleGraphicsWindow extends JGEngine{    
     /**
@@ -18,7 +19,7 @@ public class TurtleGraphicsWindow extends JGEngine{
      */
 //    private static final long serialVersionUID = 1L;
 //    JFrame turtleGraphicsWindow ;
-    TurtleState myCurrentState;
+    TurtleState myCurrentState = TurtleState.getInstant();
     List<TurtleState> myStateHistory = new ArrayList<TurtleState>();
     private boolean test = true;
     public TurtleGraphicsWindow(){
@@ -54,38 +55,41 @@ public class TurtleGraphicsWindow extends JGEngine{
     @Override
     public void doFrame() {
         // TODO Auto-generated method stub
-    	 drawLine(200.0, 200.0, 200.0, 250.0, 5.0, JGColor.blue);
-    	//this.setBackground(Color.white);
-      // if(test) simpeDraw();
-    	setColor(JGColor.red);
-    	drawRect(200, 200, 10, 10, true, true);
-    	repaint();
-    	
-    }
-    public void paint(Graphics g){
-    	g.setColor(Color.white);
-    	g.drawOval(100, 100, 20, 20);
+
+
+        System.out.println("myCurrentState is " + myCurrentState);
+//        drawUpdate(myCurrentState);
+        simpeDraw();   
+
     }
     private void simpeDraw () {
         // TODO Auto-generated method stub
-        drawLine(200.0, 200.0, 200.0, 250.0, 5.0, JGColor.blue);
-        test = false;
-    }
 
-    public void drawUpdate(TurtleState myCurrentState){
-        myCurrentState = TurtleState.getInstant();
-        myStateHistory = myCurrentState.getStateHistory();
-        System.out.println("the myStateHistory at this moment is " + myStateHistory);
-        for (int i=0; i<myStateHistory.size()-1; i++){
-            TurtleState myPrevState = myStateHistory.get(i);
-            TurtleState myNextState= myStateHistory.get(i+1);
-            // make a media file, and setImage at prev location
-            drawLine(myPrevState.getX(), myPrevState.getY(), myNextState.getX(), myNextState.getY(), 5.0, JGColor.blue);
-            // after the line is drawn, setImage at next location
-        }
-        /*for rotation: 
-         * defineImageRotated(java.lang.String imgname, java.lang.String tilename, int collisionid, java.lang.String srcimg, double angle) 
-          Define new image by rotating an already loaded image.*/
+        drawLine(300.0, 300.0, 200.0, 250.0, 5.0, JGColor.blue);
+        System.out.println("simpleDraw called");
+        
+
+    }
+//
+//    public void drawUpdate(TurtleState myCurrentState){
+//        myCurrentState = 
+//        myStateHistory = myCurrentState.getStateHistory();
+//        System.out.println("the myStateHistory at this moment is " + myStateHistory);
+//        for (int i=0; i<myStateHistory.size()-1; i++){
+//            TurtleState myPrevState = myStateHistory.get(i);
+//            TurtleState myNextState= myStateHistory.get(i+1);
+//            // make a media file, and setImage at prev location
+//            drawLine(myPrevState.getX(), myPrevState.getY(), myNextState.getX(), myNextState.getY(), 5.0, JGColor.blue);
+//            // after the line is drawn, setImage at next location
+//        }
+//        /*for rotation: 
+//         * defineImageRotated(java.lang.String imgname, java.lang.String tilename, int collisionid, java.lang.String srcimg, double angle) 
+//          Define new image by rotating an already loaded image.*/
+//    }
+    
+    @Override
+    public void paintFrame(){
+        
     }
     
 //    public void main(String[] args){
