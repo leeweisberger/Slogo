@@ -6,8 +6,14 @@ import java.util.Map;
 import model.Model;
 import model.TurtleState;
 
+/**
+ * The Class Ask.
+ */
 public class Ask extends MultipleTurtleCommand {
 
+	/* (non-Javadoc)
+	 * @see commands.basic.Command#doCommand(model.TurtleState)
+	 */
 	@Override
 	public Object doCommand(TurtleState turtleState) {
 		for (int i = 0; i < this.getNumFalseInputs(); i++) {
@@ -17,6 +23,9 @@ public class Ask extends MultipleTurtleCommand {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see commands.multiple.MultipleTurtleCommand#commandTurtles(java.util.List, java.util.Map)
+	 */
 	@Override
 	public void commandTurtles(List<Integer> activeTurtles,
 			Map<Integer, TurtleState> statesMap) {
