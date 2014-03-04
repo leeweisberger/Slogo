@@ -36,8 +36,8 @@ import jgame.JGRectangle;
 import view.*;
 
 
-public class Display extends JPanel implements DocumentListener{
-	
+public class Display extends JPanel implements ActionListener{
+	private static final Dimension SIZE = new Dimension(800, 600);
 	private static final String DRAW_BOX_TITLE = "Draw";
 	private static final String HISTORY_BOX_TITLE = "History";
 	private static final String COMMAND_BOX_TITLE = "Command";
@@ -47,16 +47,14 @@ public class Display extends JPanel implements DocumentListener{
 	private JScrollPane scrollPane;
 	private MenuBar menuBar;
 	private CommandInput commandInput; 
-	private Buttons buttons; 
 	private Container pane;
 	private JButton run;
 	private JButton stop;
 	private JButton clear;
 	private JButton history;
+	private JLabel historyLabel;
 	private JTextPane turtleStatus = new JTextPane(); 
 	private TurtleGraphicsWindow turtleGraphicsWindow; 
-	
-
 	public Display (Model model, String language){
 
 		myModel = model;
@@ -67,36 +65,41 @@ public class Display extends JPanel implements DocumentListener{
 		//        add(makeDrawTurtleWindow(), BorderLayout.CENTER);
 		menuBar = new MenuBar(); 
 		commandInput = new CommandInput(); 
-		turtleGraphicsWindow = new TurtleGraphicsWindow();
-		
-//		turtleGraphicsWindow.initGame();
-//		turtleGraphicsWindow.simpleDraw();
-//		JGRectangle sampelRect = new JGRectangle(100, 100, 50, 50);
-		
-		
+
+		turtleGraphicsWindow = new TurtleGraphicsWindow(); 
 		run = new JButton("run");
 		stop = new JButton("stop");
 		clear = new JButton("clear");
 		history = new JButton("History");
 
+		pane = new Container();	
+
+		addComponentsToLayout(); 
+	}
+
+	private void addComponentsToLayout(){
 		add(menuBar.getMenuBar(), BorderLayout.NORTH);
 		add(commandInput.getCommandInput(), BorderLayout.SOUTH);
-
-		pane = new Container();	
 		add(layoutButtons(pane),  BorderLayout.EAST);
 		add(history,  BorderLayout.WEST);
 		add(turtleGraphicsWindow, BorderLayout.CENTER);
 		System.out.println("turtleGraphicsWindow added");
 	}
-	
 	private Container layoutButtons(Container pane){
 		pane.setLayout(new GridBagLayout()); 
 		pane.add(turtleStatus, setComponentConstraints(0,0));
 		pane.add(run, setComponentConstraints(0,1));
 		pane.add(stop, setComponentConstraints(0,2));
 		pane.add(clear, setComponentConstraints(0,3));
-		
+
 		return pane; 
+	}
+
+	private void addActionListenerToComponents(){
+		run.addActionListener(this);
+		stop.addActionListener(this);
+		clear.addActionListener(this);
+		history.addActionListener(this);
 	}
 
 	private GridBagConstraints setComponentConstraints(int x, int y){
@@ -107,43 +110,22 @@ public class Display extends JPanel implements DocumentListener{
 		return c; 
 	}
 
-	private Component makeCommandHistoryBox () {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private Component makeTurtleStatusBox () {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private Component makeDrawTurtleWindow() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
-	public void insertUpdate (DocumentEvent e) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource() == run){
+			
+		}
+		if(e.getSource() == stop){
+
+		}
+		if(e.getSource() == clear){
+
+		}
+		if(e.getSource() == history){
+
+		}
 
 	}
-
-	@Override
-	public void removeUpdate (DocumentEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void changedUpdate (DocumentEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	//    TODO: figure out how to set the drawing plate
-
-
-
-
 
 }
