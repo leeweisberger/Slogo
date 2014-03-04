@@ -1,9 +1,13 @@
-1. Access Map
-2. Saperate doView from Controller 
+1. Access Map: In display we have already passed in model, and so write an getter that get it. 
+2. Separate doView from Controller 
 3. Figure out dynamically the window size (componentSize)
+4. Flag to drawUpdateState (default state is that )
+5. Allow multiple workspaces (perhaps as tabs or as separate windows). 
+	You can define exactly what a workspace is but, at the very least, 
+	it should have a separate turtle display area, command history, and active variables
+6. Multiple Turtle Drawing
 
-4. Figure out paint slower (with sleep or timer)
-5. 
+Pair Program: paint slower (with sleep or timer)
 
 
 Delegation:

@@ -65,22 +65,22 @@ public class TurtleGraphicsWindow extends JGEngine{
         drawLine(0.0, 0.0, 900.0, 600.0, 2.0, JGColor.blue);
         System.out.println("simpleDraw called");
     }
-
-    public void drawUpdate(TurtleState myCurrentState){
-        for (int i = 0; i<)
-        myCurrentState = myStateHistory = myCurrentState.getStateHistory();
-//        System.out.println("the myStateHistory at this moment is " + myStateHistory);
-        for (int i=0; i<myStateHistory.size()-1; i++){
-            TurtleState myPrevState = myStateHistory.get(i);
-            TurtleState myNextState= myStateHistory.get(i+1);
-            // make a media file, and setImage at prev location
-            drawLine(myPrevState.getX(), myPrevState.getY(), myNextState.getX(), myNextState.getY(), 5.0, JGColor.blue);
-            // after the line is drawn, setImage at next location
-        }
-        /*for rotation: 
-         * defineImageRotated(java.lang.String imgname, java.lang.String tilename, int collisionid, java.lang.String srcimg, double angle) 
-              Define new image by rotating an already loaded image.*/
-    }
+//
+//    public void drawUpdate(TurtleState myCurrentState){
+//        for (int i = 0; i< )
+//        myCurrentState = myStateHistory = myCurrentState.getStateHistory();
+////        System.out.println("the myStateHistory at this moment is " + myStateHistory);
+//        for (int i=0; i<myStateHistory.size()-1; i++){
+//            TurtleState myPrevState = myStateHistory.get(i);
+//            TurtleState myNextState= myStateHistory.get(i+1);
+//            // make a media file, and setImage at prev location
+//            drawLine(myPrevState.getX(), myPrevState.getY(), myNextState.getX(), myNextState.getY(), 5.0, JGColor.blue);
+//            // after the line is drawn, setImage at next location
+//        }
+//        /*for rotation: 
+//         * defineImageRotated(java.lang.String imgname, java.lang.String tilename, int collisionid, java.lang.String srcimg, double angle) 
+//              Define new image by rotating an already loaded image.*/
+//    }
 
     @Override
     public void paintFrame(){
