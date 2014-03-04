@@ -37,6 +37,12 @@ public class Parser {
 
 	}
 
+	/*
+	 * Makes a list of tokens, uses these tokens to create a list of commands,
+	 * and uses these commands to create a list of nodes
+	 * 
+	 * @return list of nodes, one for each command
+	 */
 	public List<Node> parseToNodeList() {
 		List<Token> tokens = makeTokenList();
 		List<Command> commandList = makeCommandList(tokens);
@@ -47,11 +53,23 @@ public class Parser {
 		return NodeList;
 	}
 
+	/*
+	 * Creates a new lexer which breaks the raw input into tokens
+	 * 
+	 * @return List of tokens, one for each command
+	 */
 	private List<Token> makeTokenList() {
 		Lexer lexer = new Lexer();
 		return lexer.lex(myInput);
 	}
 
+	/*
+	 * Loops through a list of tokens and creates a list of commands.
+	 * 
+	 * @param tokens list of tokens, one for each command
+	 * 
+	 * @return list of commands
+	 */
 	private List<Command> makeCommandList(List<Token> tokens) {
 		List<Command> commandList = new ArrayList<Command>();
 		for (Token token : tokens) {
@@ -65,6 +83,15 @@ public class Parser {
 		return commandList;
 	}
 
+	/*
+	 * Recursively builds a tree from the list of commands
+	 * 
+	 * @param commandList List of commands
+	 * 
+	 * @param n Current node. Used for recursive purposes
+	 * 
+	 * @return Node that acts as the root of the tree
+	 */
 	private Node buildTree(List<Command> commandList, Node n) {
 		Command root = commandList.get(0);
 		commandList.remove(0);
@@ -99,16 +126,20 @@ public class Parser {
 
 	}
 
+	/*
+	 * Uses reflection to get the class name from the string value of each
+	 * token. Creates a command from each class.
+	 * 
+	 * @param token
+	 * 
+	 * @return Command that token represents
+	 */
 	private Command getCommandType(Token token) {
+		List<String> s = findPackageNamesStartingWith("");
 		if (isNumeric(token.data))
 			return new Constant(Double.parseDouble(token.data));
 		if (token.data.startsWith(":")) {
-			if (!variableMap.keySet().contains(token.data)) {
-				Variable var = new Variable(0);
-				variableMap.put(token.data, var);
-				return var;
-			}
-			return variableMap.get(token.data);
+			return makeVariable(token.data);
 
 		}
 		// All commands must be in the commands package
@@ -126,21 +157,53 @@ public class Parser {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			if (isNewCommand) {
-				System.out.println("hi");
-			}
+			e.printStackTrace();
+
 		} catch (MissingResourceException e) {
 			if (isNewCommand) {
 				isNewCommand = false;
 				return new CustomCommand(token.data);
-
 			}
 			e.printStackTrace();
 
 		}
+
 		return null;
 	}
 
+	/*
+	 * Adds a variable to a map that maps variable names to variables
+	 * 
+	 * @param variableName String name of the variable
+	 * 
+	 * @return Command representation of the variable
+	 */
+	private Command makeVariable(String variableName) {
+		if (!variableMap.keySet().contains(variableName)) {
+			Variable var = new Variable(0);
+			variableMap.put(variableName, var);
+			return var;
+		}
+		return variableMap.get(variableName);
+	}
+
+	public List<String> findPackageNamesStartingWith(String prefix) {
+		List<String> result = new ArrayList<>();
+		for (Package p : Package.getPackages()) {
+			if (p.getName().startsWith(prefix)) {
+				result.add(p.getName());
+			}
+		}
+		return result;
+	}
+
+	/*
+	 * Helper method that determines if a String can be parsed to a Double
+	 * 
+	 * @param str String to be tested
+	 * 
+	 * @return Boolean that states if the input can be parsed to a Double
+	 */
 	private boolean isNumeric(String str) {
 		try {
 			Double.parseDouble(str);
