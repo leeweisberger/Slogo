@@ -29,11 +29,15 @@ import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.GroupLayout.*;
+import jgame.JGColor;
+import jgame.JGObject;
+import jgame.JGPoint;
+import jgame.JGRectangle;
 import view.*;
 
 
 public class Display extends JPanel implements DocumentListener{
-	private static final Dimension SIZE = new Dimension(800, 600);
+	
 	private static final String DRAW_BOX_TITLE = "Draw";
 	private static final String HISTORY_BOX_TITLE = "History";
 	private static final String COMMAND_BOX_TITLE = "Command";
@@ -63,7 +67,12 @@ public class Display extends JPanel implements DocumentListener{
 		//        add(makeDrawTurtleWindow(), BorderLayout.CENTER);
 		menuBar = new MenuBar(); 
 		commandInput = new CommandInput(); 
-		turtleGraphicsWindow = new TurtleGraphicsWindow(); 
+		turtleGraphicsWindow = new TurtleGraphicsWindow();
+		
+//		turtleGraphicsWindow.initGame();
+//		turtleGraphicsWindow.simpleDraw();
+//		JGRectangle sampelRect = new JGRectangle(100, 100, 50, 50);
+		
 		
 		run = new JButton("run");
 		stop = new JButton("stop");
