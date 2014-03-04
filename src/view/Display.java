@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ResourceBundle;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,16 +20,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
 import model.Model;
+
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import java.util.*;
+
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import java.awt.event.ActionEvent;
+
 import javax.swing.text.BadLocationException;
 import javax.swing.GroupLayout.*;
+
 import view.*;
 
 
@@ -51,8 +60,8 @@ public class Display extends JPanel implements ActionListener{
 	private JLabel historyLabel;
 	private JTextPane turtleStatus = new JTextPane(); 
 	private TurtleGraphicsWindow turtleGraphicsWindow; 
+	
 	public Display (Model model, String language){
-
 		myModel = model;
 		//    myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
 		setLayout(new BorderLayout());
@@ -61,7 +70,7 @@ public class Display extends JPanel implements ActionListener{
 		//        add(makeDrawTurtleWindow(), BorderLayout.CENTER);
 		menuBar = new MenuBar(); 
 		commandInput = new CommandInput(); 
-		turtleGraphicsWindow = new TurtleGraphicsWindow(); 
+		//turtleGraphicsWindow = new TurtleGraphicsWindow(); 
 		run = new JButton("run");
 		stop = new JButton("stop");
 		clear = new JButton("clear");
@@ -77,7 +86,7 @@ public class Display extends JPanel implements ActionListener{
 		add(commandInput.getCommandInput(), BorderLayout.SOUTH);
 		add(layoutButtons(pane),  BorderLayout.EAST);
 		add(history,  BorderLayout.WEST);
-		add(turtleGraphicsWindow, BorderLayout.CENTER);
+		//add(turtleGraphicsWindow, BorderLayout.CENTER);
 		System.out.println("turtleGraphicsWindow added");
 	}
 	private Container layoutButtons(Container pane){
@@ -109,7 +118,8 @@ public class Display extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == run){
-			
+			myModel.parseToNodeList(commandInput.getValue() );
+			System.out.println(commandInput.getValue());
 		}
 		if(e.getSource() == stop){
 

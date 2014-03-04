@@ -11,18 +11,18 @@ import view.Display;
 public class Main {
 	private static final String TITLE = "SLogo";
 	public static final Dimension SIZE = new Dimension(1200, 900);
-	
+
 	public static void main(String[] args) {
 		Main main = new Main();
 		Controller c = new Controller();
 		Model model = new Model();
 		model.setState(0, 0, 0,0);
-		main.initializeView();
+		main.initializeView(model);
 		c.go(model);
-		
+
 	}
-	private void initializeView(){
-		Display display = new Display(null, null); 
+	private void initializeView(Model model){
+		Display display = new Display(model, null); 
 		JFrame frame = new JFrame(TITLE); 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
