@@ -5,6 +5,9 @@ import java.util.List;
 import commands.basic.CommandList;
 import model.TurtleState;
 
+/**
+ * The Class If.
+ */
 public class If extends CommandList{
 
 	@Override

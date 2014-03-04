@@ -3,6 +3,9 @@ package commands.bool;
 import commands.basic.CommandTwoInputs;
 import model.TurtleState;
 
+/**
+ * The Class Or.
+ */
 public class Or extends CommandTwoInputs{
 
 	@Override

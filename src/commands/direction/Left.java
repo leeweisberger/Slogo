@@ -1,6 +1,9 @@
 package commands.direction;
 
 
+/**
+ * The Class Left.
+ */
 public class Left extends Direction{
 
 	@Override

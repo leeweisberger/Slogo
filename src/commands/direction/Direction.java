@@ -4,6 +4,9 @@ import commands.basic.CommandOneInput;
 import model.Model;
 import model.TurtleState;
 
+/**
+ * The Class Direction.
+ */
 public abstract class Direction extends CommandOneInput{
 	
 	public Double doCommand(TurtleState state){
@@ -11,6 +14,13 @@ public abstract class Direction extends CommandOneInput{
 		state.setAngle(state.getAngle()+changeDirection(degrees));
 		return changeDirection(degrees);
 	}
+	
+	/**
+	 * Change direction.
+	 *
+	 * @param degrees the degrees
+	 * @return the number of degrees moved
+	 */
 	public  abstract double changeDirection(Double degrees);
 
 }

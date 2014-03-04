@@ -4,6 +4,9 @@ import model.Model;
 
 
 
+/**
+ * The Class Forward.
+ */
 public class Forward extends Movement{
 
 

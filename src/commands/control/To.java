@@ -5,6 +5,9 @@ import commands.basic.CommandList;
 import model.Model;
 import model.TurtleState;
 
+/**
+ * The Class To.
+ */
 public class To extends CommandList {
 
 	@Override

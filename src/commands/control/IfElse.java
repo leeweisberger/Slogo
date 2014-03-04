@@ -3,6 +3,9 @@ package commands.control;
 import commands.basic.CommandList;
 import model.TurtleState;
 
+/**
+ * The Class IfElse.
+ */
 public class IfElse extends CommandList{
 
 	@Override

@@ -3,6 +3,9 @@ package commands.bool;
 import commands.basic.CommandOneInput;
 import model.TurtleState;
 
+/**
+ * The Class Not.
+ */
 public class Not extends CommandOneInput{
 
 	@Override

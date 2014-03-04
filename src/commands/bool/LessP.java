@@ -3,6 +3,9 @@ package commands.bool;
 import commands.basic.CommandTwoInputs;
 import model.TurtleState;
 
+/**
+ * The Class LessP.
+ */
 public class LessP extends CommandTwoInputs{
 
 	@Override

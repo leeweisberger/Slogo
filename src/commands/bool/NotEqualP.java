@@ -3,6 +3,9 @@ package commands.bool;
 import commands.basic.CommandTwoInputs;
 import model.TurtleState;
 
+/**
+ * The Class NotEqualP.
+ */
 public class NotEqualP extends CommandTwoInputs{
 
 	@Override

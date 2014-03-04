@@ -6,6 +6,9 @@ import commands.basic.Command;
 import commands.basic.Constant;
 import model.TurtleState;
 
+/**
+ * The Class DoTimes.
+ */
 public class DoTimes extends Repeat{
 
 

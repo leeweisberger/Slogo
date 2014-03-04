@@ -5,6 +5,9 @@ import java.util.List;
 import commands.basic.Command;
 import model.TurtleState;
 
+/**
+ * The Class For.
+ */
 public class For extends Repeat{
 
 	@Override
