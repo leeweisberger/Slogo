@@ -11,13 +11,22 @@ import model.Model;
 import model.TurtleState;
 import view.Display;
 
+/*
+ * The Controller class serves as a bridge between the View and the Model
+ */
 public class Controller {
-	/*
-	 * The Controller class serves as a bridge between the View and the Model
-	 */
+
 	public static final Dimension SIZE = new Dimension(1200, 900);
 	public static final String TITLE = "Slogo";
 
+	/*
+	 * Calls the doCommand method of the model and retrieves the map of history
+	 * states after commands are called
+	 * 
+	 * @param input raw user input
+	 * 
+	 * @param model an instance of the model
+	 */
 	public void doModel(String input, Model model) {
 		model.doCommands(input);
 		Map<Integer, List<TurtleState>> historyMap = model.getMyHistoryMap();
