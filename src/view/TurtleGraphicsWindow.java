@@ -63,8 +63,8 @@ public class TurtleGraphicsWindow extends JGEngine{
     }
 
     public void drawUpdate(TurtleState myCurrentState){
-//        myCurrentState = 
-//                myStateHistory = myCurrentState.getStateHistory();
+        for (int i = 0; i<)
+        myCurrentState = myStateHistory = myCurrentState.getStateHistory();
 //        System.out.println("the myStateHistory at this moment is " + myStateHistory);
         for (int i=0; i<myStateHistory.size()-1; i++){
             TurtleState myPrevState = myStateHistory.get(i);
