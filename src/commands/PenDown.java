@@ -1,5 +1,7 @@
 package commands;
 
+import commands.basic.CommandZeroInputs;
+
 import model.TurtleState;
 
 public class PenDown extends CommandZeroInputs{

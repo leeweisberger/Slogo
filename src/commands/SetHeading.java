@@ -1,5 +1,7 @@
 package commands;
 
+import commands.basic.CommandOneInput;
+
 import model.Model;
 import model.TurtleState;
 

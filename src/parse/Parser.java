@@ -11,17 +11,22 @@ import java.util.Set;
 
 import model.Model;
 import parse.Lexer.Token;
-
-import commands.Command;
-import commands.CommandList;
-import commands.Constant;
 import commands.CustomCommand;
-import commands.Variable;
+import commands.basic.Command;
+import commands.basic.CommandList;
+import commands.basic.Constant;
+import commands.basic.Variable;
+import commands.movement.Forward;
 
 /*
  * Takes raw input in string form, parses the information, and returns a list of trees with all of the commands
  */
 public class Parser {
+	private String[] packageList = { "commands", "commands.math",
+			"commands.direction", "commands.basic", "commands.movement",
+			"commands.bool", "commands.control", "commands.queries",
+			"commands.multiple" };
+
 	private String myInput;
 	private boolean isNewCommand = false;
 	private Set<Command> trueBracketCommands = new HashSet<Command>();
@@ -135,7 +140,6 @@ public class Parser {
 	 * @return Command that token represents
 	 */
 	private Command getCommandType(Token token) {
-		List<String> s = findPackageNamesStartingWith("");
 		if (isNumeric(token.data))
 			return new Constant(Double.parseDouble(token.data));
 		if (token.data.startsWith(":")) {
@@ -150,6 +154,15 @@ public class Parser {
 			token.data = myResources.getString(token.data.toLowerCase());
 			if (token.data.equals("To"))
 				isNewCommand = true;
+			for (String packag : packageList) {
+				String possibleLocation = packag + "." + token.data;
+				try {
+					return (Command) Class.forName(possibleLocation)
+							.newInstance();
+				} catch (ClassNotFoundException e) {
+
+				}
+			}
 			return (Command) Class.forName("commands." + token.data)
 					.newInstance();
 		} catch (InstantiationException e) {
@@ -183,16 +196,6 @@ public class Parser {
 			return var;
 		}
 		return variableMap.get(variableName);
-	}
-
-	public List<String> findPackageNamesStartingWith(String prefix) {
-		List<String> result = new ArrayList<>();
-		for (Package p : Package.getPackages()) {
-			if (p.getName().startsWith(prefix)) {
-				result.add(p.getName());
-			}
-		}
-		return result;
 	}
 
 	/*

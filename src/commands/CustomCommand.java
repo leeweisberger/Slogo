@@ -3,6 +3,10 @@ package commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import commands.basic.Command;
+import commands.basic.CommandList;
+import commands.basic.Variable;
+
 import model.TurtleState;
 
 public class CustomCommand extends CommandList{

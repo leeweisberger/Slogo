@@ -1,5 +1,9 @@
 package commands;
 
+import commands.basic.Command;
+import commands.basic.CommandTwoInputs;
+import commands.basic.Variable;
+
 import model.TurtleState;
 
 public class Make extends CommandTwoInputs{

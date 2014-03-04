@@ -7,9 +7,8 @@ import java.util.Map;
 
 import parse.Node;
 import parse.Parser;
-
-import commands.Command;
-import commands.MultipleTurtleCommand;
+import commands.basic.Command;
+import commands.multiple.MultipleTurtleCommand;
 
 /*
  * Backend of Slogo. Parses user input and calls each of the parsed commands
