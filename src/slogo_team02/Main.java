@@ -10,7 +10,8 @@ import view.Display;
 
 public class Main {
 	private static final String TITLE = "SLogo";
-	public static final Dimension SIZE = new Dimension(1200, 900);
+//	public static final Dimension SIZE = new Dimension(1200, 900);
+	public static final Dimension SIZE = new Dimension(1000, 800);
 	
 	public static void main(String[] args) {
 		Main main = new Main();
@@ -29,7 +30,6 @@ public class Main {
 		// add our user interface components to Frame and show it
 		frame.getContentPane().add(display);        
 		frame.setSize(SIZE);
-
 		frame.setVisible(true);
 	}
 

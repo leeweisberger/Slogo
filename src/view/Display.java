@@ -29,6 +29,10 @@ import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.GroupLayout.*;
+import jgame.JGColor;
+import jgame.JGObject;
+import jgame.JGPoint;
+import jgame.JGRectangle;
 import view.*;
 
 
@@ -61,6 +65,7 @@ public class Display extends JPanel implements ActionListener{
 		//        add(makeDrawTurtleWindow(), BorderLayout.CENTER);
 		menuBar = new MenuBar(); 
 		commandInput = new CommandInput(); 
+
 		turtleGraphicsWindow = new TurtleGraphicsWindow(); 
 		run = new JButton("run");
 		stop = new JButton("stop");
