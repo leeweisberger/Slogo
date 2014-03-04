@@ -165,9 +165,7 @@ public class Parser {
 				return new CustomCommand(token.data);
 			}
 			e.printStackTrace();
-
 		}
-
 		return null;
 	}
 

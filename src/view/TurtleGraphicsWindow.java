@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
@@ -14,6 +16,7 @@ import jgame.platform.JGEngine;
 import model.Model;
 import model.TurtleState;
 
+
 public class TurtleGraphicsWindow extends JGEngine{    
     /**
      * 
@@ -22,6 +25,7 @@ public class TurtleGraphicsWindow extends JGEngine{
     TurtleState myCurrentState = TurtleState.getInstant();
     List<TurtleState> myStateHistory = new ArrayList<TurtleState>();
     private boolean test = true;
+//    Map<Integer, List<TurtleState>> myHistoryMap =  
 
     public TurtleGraphicsWindow(){
         super();
@@ -63,8 +67,8 @@ public class TurtleGraphicsWindow extends JGEngine{
     }
 
     public void drawUpdate(TurtleState myCurrentState){
-//        myCurrentState = 
-//                myStateHistory = myCurrentState.getStateHistory();
+        for (int i = 0; i<)
+        myCurrentState = myStateHistory = myCurrentState.getStateHistory();
 //        System.out.println("the myStateHistory at this moment is " + myStateHistory);
         for (int i=0; i<myStateHistory.size()-1; i++){
             TurtleState myPrevState = myStateHistory.get(i);

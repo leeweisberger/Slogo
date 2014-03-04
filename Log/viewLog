@@ -1,3 +1,11 @@
+1. Access Map
+2. Saperate doView from Controller 
+3. Figure out dynamically the window size (componentSize)
+
+4. Figure out paint slower (with sleep or timer)
+5. 
+
+
 Delegation:
 Steve: draw window
 		command box fixed size
