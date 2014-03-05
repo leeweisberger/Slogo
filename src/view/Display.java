@@ -132,7 +132,6 @@ public class Display extends JPanel implements ActionListener{
 	public void setHistoryButtonText(String lastCommand){
 		historyLabel += " "+lastCommand; 
 		history.setText(historyLabel);
-		System.out.println("historyLabel: "+historyLabel); 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
