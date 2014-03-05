@@ -42,7 +42,13 @@ public class CustomCommand extends CommandList{
 			((Variable)myVariables.get(i)).setValue((double) getInputs().get(i).doCommand(turtleState));
 		}
 		for(int i=0; i<getNumFalseInputs(); i++){
-			
+			//recursion
+			if(myCommands.get(i) instanceof CustomCommand){
+				((CustomCommand) myCommands.get(i)).saveCommand(myVariables, myCommands);
+				myCommands.get(i).setInputs((ArrayList<Command>) ((CommandList) myCommands.get(i)).getFalseInputs());
+				((CommandList) myCommands.get(i)).setNumFalseInputs(this.getNumFalseInputs());
+				
+			}
 			myCommands.get(i).doCommand(turtleState);
 		}
 		clearInputs();

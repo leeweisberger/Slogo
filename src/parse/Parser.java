@@ -197,7 +197,8 @@ public class Parser {
 
 		} catch (MissingResourceException e) {
 			if (isNewCommand) {
-				isNewCommand = false;
+				//isNewCommand = false;
+				
 				return new CustomCommand(token.data);
 			}
 			e.printStackTrace();

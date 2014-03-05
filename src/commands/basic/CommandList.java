@@ -30,6 +30,9 @@ public abstract class CommandList extends Command{
 	public void incrementNumFalseInputs(){
 		myNumFalseInputs++;
 	}
+	public void setNumFalseInputs(int i){
+		myNumFalseInputs = i;
+	}
 	@Override
 	public void setInputsFromNode(Node node){
 		for(int i=0; i<getNumInputs(); i++){

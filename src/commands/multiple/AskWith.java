@@ -7,8 +7,14 @@ import commands.basic.Command;
 import model.Model;
 import model.TurtleState;
 
+/**
+ * The Class AskWith.
+ */
 public class AskWith extends MultipleTurtleCommand {
 
+	/* (non-Javadoc)
+	 * @see commands.basic.Command#doCommand(model.TurtleState)
+	 */
 	@Override
 	public Object doCommand(TurtleState turtleState) {
 
@@ -19,6 +25,9 @@ public class AskWith extends MultipleTurtleCommand {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see commands.multiple.MultipleTurtleCommand#commandTurtles(java.util.List, java.util.Map)
+	 */
 	@Override
 	public void commandTurtles(List<Integer> activeTurtles,
 			Map<Integer, TurtleState> statesMap) {

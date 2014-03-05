@@ -51,6 +51,9 @@ public abstract class Command {
 	public List<Command> getInputs() {
 		return myInputs;
 	}
+	public void setInputs(ArrayList<Command> ins){
+		myInputs = ins;
+	}
 
 	/**
 	 * Clear inputs.
@@ -72,6 +75,7 @@ public abstract class Command {
 			}
 		}
 	}
+	
 
 	/**
 	 * Do command.

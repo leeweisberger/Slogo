@@ -10,8 +10,9 @@ import parse.Parser;
 import commands.basic.Command;
 import commands.multiple.MultipleTurtleCommand;
 
-/*
- * Backend of Slogo. Parses user input and calls each of the parsed commands
+
+/**
+ * The Class Model.
  */
 public class Model {
 	private Map<Integer, TurtleState> myStatesMap = new HashMap<Integer, TurtleState>();
