@@ -1,40 +1,54 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.List;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.util.Map;
 import java.util.ResourceBundle;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import model.Model;
+
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import java.util.*;
+
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import java.awt.event.ActionEvent;
+
 import javax.swing.text.BadLocationException;
 import javax.swing.GroupLayout.*;
+
 import jgame.JGColor;
 import jgame.JGObject;
 import jgame.JGPoint;
 import jgame.JGRectangle;
 import view.*;
 
+import model.TurtleState;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Display extends JPanel implements ActionListener{
 	private static final Dimension SIZE = new Dimension(800, 600);
@@ -48,32 +62,28 @@ public class Display extends JPanel implements ActionListener{
 	private MenuBar menuBar;
 	private CommandInput commandInput; 
 	private Container pane;
-	private JButton run;
-	private JButton stop;
-	private JButton clear;
-	private JButton history;
-	private JLabel historyLabel;
+	private JButton run, stop, clear, history;
+	private String historyLabel;
 	private JTextPane turtleStatus = new JTextPane(); 
-	private TurtleGraphicsWindow turtleGraphicsWindow; 
+	private TurtleGraphicsWindow turtleGraphicsWindow;
+	private Dimension GRAPHIC_WINDOW_SIZE;
+	private Map<Integer, List<TurtleState>> myHistoryMap;
+	
 	public Display (Model model, String language){
-
 		myModel = model;
-		//    myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-		setLayout(new BorderLayout());
-		//        add(makeCommandHistoryBox(), BorderLayout.EAST);
-		//        add(makeTurtleStatusBox(), BorderLayout.SOUTH);
-		//        add(makeDrawTurtleWindow(), BorderLayout.CENTER);
-		menuBar = new MenuBar(); 
-		commandInput = new CommandInput(); 
-
+		setLayout(new BorderLayout());		
+		commandInput = new CommandInput();
+		menuBar = new MenuBar(commandInput); 
 		turtleGraphicsWindow = new TurtleGraphicsWindow(); 
 		run = new JButton("run");
 		stop = new JButton("stop");
 		clear = new JButton("clear");
-		history = new JButton("History");
+		historyLabel = new String("History"); 
+		history = new JButton(historyLabel);
 
 		pane = new Container();	
 
+		addActionListenerToComponents(); 
 		addComponentsToLayout(); 
 	}
 
@@ -83,7 +93,14 @@ public class Display extends JPanel implements ActionListener{
 		add(layoutButtons(pane),  BorderLayout.EAST);
 		add(history,  BorderLayout.WEST);
 		add(turtleGraphicsWindow, BorderLayout.CENTER);
-		System.out.println("turtleGraphicsWindow added");
+//		System.out.println("turtleGraphicsWindow added");
+		
+		
+		GRAPHIC_WINDOW_SIZE = turtleGraphicsWindow.getSize();
+		System.out.println(turtleGraphicsWindow.pfWidth() + turtleGraphicsWindow.pfHeight());
+		System.out.println(turtleGraphicsWindow.viewWidth() + turtleGraphicsWindow.viewHeight());
+		System.out.println(turtleGraphicsWindow.displayWidth() + turtleGraphicsWindow.displayHeight());
+		
 	}
 	private Container layoutButtons(Container pane){
 		pane.setLayout(new GridBagLayout()); 
@@ -96,7 +113,9 @@ public class Display extends JPanel implements ActionListener{
 	}
 
 	private void addActionListenerToComponents(){
+		run.setActionCommand("run");
 		run.addActionListener(this);
+		
 		stop.addActionListener(this);
 		clear.addActionListener(this);
 		history.addActionListener(this);
@@ -110,22 +129,33 @@ public class Display extends JPanel implements ActionListener{
 		return c; 
 	}
 
+	public void setHistoryButtonText(String lastCommand){
+		historyLabel += " "+lastCommand; 
+		history.setText(historyLabel);
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == run){
-			
+		if("run".equals( e.getActionCommand() )){	
+			setHistoryButtonText(commandInput.getValue()); 
+			myModel.parseToNodeList(commandInput.getValue());
 		}
-		if(e.getSource() == stop){
+		if("stop".equals(e.getActionCommand())){
 
 		}
-		if(e.getSource() == clear){
+		if("clear".equals(e.getActionCommand())){
 
 		}
-		if(e.getSource() == history){
-
+		if("history".equals(e.getActionCommand())){
+			myModel.parseToNodeList(historyLabel);
 		}
 
 	}
+
+    public TurtleGraphicsWindow getTurtleGraphicsWindow () {
+        return turtleGraphicsWindow;
+        // TODO Auto-generated method stub
+        
+    }
 
 }

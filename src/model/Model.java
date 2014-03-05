@@ -24,6 +24,7 @@ public class Model {
 		return myHistoryMap;
 	}
 
+
 	/**
 	 * Creates a new TurtleState.
 	 *

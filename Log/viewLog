@@ -1,23 +1,31 @@
+Other todos: Language setting
+Need to create formatted textFields to show information about variables, and such:
+http://docs.oracle.com/javase/tutorial/uiswing/components/formattedtextfield.html
+Pair Program: paint slower (with sleep or timer)
+
+
+Delegation:
+Steve: 
+
 1. Access Map: In display we have already passed in model, and so write an getter that get it. 
-2. Separate doView from Controller 
+
 3. Figure out dynamically the window size (componentSize)
 4. Flag to drawUpdateState (default state is that )
 5. Allow multiple workspaces (perhaps as tabs or as separate windows). 
 	You can define exactly what a workspace is but, at the very least, 
 	it should have a separate turtle display area, command history, and active variables
-6. Multiple Turtle Drawing
-
-Pair Program: paint slower (with sleep or timer)
-
-
-Delegation:
-Steve: draw window
-		command box fixed size
-		refactoring
-		drawing the stuff
+6. Multiple Turtle Drawing: 
+	allow users to toggle whether or not to highlight the currently active turtles in a workspace's display window
+		Terrapin Logo v. 3 allows you to make the WHO command visible by having boundary boxes appear around all objects on the TELL list. 
+		This can be useful when using multiple turtles or multiple bitmaps so that the objects that are listening to commands are readily apparent.
+	http://www.terrapinlogo.com/Version_3_Features.php#five
+	
+	
 Anthony:
 		menu bar(functionality remaining)
 		buttons
+			run: parse and call draw 
+			
 
 Menu bar 
 	Buttons 
@@ -25,8 +33,13 @@ Menu bar
 	Format: change color, choose turtle image
 	Help:
 
-	 | stop | run | undo | clear | 
-	**| slow | fast | import  
+Buttons
+	 | stop | run | undo | clear | Pen up(connected to fast) / down
+	**| slow | fast (radio buttons) | import
+	
+
+	 
+ 
 
 Turtle Graphics 
 	turtle + pen 
@@ -50,27 +63,6 @@ HTML formatted help page
 MenuBar refactored but still doesn't obey open closed principle
 determine what methods in the GUI are to be public/ part of the API
 
+History button text doesn't wrap**
 
 
-enter commands to the turtle interactively
-display results of the turtle executing commands
-The turtle should be driven via commands entered by the user 
-and optionally by buttons or other user controls.
- 
-You should provide feedback so that the user is always aware 
-of the turtle's position, heading, or other parameters affected
-by the environment. Note, the turtle starts in the center of the 
-display which is considered (0, 0).
-
-display errors that may result from the user's commands
-
-choose an image to use for the turtle
-
-specify a color to use for the pen
-show commands previously run in the environment (even better, make these commands directly clickable to execute)
-access an HTML formatted help page
-it could just be a "language reference", i.e., the command descriptions
-given with the assignment, or you could extend it to include features of the GUI
-
-naming the boxes**? 
-used MenuLookDemo.java example 

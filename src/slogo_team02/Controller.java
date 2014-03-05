@@ -30,24 +30,12 @@ public class Controller {
 		Map<Integer, List<TurtleState>> historyMap = model.getMyHistoryMap();
 	}
 
-	private void doView() {
-		Display display = new Display(null, null);
-		JFrame frame = new JFrame(TITLE);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		// add our user interface components to Frame and show it
-		frame.getContentPane().add(display);
-		frame.setSize(SIZE);
-		frame.setVisible(true);
-	}
-
 	public void go(Model model) {
 		while (true) {
 			Scanner scanner = new Scanner(System.in);
 			String input = scanner.nextLine();
 			doModel(input, model);
 		}
-
 	}
 
 }

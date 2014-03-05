@@ -39,8 +39,10 @@ public class TurtleState {
 	 *
 	 * @return the instant
 	 */
-	public static  TurtleState getInstant() {
+	
+	public static TurtleState getInstant(){
 		return myCurrentState;
+ 
 	}
 
 	/**
