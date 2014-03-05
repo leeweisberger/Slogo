@@ -22,8 +22,17 @@ public class TurtleState {
 		setState(x, y, angle, penDown, showing, turtleID);
 	}
 
-	public static  TurtleState getInstant() {
+	public static  TurtleState getInstant(double x, double y, double angle,boolean penDown,boolean showing, int turtleID) {
+		if(myCurrentState == null){
+			myCurrentState = new TurtleState(x, y, angle, penDown, showing, turtleID); 
+			return myCurrentState; 
+		}
 		return myCurrentState;
+	}
+	
+	public static TurtleState getInstant(){
+		return myCurrentState;
+ 
 	}
 
 	public void setState(double x, double y, double angle, boolean penDown,

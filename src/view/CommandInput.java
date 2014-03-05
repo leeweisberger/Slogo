@@ -1,14 +1,25 @@
 package view;
 
 import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
 
 public class CommandInput {
 
-	JTextArea commandIn;
-	JScrollPane commandInScrollPane; 
+	private JTextArea commandIn;
+	private DocumentListener documentListener; 
+	private JScrollPane commandInScrollPane; 
+	private BufferedReader br = null;
+
 
 	CommandInput(){
 		commandIn = new JTextArea(10, 10);
@@ -25,4 +36,52 @@ public class CommandInput {
 	public JScrollPane getCommandInput() {
 		return commandInScrollPane;
 	}
+
+	public String getValue() {
+		return commandIn.getText();
+	}
+
+	public void insertCommandsFromFile(File file){
+		br = null;
+		String CurrentLine, fullText = null;
+		try {
+			br = new BufferedReader(new FileReader(file));
+
+			while ((CurrentLine = br.readLine()) != null) {
+				fullText+=CurrentLine; 
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		commandIn.setText(fullText);
+	}
+	
+	public File saveCommandsToFile(File file){
+		try {	 
+			String content = commandIn.getText();
+ 
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+ 
+			FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(content);
+			bw.close();
+ 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return file;		
+	}
+
 }

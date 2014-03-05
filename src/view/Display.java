@@ -37,14 +37,11 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.GroupLayout.*;
-<<<<<<< HEAD
 
-=======
 import jgame.JGColor;
 import jgame.JGObject;
 import jgame.JGPoint;
 import jgame.JGRectangle;
->>>>>>> 0bf1ae93d3cd9cb1c1c449d8012f66811ec42c1e
 import view.*;
 
 
@@ -70,13 +67,9 @@ public class Display extends JPanel implements ActionListener{
 	
 	public Display (Model model, String language){
 		myModel = model;
-		//    myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-		setLayout(new BorderLayout());
-		//        add(makeCommandHistoryBox(), BorderLayout.EAST);
-		//        add(makeTurtleStatusBox(), BorderLayout.SOUTH);
-		//        add(makeDrawTurtleWindow(), BorderLayout.CENTER);
-		menuBar = new MenuBar(); 
-		commandInput = new CommandInput(); 
+		setLayout(new BorderLayout());		
+		commandInput = new CommandInput();
+		menuBar = new MenuBar(commandInput); 
 		turtleGraphicsWindow = new TurtleGraphicsWindow(); 
 		run = new JButton("run");
 		stop = new JButton("stop");
