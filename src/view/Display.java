@@ -57,13 +57,10 @@ public class Display extends JPanel implements ActionListener{
 	private MenuBar menuBar;
 	private CommandInput commandInput; 
 	private Container pane;
-	private JButton run;
-	private JButton stop;
-	private JButton clear;
-	private JButton history;
-	private JLabel historyLabel;
+	private JButton run, stop, clear, history;
+	private String historyLabel;
 	private JTextPane turtleStatus = new JTextPane(); 
-	private TurtleGraphicsWindow turtleGraphicsWindow; 
+	private TurtleGraphicsWindow turtleGraphicsWindow;
 	
 	public Display (Model model, String language){
 		myModel = model;
@@ -74,10 +71,12 @@ public class Display extends JPanel implements ActionListener{
 		run = new JButton("run");
 		stop = new JButton("stop");
 		clear = new JButton("clear");
-		history = new JButton("History");
+		historyLabel = new String("History"); 
+		history = new JButton(historyLabel);
 
 		pane = new Container();	
 
+		addActionListenerToComponents(); 
 		addComponentsToLayout(); 
 	}
 
@@ -86,7 +85,7 @@ public class Display extends JPanel implements ActionListener{
 		add(commandInput.getCommandInput(), BorderLayout.SOUTH);
 		add(layoutButtons(pane),  BorderLayout.EAST);
 		add(history,  BorderLayout.WEST);
-		//add(turtleGraphicsWindow, BorderLayout.CENTER);
+		add(turtleGraphicsWindow, BorderLayout.CENTER);
 		System.out.println("turtleGraphicsWindow added");
 	}
 	private Container layoutButtons(Container pane){
@@ -100,7 +99,9 @@ public class Display extends JPanel implements ActionListener{
 	}
 
 	private void addActionListenerToComponents(){
+		run.setActionCommand("run");
 		run.addActionListener(this);
+		
 		stop.addActionListener(this);
 		clear.addActionListener(this);
 		history.addActionListener(this);
@@ -114,21 +115,26 @@ public class Display extends JPanel implements ActionListener{
 		return c; 
 	}
 
+	public void setHistoryButtonText(String lastCommand){
+		historyLabel += " "+lastCommand; 
+		history.setText(historyLabel);
+		System.out.println("historyLabel: "+historyLabel); 
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == run){
-			myModel.parseToNodeList(commandInput.getValue() );
-			System.out.println(commandInput.getValue());
+		if("run".equals( e.getActionCommand() )){	
+			setHistoryButtonText(commandInput.getValue()); 
+			myModel.parseToNodeList(commandInput.getValue());
 		}
-		if(e.getSource() == stop){
+		if("stop".equals(e.getActionCommand())){
 
 		}
-		if(e.getSource() == clear){
+		if("clear".equals(e.getActionCommand())){
 
 		}
-		if(e.getSource() == history){
-
+		if("history".equals(e.getActionCommand())){
+			myModel.parseToNodeList(historyLabel);
 		}
 
 	}

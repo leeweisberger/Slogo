@@ -63,7 +63,7 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     void simpleDraw () {
         drawLine(0.0, 0.0, 900.0, 600.0, 2.0, JGColor.blue);
-        System.out.println("simpleDraw called");
+       // System.out.println("simpleDraw called");
     }
 
     public void drawUpdate(TurtleState myCurrentState){
@@ -91,7 +91,7 @@ public class TurtleGraphicsWindow extends JGEngine{
         drawImage("myTurtle", 450.0, 300.0);
         int DISPLAY_WIDTH = displayWidth();
         int DISPLAY_HEIGHT = displayHeight();
-        System.out.println("displaywidth is " + DISPLAY_WIDTH + "displayHeight is " + DISPLAY_HEIGHT);
+        //System.out.println("displaywidth is " + DISPLAY_WIDTH + "displayHeight is " + DISPLAY_HEIGHT);
     }
 
 }

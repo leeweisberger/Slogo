@@ -52,6 +52,7 @@ HTML formatted help page
 ****Notes
 MenuBar refactored but still doesn't obey open closed principle
 determine what methods in the GUI are to be public/ part of the API
-	
+
+History button text doesn't wrap**
 
 
