@@ -1,0 +1,1 @@
+null#include <stdlib.h>#include <stdio.h>#define _XOPEN_SOURCE 1#include <ucontext.h>/* * Illustrate use of context save/restore: a key idea behind threads. * Save and restore a single context. */int count = 0;ucontext_t context;intmain() {  int i = 0;  getcontext(&context);  count += 1;  i += 1;  sleep(2);  printf("%4d %4d\n", count, i);  setcontext(&context);}

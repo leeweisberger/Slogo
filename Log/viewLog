@@ -1,16 +1,26 @@
-1. Access Map
-2. Saperate doView from Controller 
-3. Figure out dynamically the window size (componentSize)
-
-4. Figure out paint slower (with sleep or timer)
-5. 
+Other todos: Language setting
+Need to create formatted textFields to show information about variables, and such:
+http://docs.oracle.com/javase/tutorial/uiswing/components/formattedtextfield.html
+Pair Program: paint slower (with sleep or timer)
 
 
 Delegation:
-Steve: draw window
-		command box fixed size
-		refactoring
-		drawing the stuff
+Steve: 
+
+1. Access Map: In display we have already passed in model, and so write an getter that get it. 
+
+3. Figure out dynamically the window size (componentSize)
+4. Flag to drawUpdateState (default state is that )
+5. Allow multiple workspaces (perhaps as tabs or as separate windows). 
+	You can define exactly what a workspace is but, at the very least, 
+	it should have a separate turtle display area, command history, and active variables
+6. Multiple Turtle Drawing: 
+	allow users to toggle whether or not to highlight the currently active turtles in a workspace's display window
+		Terrapin Logo v. 3 allows you to make the WHO command visible by having boundary boxes appear around all objects on the TELL list. 
+		This can be useful when using multiple turtles or multiple bitmaps so that the objects that are listening to commands are readily apparent.
+	http://www.terrapinlogo.com/Version_3_Features.php#five
+	
+	
 Anthony:
 		menu bar(functionality remaining)
 		buttons

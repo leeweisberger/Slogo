@@ -3,7 +3,7 @@ package parse;
 import java.util.ArrayList;
 import java.util.List;
 
-import commands.Command;
+import commands.basic.Command;
 
 public class Node {
 	private Command myData;

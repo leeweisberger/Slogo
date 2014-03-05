@@ -11,25 +11,52 @@ import java.util.Set;
 
 import model.Model;
 import parse.Lexer.Token;
-
-import commands.Command;
-import commands.CommandList;
-import commands.Constant;
 import commands.CustomCommand;
-import commands.Variable;
+import commands.basic.Command;
+import commands.basic.CommandList;
+import commands.basic.Constant;
+import commands.basic.Variable;
+import commands.movement.Forward;
 
-/*
- * Takes raw input in string form, parses the information, and returns a list of trees with all of the commands
+
+/**
+ * The Class Parser.
  */
 public class Parser {
+	
+	/** The package list. */
+	private String[] packageList = { "commands", "commands.math",
+			"commands.direction", "commands.basic", "commands.movement",
+			"commands.bool", "commands.control", "commands.queries",
+			"commands.multiple" };
+
+	/** The raw input. */
 	private String myInput;
+	
+	/** check if a custom command should be created */
 	private boolean isNewCommand = false;
+	
+	/** the set of commands in brackets */
 	private Set<Command> trueBracketCommands = new HashSet<Command>();
+	
+	/** The set of commands in the second set of brackets */
 	private Set<Command> falseBracketCommands = new HashSet<Command>();
+	
+	/** The variable map. Maps names to variable commands */
 	private Map<String, Variable> variableMap = new HashMap<String, Variable>();
+	
+	/** The Constant DEFAULT_RESOURCE_PACKAGE. */
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources.";
+	
+	
 	ResourceBundle myResources;
 
+	/**
+	 * Instantiates a new parser.
+	 *
+	 * @param input the raw user input
+	 * @param language the language
+	 */
 	public Parser(String input, String language) {
 		myInput = input;
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE
@@ -37,11 +64,10 @@ public class Parser {
 
 	}
 
-	/*
-	 * Makes a list of tokens, uses these tokens to create a list of commands,
-	 * and uses these commands to create a list of nodes
-	 * 
-	 * @return list of nodes, one for each command
+	/**
+	 * Calls commands that parse the raw input to node list.
+	 *
+	 * @return the list of nodes
 	 */
 	public List<Node> parseToNodeList() {
 		List<Token> tokens = makeTokenList();
@@ -53,22 +79,21 @@ public class Parser {
 		return NodeList;
 	}
 
-	/*
-	 * Creates a new lexer which breaks the raw input into tokens
-	 * 
-	 * @return List of tokens, one for each command
+	/**
+	 * Make token list from raw user input.
+	 *
+	 * @return the list of tokens
 	 */
 	private List<Token> makeTokenList() {
 		Lexer lexer = new Lexer();
 		return lexer.lex(myInput);
 	}
 
-	/*
-	 * Loops through a list of tokens and creates a list of commands.
-	 * 
-	 * @param tokens list of tokens, one for each command
-	 * 
-	 * @return list of commands
+	/**
+	 * Make command list.
+	 *
+	 * @param tokens the list of tokens
+	 * @return the list of commands
 	 */
 	private List<Command> makeCommandList(List<Token> tokens) {
 		List<Command> commandList = new ArrayList<Command>();
@@ -83,14 +108,12 @@ public class Parser {
 		return commandList;
 	}
 
-	/*
-	 * Recursively builds a tree from the list of commands
-	 * 
-	 * @param commandList List of commands
-	 * 
-	 * @param n Current node. Used for recursive purposes
-	 * 
-	 * @return Node that acts as the root of the tree
+	/**
+	 * Builds the tree recursively.
+	 *
+	 * @param commandList the list of commands
+	 * @param n the current node
+	 * @return the node that represents a tree
 	 */
 	private Node buildTree(List<Command> commandList, Node n) {
 		Command root = commandList.get(0);
@@ -108,6 +131,13 @@ public class Parser {
 		return node;
 	}
 
+	/**
+	 * Adds the bracket commands.
+	 *
+	 * @param commandList the command list
+	 * @param root the root
+	 * @param node the node
+	 */
 	private void addBracketCommands(List<Command> commandList, Command root,
 			Node node) {
 		while (commandList.size() > 0
@@ -126,16 +156,13 @@ public class Parser {
 
 	}
 
-	/*
-	 * Uses reflection to get the class name from the string value of each
-	 * token. Creates a command from each class.
-	 * 
-	 * @param token
-	 * 
-	 * @return Command that token represents
+	/**
+	 * Gets the command type.
+	 *
+	 * @param token the token
+	 * @return the command type
 	 */
 	private Command getCommandType(Token token) {
-		List<String> s = findPackageNamesStartingWith("");
 		if (isNumeric(token.data))
 			return new Constant(Double.parseDouble(token.data));
 		if (token.data.startsWith(":")) {
@@ -150,6 +177,15 @@ public class Parser {
 			token.data = myResources.getString(token.data.toLowerCase());
 			if (token.data.equals("To"))
 				isNewCommand = true;
+			for (String packag : packageList) {
+				String possibleLocation = packag + "." + token.data;
+				try {
+					return (Command) Class.forName(possibleLocation)
+							.newInstance();
+				} catch (ClassNotFoundException e) {
+
+				}
+			}
 			return (Command) Class.forName("commands." + token.data)
 					.newInstance();
 		} catch (InstantiationException e) {
@@ -161,7 +197,8 @@ public class Parser {
 
 		} catch (MissingResourceException e) {
 			if (isNewCommand) {
-				isNewCommand = false;
+				//isNewCommand = false;
+				
 				return new CustomCommand(token.data);
 			}
 			e.printStackTrace();
@@ -169,12 +206,12 @@ public class Parser {
 		return null;
 	}
 
-	/*
-	 * Adds a variable to a map that maps variable names to variables
-	 * 
-	 * @param variableName String name of the variable
-	 * 
-	 * @return Command representation of the variable
+
+	/**
+	 * Make variable.
+	 *
+	 * @param variableName the variable name
+	 * @return the command that represents the variable
 	 */
 	private Command makeVariable(String variableName) {
 		if (!variableMap.keySet().contains(variableName)) {
@@ -185,22 +222,11 @@ public class Parser {
 		return variableMap.get(variableName);
 	}
 
-	public List<String> findPackageNamesStartingWith(String prefix) {
-		List<String> result = new ArrayList<>();
-		for (Package p : Package.getPackages()) {
-			if (p.getName().startsWith(prefix)) {
-				result.add(p.getName());
-			}
-		}
-		return result;
-	}
-
-	/*
-	 * Helper method that determines if a String can be parsed to a Double
-	 * 
-	 * @param str String to be tested
-	 * 
-	 * @return Boolean that states if the input can be parsed to a Double
+	/**
+	 * Checks if is numeric.
+	 *
+	 * @param str the string
+	 * @return true, if is numeric
 	 */
 	private boolean isNumeric(String str) {
 		try {

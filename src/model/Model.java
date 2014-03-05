@@ -7,12 +7,12 @@ import java.util.Map;
 
 import parse.Node;
 import parse.Parser;
+import commands.basic.Command;
+import commands.multiple.MultipleTurtleCommand;
 
-import commands.Command;
-import commands.MultipleTurtleCommand;
 
-/*
- * Backend of Slogo. Parses user input and calls each of the parsed commands
+/**
+ * The Class Model.
  */
 public class Model {
 	private Map<Integer, TurtleState> myStatesMap = new HashMap<Integer, TurtleState>();
@@ -24,18 +24,27 @@ public class Model {
 		return myHistoryMap;
 	}
 
+
+	/**
+	 * Creates a new TurtleState.
+	 *
+	 * @param xpos the xpos
+	 * @param ypos the ypos
+	 * @param angle the angle
+	 * @param turtleID the turtle id
+	 */
 	public void setState(double xpos, double ypos, double angle, int turtleID) {
 		TurtleState CurrentState = new TurtleState(xpos, ypos, angle, true,
-				true, turtleID);
+				true, turtleID,0);
 		myStatesMap.put(turtleID, CurrentState);
 		myActiveTurtles.add(turtleID);
 	}
 
-	/*
-	 * Parses and calls each of the commands. Stores the resulting state
-	 * histories in myHistoryMap
-	 * 
-	 * @param raw user input
+	
+	/**
+	 * Do commands.
+	 *
+	 * @param input the raw userinput
 	 */
 	public void doCommands(String input) {
 		for (Node node : parseToNodeList(input)) {
@@ -60,12 +69,11 @@ public class Model {
 
 	}
 
-	/*
-	 * Creates a parser which parses raw string input into a list of nodes.
-	 * 
-	 * @param Raw String input
-	 * 
-	 * @return List<Node> where each token is a member
+	/**
+	 * Parses the input to a node list.
+	 *
+	 * @param input the input
+	 * @return the list of nodes
 	 */
 	public List<Node> parseToNodeList(String input) {
 		Parser parser = new Parser(input, "English");
