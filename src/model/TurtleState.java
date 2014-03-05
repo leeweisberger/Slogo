@@ -135,9 +135,24 @@ public class TurtleState {
 	public void setShow(boolean isShown) {
 		setState(myX, myY, myAngle, myPenDown, isShown, myID);
 	}
+	
+	/**
+	 * Sets the color.
+	 *
+	 * @param d the new color
+	 */
 	public void setColor(double d){
 		myColor=d;
 		setState(myX, myY, myAngle, myPenDown, myShowing, myID);
+	}
+	
+	/**
+	 * Gets the color.
+	 *
+	 * @return the color
+	 */
+	public double getColor(){
+		return myColor;
 	}
 
 	/**
