@@ -54,7 +54,9 @@ public class Display extends JPanel implements ActionListener{
 	private JButton history;
 	private JLabel historyLabel;
 	private JTextPane turtleStatus = new JTextPane(); 
-	private TurtleGraphicsWindow turtleGraphicsWindow; 
+	private TurtleGraphicsWindow turtleGraphicsWindow;
+	private Dimension GRAPHIC_WINDOW_SIZE;
+	
 	public Display (Model model, String language){
 
 		myModel = model;
@@ -73,8 +75,8 @@ public class Display extends JPanel implements ActionListener{
 		history = new JButton("History");
 
 		pane = new Container();	
-
 		addComponentsToLayout(); 
+		
 	}
 
 	private void addComponentsToLayout(){
@@ -83,7 +85,14 @@ public class Display extends JPanel implements ActionListener{
 		add(layoutButtons(pane),  BorderLayout.EAST);
 		add(history,  BorderLayout.WEST);
 		add(turtleGraphicsWindow, BorderLayout.CENTER);
-		System.out.println("turtleGraphicsWindow added");
+//		System.out.println("turtleGraphicsWindow added");
+		
+		
+		GRAPHIC_WINDOW_SIZE = turtleGraphicsWindow.getSize();
+		System.out.println(turtleGraphicsWindow.pfWidth() + turtleGraphicsWindow.pfHeight());
+		System.out.println(turtleGraphicsWindow.viewWidth() + turtleGraphicsWindow.viewHeight());
+		System.out.println(turtleGraphicsWindow.displayWidth() + turtleGraphicsWindow.displayHeight());
+		
 	}
 	private Container layoutButtons(Container pane){
 		pane.setLayout(new GridBagLayout()); 
