@@ -1,5 +1,6 @@
-
-
+Other todos: Language setting
+Need to create formatted textFields to show information about variables, and such:
+http://docs.oracle.com/javase/tutorial/uiswing/components/formattedtextfield.html
 Pair Program: paint slower (with sleep or timer)
 
 
@@ -7,7 +8,7 @@ Delegation:
 Steve: 
 
 1. Access Map: In display we have already passed in model, and so write an getter that get it. 
-2. Separate doView from Controller 
+
 3. Figure out dynamically the window size (componentSize)
 4. Flag to drawUpdateState (default state is that )
 5. Allow multiple workspaces (perhaps as tabs or as separate windows). 

@@ -17,20 +17,18 @@ public class Main {
 		Main main = new Main();
 		Controller c = new Controller();
 		Model model = new Model();
-		model.setState(0, 0, 0, 0);
-		main.initializeView();
-		c.go(model);
-		
-	}
-	private void initializeView(){
-		Display display = new Display(null, null); 
-		JFrame frame = new JFrame(TITLE); 
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// add our user interface components to Frame and show it
-		frame.getContentPane().add(display);        
-		frame.setSize(SIZE);
-		frame.setVisible(true);
+		model.setState(0, 0, 0,0);
+//		main.initializeView();
+	
+                ViewController vc = new ViewController();
+                vc.initializeView(model);  		
+                
+                
+		c.go(model);
+  
+
 	}
+
 
 }

@@ -18,20 +18,14 @@ import model.TurtleState;
 
 
 public class TurtleGraphicsWindow extends JGEngine{    
-    /**
-     * 
-     */
+
     private static final Dimension SIZE = new Dimension(900, 600);
     TurtleState myCurrentState = TurtleState.getInstant();
-    List<TurtleState> myStateHistory = new ArrayList<TurtleState>();
-    
-    private boolean test = true;
-//    Map<Integer, List<TurtleState>> myHistoryMap =  
+    private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
+    private boolean test = true;  
 
     public TurtleGraphicsWindow(){
         super();
-//        double aspect = 3.0 / 2.0;
-//        int height = 200;
         double width = 835.0;
         double height = 567.0;
         initEngineComponent((int) width, (int) height);      
@@ -91,6 +85,11 @@ public class TurtleGraphicsWindow extends JGEngine{
         int DISPLAY_WIDTH = displayWidth();
         int DISPLAY_HEIGHT = displayHeight();
         System.out.println("displaywidth is " + DISPLAY_WIDTH + "displayHeight is " + DISPLAY_HEIGHT);
+    }
+
+    public void changeDrawSpeed (Double fps, Double maxframeskip) {
+        // TODO Auto-generated method stub
+        setFrameRate(fps, maxframeskip);
     }
 
 }
