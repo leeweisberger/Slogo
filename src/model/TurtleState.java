@@ -9,37 +9,17 @@ import java.util.List;
  */
 public class TurtleState {
 
-	/** The my x. */
 	private double myX;
-	
-	/** The my y. */
 	private double myY;
-	
-	/** The my angle. */
 	private double myAngle;
-	
-	/** The my pen down. */
 	private boolean myPenDown;
-	
-	/** The my showing. */
 	private boolean myShowing;
-	
-	/** The my id. */
 	private int myID;
-	
-	/** The my state history. */
 	private List<TurtleState> myStateHistory = new ArrayList<TurtleState>();
-
-
-	/** The _instance state. */
 	private static TurtleState _instanceState;
-	
-	/** The my current state. */
 	private static TurtleState myCurrentState;
-	
-	/** The isnew. */
 	private boolean isnew = true;
-
+	private double myColor=0;
 	/**
 	 * Instantiates a new turtle state.
 	 *
@@ -50,7 +30,7 @@ public class TurtleState {
 	 * @param showing the showing
 	 * @param turtleID the turtle id
 	 */
-	public TurtleState(double x, double y, double angle,boolean penDown,boolean showing, int turtleID) {
+	public TurtleState(double x, double y, double angle,boolean penDown,boolean showing, int turtleID, double color) {
 		setState(x, y, angle, penDown, showing, turtleID);
 	}
 
@@ -155,13 +135,17 @@ public class TurtleState {
 	public void setShow(boolean isShown) {
 		setState(myX, myY, myAngle, myPenDown, isShown, myID);
 	}
+	public void setColor(double d){
+		myColor=d;
+		setState(myX, myY, myAngle, myPenDown, myShowing, myID);
+	}
 
 	/**
 	 * Update state history if the state is not new.
 	 */
 	public void updateStateHistory() {
 		isnew = true;
-		myStateHistory.add(new TurtleState(myX,myY,myAngle,myPenDown,myShowing,myID));
+		myStateHistory.add(new TurtleState(myX,myY,myAngle,myPenDown,myShowing,myID,myColor));
 	}
 
 	/**

@@ -34,7 +34,7 @@ public class Model {
 	 */
 	public void setState(double xpos, double ypos, double angle, int turtleID) {
 		TurtleState CurrentState = new TurtleState(xpos, ypos, angle, true,
-				true, turtleID);
+				true, turtleID,0);
 		myStatesMap.put(turtleID, CurrentState);
 		myActiveTurtles.add(turtleID);
 	}
