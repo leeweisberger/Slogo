@@ -219,6 +219,8 @@ public class TurtleState {
 		return myID;
 	}
 
+	
+
 	// public static TurtleState getStateInstant(double x, double y, double
 	// angle){
 	// if (_instanceState == null){
