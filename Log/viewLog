@@ -64,5 +64,8 @@ MenuBar refactored but still doesn't obey open closed principle
 determine what methods in the GUI are to be public/ part of the API
 
 History button text doesn't wrap**
+Specify file name for file to be saved in 
+tab hierarchy refactoring 
+
 
 

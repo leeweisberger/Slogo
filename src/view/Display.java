@@ -24,27 +24,23 @@ import java.awt.event.KeyEvent;
  
 public class Display extends JPanel {
 	private DisplayTab tab1; 
-
-
 	private DisplayTab tab2; 
 	private DisplayTab tab3; 
-	private Model model1;
-	private Model model2;
-	private Model model3;
+	private static Model model;
 	
     public Display() {
         super(new GridLayout(1, 1));
          
         JTabbedPane tabbedPane = new JTabbedPane();
         
-        model1 = new Model();
-        tab1 = new DisplayTab(model1, null); 
+        model = new Model();
+        tab1 = new DisplayTab(model, null); 
         
-        model2 = new Model();
-        tab2 = new DisplayTab(model2, null); 
+    
+        tab2 = new DisplayTab(model, null); 
         
-        model3 = new Model();
-        tab3 = new DisplayTab(model3, null);
+
+        tab3 = new DisplayTab(model, null);
         
         tabbedPane.addTab("tab 1", tab1);
         tabbedPane.addTab("tab 2", tab2);

@@ -146,7 +146,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		if("run".equals( e.getActionCommand() )){	
 			setHistoryButtonText(commandInput.getValue()); 
-			myModel.parseToNodeList(commandInput.getValue());
+			myModel.doCommands(commandInput.getValue());
 		}
 		if("stop".equals(e.getActionCommand())){
 
