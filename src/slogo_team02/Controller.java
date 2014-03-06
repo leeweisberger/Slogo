@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 import model.Model;
 import model.TurtleState;
-import view.Display;
+import view.DisplayTab;
 
 /*
  * The Controller class serves as a bridge between the View and the Model
