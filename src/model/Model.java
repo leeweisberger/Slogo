@@ -21,10 +21,14 @@ public class Model {
 	private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
 
 	public Map<Integer, List<TurtleState>> getMyHistoryMap() {
-		return myHistoryMap;
+//	    System.out.println("getMyHistoryMap called ");
+	    return myHistoryMap;
 	}
-
-
+	
+	public List<Integer> getActiveTurtles(){
+	    return myActiveTurtles;
+	}
+	
 	/**
 	 * Creates a new TurtleState.
 	 *
@@ -38,6 +42,7 @@ public class Model {
 				true, turtleID,0);
 		myStatesMap.put(turtleID, CurrentState);
 		myActiveTurtles.add(turtleID);
+		
 	}
 
 	
@@ -65,6 +70,7 @@ public class Model {
 		}
 		for (TurtleState turtle : myStatesMap.values()) {
 			myHistoryMap.put(turtle.getID(), turtle.getStateHistory());
+//			System.out.println("the parser has put the history inside");
 		}
 
 	}

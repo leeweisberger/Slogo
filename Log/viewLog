@@ -1,16 +1,42 @@
+for constructor, can throw: SecurityException, ClassNotFoundException, NoSuchMethodException
+automatic creation of tabs: 
+change between tabs = keep track of new history, and clear the current stuff on view.
+	Lines.clear()
+	canvas.clear()
+change the background color: add combo choose in panel: http://docs.oracle.com/javase/tutorial/uiswing/components/combobox.html
+change the pen color 
+allow user to select different turtle, use this: http://docs.oracle.com/javase/tutorial/uiswing/components/filechooser.html
+active variables
 Other todos: Language setting
+
+JGObject for Turtle Object? 
+3. Figure out dynamically the window size (componentSize)
+
+	//put in the menu option
+        public void actionPerformed (ActionEvent e){
+            try{
+                myTabbedPane.add("Tab" + adjustedTabCount(), new DisplayTab(X, X))
+            }
+            catch(Exception e1){
+                e1.printStackTraces()
+            }
+        }
+        
+        myTabCount ++ for adjustedTabCount
+        for closing a tab, getSelectedComponent
+        
+        clear: set image at origin, clear History, setAngle to original, and myLines.clear(): 
+        	myLines is an arrayList, call clear will clear them, and in paintFrame you no longer draw it.
+         
+
 Need to create formatted textFields to show information about variables, and such:
 http://docs.oracle.com/javase/tutorial/uiswing/components/formattedtextfield.html
 Pair Program: paint slower (with sleep or timer)
 
-
 Delegation:
-Steve: 
+Steve:  
 
-1. Access Map: In display we have already passed in model, and so write an getter that get it. 
 
-3. Figure out dynamically the window size (componentSize)
-4. Flag to drawUpdateState (default state is that )
 5. Allow multiple workspaces (perhaps as tabs or as separate windows). 
 	You can define exactly what a workspace is but, at the very least, 
 	it should have a separate turtle display area, command history, and active variables
@@ -64,5 +90,15 @@ MenuBar refactored but still doesn't obey open closed principle
 determine what methods in the GUI are to be public/ part of the API
 
 History button text doesn't wrap**
+Specify file name for file to be saved in 
+tab hierarchy refactoring 
+
+errors from user input
+choose image for turtle 
+HTML formatted help page 
+*show variables currently available in the environment (even better, make their values directly clickable to edit)
+*show user-defined commands currently available in the environment (even better, make these commands directly clickable to execute) 
+*allow users to set, save, and load workspace preferences (like default background, starting image list, starting number of turtles, starting file to load, etc.)
+
 
 
