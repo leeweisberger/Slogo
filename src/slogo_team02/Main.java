@@ -8,6 +8,7 @@ import javax.swing.text.View;
 import model.Model;
 import view.Display;
 
+
 public class Main {
 	private static final String TITLE = "SLogo";
 	public static final Dimension SIZE = new Dimension(1200, 900);
