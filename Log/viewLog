@@ -9,6 +9,7 @@ allow user to select different turtle, use this: http://docs.oracle.com/javase/t
 active variables
 Other todos: Language setting
 
+JGObject for Turtle Object? 
 3. Figure out dynamically the window size (componentSize)
 
 	//put in the menu option
