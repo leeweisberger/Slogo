@@ -62,7 +62,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 	private MenuBar menuBar;
 	private CommandInput commandInput; 
 	private Container pane;
-	private JButton run, stop, clear, history, saveTurtleState;
+	private JButton run, stop, clear, history;
 	private JRadioButton faster, slower; 
 	private String historyLabel;
 	private JTextPane turtleStatus = new JTextPane(); 
@@ -78,7 +78,6 @@ public class DisplayTab extends JPanel implements ActionListener{
 		run = new JButton("run");
 		stop = new JButton("stop");
 		clear = new JButton("clear");
-		saveTurtleState = new JButton("save turtle state");
 		historyLabel = new String("History"); 
 		history = new JButton(historyLabel);
 		faster = new JRadioButton("faster"); 
@@ -108,7 +107,6 @@ public class DisplayTab extends JPanel implements ActionListener{
 		pane.add(slower, setComponentConstraints(1,2));
 		pane.add(stop, setComponentConstraints(0,3));
 		pane.add(clear, setComponentConstraints(0,4));
-		pane.add(saveTurtleState, setComponentConstraints(0,5));
 
 		return pane; 
 	}
@@ -122,8 +120,6 @@ public class DisplayTab extends JPanel implements ActionListener{
 		clear.addActionListener(this);
 		history.setActionCommand("history");
 		history.addActionListener(this);
-		saveTurtleState.setActionCommand("saveTurtleState");
-		saveTurtleState.addActionListener(this);
 	}
 
 	private GridBagConstraints setComponentConstraints(int x, int y){
@@ -160,9 +156,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 		if("slower".equals(e.getActionCommand())){
 
 		}
-		if("saveTurtleState".equals(e.getActionCommand())){
-			turtleGraphicsWindow = null; 
-		}
+	
 
 	}
 

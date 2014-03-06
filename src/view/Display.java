@@ -42,7 +42,7 @@ public class Display extends JPanel implements ChangeListener{
 
 		model = new Model();
 		tab1 = new DisplayTab(model, null); 
-
+		tab1.setTurtleGraphicsWindow(turtleGrahicsWindow);
 
 		tab2 = new DisplayTab(model, null); 
 

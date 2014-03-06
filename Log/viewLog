@@ -67,5 +67,12 @@ History button text doesn't wrap**
 Specify file name for file to be saved in 
 tab hierarchy refactoring 
 
+errors from user input
+choose image for turtle 
+HTML formatted help page 
+*show variables currently available in the environment (even better, make their values directly clickable to edit)
+*show user-defined commands currently available in the environment (even better, make these commands directly clickable to execute) 
+*allow users to set, save, and load workspace preferences (like default background, starting image list, starting number of turtles, starting file to load, etc.)
+
 
 
