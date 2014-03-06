@@ -4,13 +4,17 @@ import view.*;
 import model.*;
 import jgame.JGColor;
 import jgame.platform.JGEngine;
+
 import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
 import javax.swing.JFrame;
+
 import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.text.View;
 
@@ -37,7 +41,6 @@ public class ViewController {
         frame.getContentPane().add(display);        
         frame.setSize(SIZE);
         frame.setVisible(true);                
-        turtleGraphicsWindow = display.getTab1().getTurtleGraphicsWindow();
         /*test draw and update path*/
         drawPath();
     }

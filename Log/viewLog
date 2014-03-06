@@ -73,6 +73,5 @@ HTML formatted help page
 *show variables currently available in the environment (even better, make their values directly clickable to edit)
 *show user-defined commands currently available in the environment (even better, make these commands directly clickable to execute) 
 *allow users to set, save, and load workspace preferences (like default background, starting image list, starting number of turtles, starting file to load, etc.)
-
-
+*save turtleState and load on tab switch 
 
