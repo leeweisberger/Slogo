@@ -18,22 +18,22 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.text.View;
 
-
 public class ViewController {
     private static final String TITLE = "SLogo";
     public static final Dimension SIZE = new Dimension(1000, 800);
     private Model myModel;
     private Map<Integer, List<TurtleState>> myHistoryMap;
+    private List<Integer> myActiveTurtles;
     private TurtleGraphicsWindow turtleGraphicsWindow;
-    private List<Integer> activeTurtleList;
     private boolean permission;
 
 
     public void initializeView(Model model){
         myModel = model;
         myHistoryMap = myModel.getMyHistoryMap();
-        
-        Display display = new Display(); 
+        myActiveTurtles = myModel.getActiveTurtles();
+
+        Display display = new Display(myModel, null); 
         JFrame frame = new JFrame(TITLE); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -41,23 +41,33 @@ public class ViewController {
         frame.getContentPane().add(display);        
         frame.setSize(SIZE);
         frame.setVisible(true);                
+<<<<<<< HEAD
+=======
+        turtleGraphicsWindow = display.getTab1().getTurtleGraphicsWindow();
+
+>>>>>>> 58340039648404c740b754d2802e25ef0fc0b09d
         /*test draw and update path*/
-        drawPath();
+//        drawPath();
     }
 
-    public void drawPath(){
+    void drawPath(){
         /*Run when the run button or is pressed;*/
-        permission = true;
-        for (Map.Entry<Integer, List<TurtleState>> singleTStateList: myHistoryMap.entrySet()){
-            turtleGraphicsWindow.drawUpdate(singleTStateList.getValue(), permission);
-        }
+        
+    }
+    
+    public void drawTurtle(){
+        
     }
 
     private void changeColor(JGColor color){
         turtleGraphicsWindow.setColor(color);
     }
-    
+
     private void changeDrawSpeed(Double fps, Double maxframeskip){
         turtleGraphicsWindow.changeDrawSpeed(fps, maxframeskip);
     }    
+
+    private void activeTurtle(boolean showBounding){
+        //        public void dbgShowBoundingBox(boolean enabled)
+    }
 }

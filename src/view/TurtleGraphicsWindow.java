@@ -12,6 +12,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 
 import jgame.JGColor;
+import jgame.JGRectangle;
 import jgame.platform.JGEngine;
 import model.Model;
 import model.TurtleState;
@@ -21,11 +22,14 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     private static final Dimension SIZE = new Dimension(900, 600);
     TurtleState myCurrentState = TurtleState.getInstant();
-    private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
+    //    private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
     private boolean test = true;  
     private double DYNAMIC_WIDTH = 835.0;
     private double DYNAMIC_HEIGHT = 567.0;
-    
+    private Map<Integer, List<TurtleState>> myHistoryMap;
+    private List<Integer> myActiveTurtles;
+    private boolean permission;
+    private boolean isClicked = false;
 
     public TurtleGraphicsWindow(){
         super();
@@ -53,40 +57,73 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     @Override
     public void doFrame() {
+//        simpleDraw();
     }
 
     public void simpleDraw () {
+        //      defineImage("myTurtle", null, 0, "view/turtle.png", name, debugflags, debugflags, debugflags, debugflags);
+        //      defineImage("myTurtle", null, 0, null, null, , debugflags, debugflags, debugflags);
+
+        drawImage("myTurtle", DYNAMIC_WIDTH/2, DYNAMIC_HEIGHT/2);
+        //        setImage();
         drawLine(0.0, 0.0, 900.0, 600.0, 2.0, JGColor.blue);
+        //        defineImage(null, null, 0, "turtle", null);
+        //        JGRectangle bBox = getImageBBox("myTurtle");
+        //        drawRect((double) bBox.x,(double) bBox.y,(double) Math.max(bBox.width, bBox.height),(double) Math.max(bBox.width, bBox.height), false, false, 0.8, JGColor.red);
+        showActiveTurtle();
     }
 
-    public void drawUpdate(List<TurtleState> singleTStateList, boolean permission){
-        if (permission){
-            //        System.out.println("the myStateHistory at this moment is " + singleTStateList);
-            for (int i=0; i<singleTStateList.size()-1; i++){
-                TurtleState myPrevState = singleTStateList.get(i);
-                TurtleState myNextState= singleTStateList.get(i+1);
-                drawImage("myTurtle", myPrevState.getX(), myPrevState.getY());
-                drawLine(myPrevState.getX(), myPrevState.getY(), myNextState.getX(), myNextState.getY(), 5.0, JGColor.blue);
-                drawImage("myTurtle", myNextState.getX(), myNextState.getY());
+    void showActiveTurtle(){
+        drawRect(200.0, 200.0, 30.0, 20.0, false, false, 2.0, JGColor.red);
+    }
+
+    void runBottonAction(Map<Integer, List<TurtleState>> myHistoryMap, List<Integer> myActiveTurtles, boolean permission){
+        isClicked = true;
+        this.myHistoryMap = myHistoryMap;  
+        this.myActiveTurtles = myActiveTurtles;
+        this.permission = permission;
+//        paintFrame();
+    }
+
+    /*for rotation: 
+     * defineImageRotated(java.lang.String imgname, java.lang.String tilename, int collisionid, java.lang.String srcimg, double angle) 
+              Define new image by rotating an already loaded image.*/
+
+    @Override
+    public void paintFrame(){
+        if (isClicked){
+            simpleDraw();
+            drawPath();
+        }
+        //            System.out.println(getImageBBox("myTurtle").toString());
+        //        System.out.println("displaywidth is " + DISPLAY_WIDTH + "displayHeight is " + DISPLAY_HEIGHT);
+    }
+
+    void drawPath(){
+//        System.out.println("drawPath is called");
+        permission = true;
+        for (Map.Entry<Integer, List<TurtleState>> singleTStateList: myHistoryMap.entrySet()){
+            if (myActiveTurtles.contains(singleTStateList.getKey())){ 
+                drawUpdate(singleTStateList.getValue());
             }
         }
-            /*for rotation: 
-             * defineImageRotated(java.lang.String imgname, java.lang.String tilename, int collisionid, java.lang.String srcimg, double angle) 
-              Define new image by rotating an already loaded image.*/
-        }
-
-        @Override
-        public void paintFrame(){
-            simpleDraw();
-            drawImage("myTurtle", DYNAMIC_WIDTH/2, DYNAMIC_HEIGHT/2);
-            int DISPLAY_WIDTH = displayWidth();
-            int DISPLAY_HEIGHT = displayHeight();
-            //        System.out.println("displaywidth is " + DISPLAY_WIDTH + "displayHeight is " + DISPLAY_HEIGHT);
-        }
-
-        public void changeDrawSpeed (Double fps, Double maxframeskip) {
-            // TODO Auto-generated method stub
-            setFrameRate(fps, maxframeskip);
-        }
-
     }
+
+    void drawUpdate(List<TurtleState> singleTStateList){   
+        //        System.out.println("the myStateHistory at this moment is " + singleTStateList);
+        for (int i=0; i<singleTStateList.size()-1; i++){
+            //                dbgShowBoundingBox(permission);
+            TurtleState myPrevState = singleTStateList.get(i);
+            TurtleState myNextState= singleTStateList.get(i+1);
+            drawImage("myTurtle", myPrevState.getX(), myPrevState.getY());
+            drawLine(myPrevState.getX(), myPrevState.getY(), myNextState.getX(), myNextState.getY(), 5.0, JGColor.blue);
+            drawImage("myTurtle", myNextState.getX(), myNextState.getY());
+        }
+    }
+
+    public void changeDrawSpeed (Double fps, Double maxframeskip) {
+        // TODO Auto-generated method stub
+        setFrameRate(fps, maxframeskip);
+    }
+
+}

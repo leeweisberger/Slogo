@@ -30,24 +30,25 @@ public class Display extends JPanel implements ChangeListener{
 	private DisplayTab tab1; 
 	private DisplayTab tab2; 
 	private DisplayTab tab3; 
-	private static Model model;
+	private static Model myModel;
 	private static TurtleGraphicsWindow turtleGrahicsWindow = new TurtleGraphicsWindow(); 
 	private JTabbedPane tabbedPane; 
-	private int selectedIndex; 
+	private int selectedIndex;
 
-	public Display() {
+	public Display(Model model, String language) {
 		super(new GridLayout(1, 1));
 
 		tabbedPane = new JTabbedPane();
 
-		model = new Model();
-		tab1 = new DisplayTab(model, null); 
+
+		
+		tab1 = new DisplayTab(new Model(), null); 
 		tab1.setTurtleGraphicsWindow(turtleGrahicsWindow);
 
-		tab2 = new DisplayTab(model, null); 
+		tab2 = new DisplayTab(new Model(), null); 
 
+		tab3 = new DisplayTab(new Model(), null);
 
-		tab3 = new DisplayTab(model, null);
 
 		tabbedPane.addTab("tab 1", tab1);
 		tabbedPane.addTab("tab 2", tab2);

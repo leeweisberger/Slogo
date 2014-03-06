@@ -49,6 +49,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import slogo_team02.ViewController;
+
 public class DisplayTab extends JPanel implements ActionListener{
 	private static final Dimension SIZE = new Dimension(800, 600);
 	private static final String DRAW_BOX_TITLE = "Draw";
@@ -63,6 +65,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 	private JTextPane turtleStatus = new JTextPane(); 
 	private TurtleGraphicsWindow turtleGraphicsWindow;
 	private Map<Integer, List<TurtleState>> myHistoryMap;
+	private List<Integer> myActiveTurtles;
 
 	public DisplayTab (Model model, String language){
 		this.model = model;			
@@ -81,7 +84,21 @@ public class DisplayTab extends JPanel implements ActionListener{
 		clear = new JButton("clear");
 		historyLabel = new String("History"); 
 		history = new JButton(historyLabel);
+<<<<<<< HEAD
 		pane = new Container();
+=======
+		faster = new JRadioButton("faster"); 
+		slower = new JRadioButton("slower"); 
+
+		pane = new Container();	
+
+		addActionListenerToComponents(); 
+		addComponentsToLayout(); 
+		
+	        myHistoryMap = myModel.getMyHistoryMap();
+	        System.out.println("checking if myHistoryMap is received in DisplayTab" + myHistoryMap.get(0));
+	        myActiveTurtles = myModel.getActiveTurtles();
+>>>>>>> 58340039648404c740b754d2802e25ef0fc0b09d
 	}
 	
 	private void addComponentsToLayout(){
@@ -125,8 +142,18 @@ public class DisplayTab extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if("run".equals( e.getActionCommand() )){	
+<<<<<<< HEAD
 			setHistoryButtonText(commandInput.getValue()); 
 			model.doCommands(commandInput.getValue());
+=======
+			setHistoryButtonText(commandInput.getValue());
+			myModel.parseToNodeList(commandInput.getValue());
+			turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
+			System.out.println(myHistoryMap.get(0));
+		}
+		if("stop".equals(e.getActionCommand())){
+
+>>>>>>> 58340039648404c740b754d2802e25ef0fc0b09d
 		}
 	
 		if("clear".equals(e.getActionCommand())){
