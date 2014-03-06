@@ -20,11 +20,10 @@ public class Main {
 		model.setState(0, 0, 0,0);
 		//		main.initializeView();
 		ViewController vc = new ViewController();
-		vc.initializeView(model);  		
-
+		vc.initializeView(model);
+		vc.drawPath();
 
 		c.go(model);
-
 
 	}
 }

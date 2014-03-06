@@ -50,6 +50,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import slogo_team02.ViewController;
+
 public class DisplayTab extends JPanel implements ActionListener{
 	private static final Dimension SIZE = new Dimension(800, 600);
 	private static final String DRAW_BOX_TITLE = "Draw";
@@ -69,6 +71,8 @@ public class DisplayTab extends JPanel implements ActionListener{
 	private TurtleGraphicsWindow turtleGraphicsWindow;
 	private Dimension GRAPHIC_WINDOW_SIZE;
 	private Map<Integer, List<TurtleState>> myHistoryMap;
+	private List<Integer> myActiveTurtles;
+	
 	
 	public DisplayTab (Model model, String language){
 		myModel = model;
@@ -145,8 +149,9 @@ public class DisplayTab extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if("run".equals( e.getActionCommand() )){	
-			setHistoryButtonText(commandInput.getValue()); 
+			setHistoryButtonText(commandInput.getValue());
 			myModel.parseToNodeList(commandInput.getValue());
+			turtleGraphicsWindow.drawPath(myHistoryMap, myActiveTurtles, true);
 		}
 		if("stop".equals(e.getActionCommand())){
 
