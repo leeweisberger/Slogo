@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import model.Model;
 
@@ -25,7 +26,7 @@ import java.awt.event.KeyEvent;
 
 import jgame.platform.JGEngine;
 
-public class Display extends JPanel {
+public class Display extends JPanel implements ChangeListener{
 	private DisplayTab tab1; 
 	private DisplayTab tab2; 
 	private DisplayTab tab3; 
@@ -49,7 +50,7 @@ public class Display extends JPanel {
 		tabbedPane.addTab("tab 1", tab1);
 		tabbedPane.addTab("tab 2", tab2);
 		tabbedPane.addTab("tab 3", tab3);
-
+		tabbedPane.addChangeListener(this); 
 		//Add the tabbed pane to this panel.
 		add(tabbedPane);
 
@@ -68,7 +69,6 @@ public class Display extends JPanel {
 
 	public void stateChanged(ChangeEvent e){
 		 if ( tabbedPane.getSelectedIndex() != selectedIndex ) { 
-			 System.out.println("get selected index:"+selectedIndex);
 	        ((DisplayTab) tabbedPane.getSelectedComponent()).setTurtleGraphicsWindow(turtleGrahicsWindow);
 	        selectedIndex = tabbedPane.getSelectedIndex();
 	        }
