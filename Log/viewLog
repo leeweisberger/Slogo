@@ -24,6 +24,8 @@ Steve:
 Anthony:
 		menu bar(functionality remaining)
 		buttons
+			run: parse and call draw 
+			
 
 Menu bar 
 	Buttons 
@@ -31,8 +33,13 @@ Menu bar
 	Format: change color, choose turtle image
 	Help:
 
-	 | stop | run | undo | clear | 
-	**| slow | fast | import  
+Buttons
+	 | stop | run | undo | clear | Pen up(connected to fast) / down
+	**| slow | fast (radio buttons) | import
+	
+
+	 
+ 
 
 Turtle Graphics 
 	turtle + pen 
@@ -56,27 +63,6 @@ HTML formatted help page
 MenuBar refactored but still doesn't obey open closed principle
 determine what methods in the GUI are to be public/ part of the API
 
+History button text doesn't wrap**
 
 
-enter commands to the turtle interactively
-display results of the turtle executing commands
-The turtle should be driven via commands entered by the user 
-and optionally by buttons or other user controls.
- 
-You should provide feedback so that the user is always aware 
-of the turtle's position, heading, or other parameters affected
-by the environment. Note, the turtle starts in the center of the 
-display which is considered (0, 0).
-
-display errors that may result from the user's commands
-
-choose an image to use for the turtle
-
-specify a color to use for the pen
-show commands previously run in the environment (even better, make these commands directly clickable to execute)
-access an HTML formatted help page
-it could just be a "language reference", i.e., the command descriptions
-given with the assignment, or you could extend it to include features of the GUI
-
-naming the boxes**? 
-used MenuLookDemo.java example 

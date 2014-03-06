@@ -29,17 +29,16 @@ public class ViewController {
         myModel = model;
         myHistoryMap = myModel.getMyHistoryMap();
         
-        Display display = new Display(myModel, null); 
+        Display display = new Display(); 
         JFrame frame = new JFrame(TITLE); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // add our user interface components to Frame and show it
         frame.getContentPane().add(display);        
         frame.setSize(SIZE);
-        frame.setVisible(true);
-        turtleGraphicsWindow = display.getTurtleGraphicsWindow();
-        
-        
+        frame.setVisible(true);                
+        turtleGraphicsWindow = display.getTab1().getTurtleGraphicsWindow();
+        /*test draw and update path*/
         drawPath();
     }
 
@@ -57,8 +56,5 @@ public class ViewController {
     
     private void changeDrawSpeed(Double fps, Double maxframeskip){
         turtleGraphicsWindow.changeDrawSpeed(fps, maxframeskip);
-    }
-    
-
-    
+    }    
 }

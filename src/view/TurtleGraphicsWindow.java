@@ -57,7 +57,6 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     public void simpleDraw () {
         drawLine(0.0, 0.0, 900.0, 600.0, 2.0, JGColor.blue);
-        //        System.out.println("simpleDraw called");
     }
 
     public void drawUpdate(List<TurtleState> singleTStateList, boolean permission){
