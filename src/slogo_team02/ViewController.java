@@ -22,6 +22,7 @@ public class ViewController {
     private Map<Integer, List<TurtleState>> myHistoryMap;
     private TurtleGraphicsWindow turtleGraphicsWindow;
     private List<Integer> activeTurtleList;
+    private boolean permission;
 
 
     public void initializeView(Model model){
@@ -36,13 +37,18 @@ public class ViewController {
         frame.getContentPane().add(display);        
         frame.setSize(SIZE);
         frame.setVisible(true);
-        
         turtleGraphicsWindow = display.getTurtleGraphicsWindow();
+        
+        
+        drawPath();
     }
 
     public void drawPath(){
-        /*when the run button or enter is pressed;*/
-        
+        /*Run when the run button or is pressed;*/
+        permission = true;
+        for (Map.Entry<Integer, List<TurtleState>> singleTStateList: myHistoryMap.entrySet()){
+            turtleGraphicsWindow.drawUpdate(singleTStateList.getValue(), permission);
+        }
     }
 
     private void changeColor(JGColor color){

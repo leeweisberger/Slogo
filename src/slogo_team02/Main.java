@@ -24,11 +24,7 @@ public class Main {
                 ViewController vc = new ViewController();
                 vc.initializeView(model);  		
                 
-                
 		c.go(model);
-  
 
 	}
-
-
 }
