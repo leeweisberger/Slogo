@@ -53,140 +53,144 @@ import java.util.Map;
 import slogo_team02.ViewController;
 
 public class DisplayTab extends JPanel implements ActionListener{
-	private static final Dimension SIZE = new Dimension(800, 600);
-	private static final String DRAW_BOX_TITLE = "Draw";
-	private static final String HISTORY_BOX_TITLE = "History";
-	private static final String COMMAND_BOX_TITLE = "Command";
-	private static Model myModel;
-	private static ResourceBundle myResources;
-	private JTextArea output;
-	private JScrollPane scrollPane;
-	private MenuBar menuBar;
-	private CommandInput commandInput; 
-	private Container pane;
-	private JButton run, stop, clear, history;
-	private JRadioButton faster, slower; 
-	private String historyLabel;
-	private JTextPane turtleStatus = new JTextPane(); 
-	private TurtleGraphicsWindow turtleGraphicsWindow;
-	private Dimension GRAPHIC_WINDOW_SIZE;
-	private Map<Integer, List<TurtleState>> myHistoryMap;
-	private List<Integer> myActiveTurtles;
+    private static final Dimension SIZE = new Dimension(800, 600);
+    private static final String DRAW_BOX_TITLE = "Draw";
+    private static final String HISTORY_BOX_TITLE = "History";
+    private static final String COMMAND_BOX_TITLE = "Command";
+    private static Model myModel;
+    private static ResourceBundle myResources;
+    private JTextArea output;
+    private JScrollPane scrollPane;
+    private MenuBar menuBar;
+    private CommandInput commandInput; 
+    private Container pane;
+    private JButton run, stop, clear, history;
+    private JRadioButton faster, slower; 
+    private String historyLabel;
+    private JTextPane turtleStatus = new JTextPane(); 
+    private TurtleGraphicsWindow turtleGraphicsWindow;
+    private Dimension GRAPHIC_WINDOW_SIZE;
+    private Map<Integer, List<TurtleState>> myHistoryMap;
+    private List<Integer> myActiveTurtles;
 
-	public DisplayTab (Model model, String language){
-		myModel = model;
-		setLayout(new BorderLayout());		
-		commandInput = new CommandInput();
-		menuBar = new MenuBar(commandInput); 
-		run = new JButton("run");
-		stop = new JButton("stop");
-		clear = new JButton("clear");
-		historyLabel = new String("History"); 
-		history = new JButton(historyLabel);
-		faster = new JRadioButton("faster"); 
-		slower = new JRadioButton("slower"); 
+    public DisplayTab (Model model, String language){
+        myModel = model;
+        setLayout(new BorderLayout());		
+        commandInput = new CommandInput();
+        menuBar = new MenuBar(commandInput); 
+        run = new JButton("run");
+        stop = new JButton("stop");
+        clear = new JButton("clear");
+        historyLabel = new String("History"); 
+        history = new JButton(historyLabel);
+        faster = new JRadioButton("faster"); 
+        slower = new JRadioButton("slower"); 
 
-		pane = new Container();	
+        pane = new Container();	
 
-		addActionListenerToComponents(); 
-		addComponentsToLayout(); 
-		
-	        myHistoryMap = myModel.getMyHistoryMap();
-	        System.out.println("checking if myHistoryMap is received in DisplayTab" + myHistoryMap.get(0));
-	        myActiveTurtles = myModel.getActiveTurtles();
-	}
+        addActionListenerToComponents(); 
+        addComponentsToLayout(); 
+        
+        myHistoryMap = myModel.getMyHistoryMap();
+//        System.out.println("checking if myHistoryMap is received in DisplayTab " + myHistoryMap.get(0));
+        myActiveTurtles = myModel.getActiveTurtles();
 
-	/**
-	 * 
-	 */
-	private void addComponentsToLayout(){
-		add(menuBar.getMenuBar(), BorderLayout.NORTH);
-		add(commandInput.getCommandInput(), BorderLayout.SOUTH);
-		add(layoutButtons(pane),  BorderLayout.EAST);
-		add(history,  BorderLayout.WEST);
-	}
-	private Container layoutButtons(Container pane){
-		pane.setLayout(new GridBagLayout()); 
-		pane.add(turtleStatus, setComponentConstraints(0,0));
-		pane.add(run, setComponentConstraints(0,1));
-		pane.add(faster, setComponentConstraints(1,1));
-		pane.add(slower, setComponentConstraints(1,2));
-		pane.add(stop, setComponentConstraints(0,3));
-		pane.add(clear, setComponentConstraints(0,4));
+    }
 
-		return pane; 
-	}
+    /**
+     * 
+     */
+    private void addComponentsToLayout(){
+        add(menuBar.getMenuBar(), BorderLayout.NORTH);
+        add(commandInput.getCommandInput(), BorderLayout.SOUTH);
+        add(layoutButtons(pane),  BorderLayout.EAST);
+        add(history,  BorderLayout.WEST);
+    }
+    private Container layoutButtons(Container pane){
+        pane.setLayout(new GridBagLayout()); 
+        pane.add(turtleStatus, setComponentConstraints(0,0));
+        pane.add(run, setComponentConstraints(0,1));
+        pane.add(faster, setComponentConstraints(1,1));
+        pane.add(slower, setComponentConstraints(1,2));
+        pane.add(stop, setComponentConstraints(0,3));
+        pane.add(clear, setComponentConstraints(0,4));
 
-	private void addActionListenerToComponents(){
-		run.setActionCommand("run");
-		run.addActionListener(this);
-		stop.setActionCommand("stop");
-		stop.addActionListener(this);
-		clear.setActionCommand("clear");
-		clear.addActionListener(this);
-		history.setActionCommand("history");
-		history.addActionListener(this);
-	}
+        return pane; 
+    }
 
-	private GridBagConstraints setComponentConstraints(int x, int y){
-		GridBagConstraints c = new GridBagConstraints();
-		c.weightx= 0.5;
-		c.gridx = x; 
-		c.gridy = y; 
-		return c; 
-	}
+    private void addActionListenerToComponents(){
+        run.setActionCommand("run");
+        run.addActionListener(this);
+        stop.setActionCommand("stop");
+        stop.addActionListener(this);
+        clear.setActionCommand("clear");
+        clear.addActionListener(this);
+        history.setActionCommand("history");
+        history.addActionListener(this);
+    }
 
-	public void setHistoryButtonText(String lastCommand){
-		historyLabel = lastCommand; 
-		history.setText(historyLabel);
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if("run".equals( e.getActionCommand() )){	
-			setHistoryButtonText(commandInput.getValue());
-			myModel.parseToNodeList(commandInput.getValue());
-			turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
-			System.out.println(myHistoryMap.get(0));
-		}
-		if("stop".equals(e.getActionCommand())){
+    private GridBagConstraints setComponentConstraints(int x, int y){
+        GridBagConstraints c = new GridBagConstraints();
+        c.weightx= 0.5;
+        c.gridx = x; 
+        c.gridy = y; 
+        return c; 
+    }
 
-		}
-		if("clear".equals(e.getActionCommand())){
-
-		}
-		if("history".equals(e.getActionCommand())){
-			myModel.parseToNodeList(historyLabel);
-		}
-		if("faster".equals(e.getActionCommand())){
-
-		}
-		if("slower".equals(e.getActionCommand())){
-
-		}
-	
-
-	}
-
-	public TurtleGraphicsWindow getTurtleGraphicsWindow () {
-		return turtleGraphicsWindow;
-		// TODO Auto-generated method stub
-	}
-	
-	public void setTurtleGraphicsWindow(TurtleGraphicsWindow turtleGraphicsWindow) {
-		this.turtleGraphicsWindow = turtleGraphicsWindow;
-		add(turtleGraphicsWindow, BorderLayout.CENTER);
-	}
+    public void setHistoryButtonText(String lastCommand){
+        historyLabel = lastCommand; 
+        history.setText(historyLabel);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        if("run".equals( e.getActionCommand() )){	
+            setHistoryButtonText(commandInput.getValue());
+            myModel.parseToNodeList(commandInput.getValue());
 
 
-	public void loadState(){
 
-	}
+            turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
+            			
+        }
+        if("stop".equals(e.getActionCommand())){
+
+        }
+        if("clear".equals(e.getActionCommand())){
+
+        }
+        if("history".equals(e.getActionCommand())){
+            myModel.parseToNodeList(historyLabel);
+        }
+        if("faster".equals(e.getActionCommand())){
+
+        }
+        if("slower".equals(e.getActionCommand())){
+
+        }
 
 
-	public void saveState(){
+    }
 
-	}
+    public TurtleGraphicsWindow getTurtleGraphicsWindow () {
+        return turtleGraphicsWindow;
+        // TODO Auto-generated method stub
+    }
+
+    public void setTurtleGraphicsWindow(TurtleGraphicsWindow turtleGraphicsWindow) {
+        this.turtleGraphicsWindow = turtleGraphicsWindow;
+        add(turtleGraphicsWindow, BorderLayout.CENTER);
+    }
+
+
+    public void loadState(){
+
+    }
+
+
+    public void saveState(){
+
+    }
 
 
 }

@@ -21,7 +21,7 @@ public class Model {
 	private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
 
 	public Map<Integer, List<TurtleState>> getMyHistoryMap() {
-	    System.out.println("getMyHistoryMap called ");
+//	    System.out.println("getMyHistoryMap called ");
 	    return myHistoryMap;
 	}
 	

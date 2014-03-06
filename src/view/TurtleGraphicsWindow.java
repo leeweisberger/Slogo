@@ -24,11 +24,13 @@ public class TurtleGraphicsWindow extends JGEngine{
     TurtleState myCurrentState = TurtleState.getInstant();
     //    private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
     private boolean test = true;  
-    private double DYNAMIC_WIDTH = 835.0;
-    private double DYNAMIC_HEIGHT = 567.0;
+    private double DYNAMIC_WIDTH = 740.0;
+    private double DYNAMIC_HEIGHT = 517.0;
+    private double CENTER_WIDTH = DYNAMIC_WIDTH/2;
+    private double CENTER_HEIGHT = DYNAMIC_HEIGHT/2;
     private Map<Integer, List<TurtleState>> myHistoryMap;
     private List<Integer> myActiveTurtles;
-    private boolean permission;
+    private boolean permission = true;
     private boolean isClicked = false;
 
     public TurtleGraphicsWindow(){
@@ -52,12 +54,12 @@ public class TurtleGraphicsWindow extends JGEngine{
     @Override
     public void initGame () {
         defineMedia("viewer.tbl");
-        setFrameRate(6, 2);
+        setFrameRate(4, 0);
     }
 
     @Override
     public void doFrame() {
-//        simpleDraw();
+        //        simpleDraw();
     }
 
     public void simpleDraw () {
@@ -66,7 +68,7 @@ public class TurtleGraphicsWindow extends JGEngine{
 
         drawImage("myTurtle", DYNAMIC_WIDTH/2, DYNAMIC_HEIGHT/2);
         //        setImage();
-        drawLine(0.0, 0.0, 900.0, 600.0, 2.0, JGColor.blue);
+        drawLine(0.0, 0.0, DYNAMIC_WIDTH, DYNAMIC_HEIGHT, 2.0, JGColor.blue);
         //        defineImage(null, null, 0, "turtle", null);
         //        JGRectangle bBox = getImageBBox("myTurtle");
         //        drawRect((double) bBox.x,(double) bBox.y,(double) Math.max(bBox.width, bBox.height),(double) Math.max(bBox.width, bBox.height), false, false, 0.8, JGColor.red);
@@ -82,7 +84,9 @@ public class TurtleGraphicsWindow extends JGEngine{
         this.myHistoryMap = myHistoryMap;  
         this.myActiveTurtles = myActiveTurtles;
         this.permission = permission;
-//        paintFrame();
+//        System.out.println(myHistoryMap.get(0));
+//        System.out.println("runBottonAction called");
+        //        paintFrame();
     }
 
     /*for rotation: 
@@ -92,7 +96,8 @@ public class TurtleGraphicsWindow extends JGEngine{
     @Override
     public void paintFrame(){
         if (isClicked){
-            simpleDraw();
+//            simpleDraw();
+            //            System.out.println("drawPath correctly called");
             drawPath();
         }
         //            System.out.println(getImageBBox("myTurtle").toString());
@@ -100,26 +105,39 @@ public class TurtleGraphicsWindow extends JGEngine{
     }
 
     void drawPath(){
-//        System.out.println("drawPath is called");
+        //        System.out.println("drawPath is called");
         permission = true;
         for (Map.Entry<Integer, List<TurtleState>> singleTStateList: myHistoryMap.entrySet()){
-            if (myActiveTurtles.contains(singleTStateList.getKey())){ 
-                drawUpdate(singleTStateList.getValue());
-            }
+            //            if (myActiveTurtles.contains(singleTStateList.getKey())){ 
+            //                drawUpdate(singleTStateList.getValue());
+            //            } 
+//            System.out.println("drawPath called");
+//            System.out.println("singleTStateList value is " + singleTStateList.getValue());
+            drawUpdate(singleTStateList.getValue());
         }
     }
 
     void drawUpdate(List<TurtleState> singleTStateList){   
+        TurtleState myFinalState = singleTStateList.get(singleTStateList.size() - 1);
+        drawImage("myTurtle", (CENTER_WIDTH+myFinalState.getX()), (CENTER_HEIGHT-myFinalState.getY()));
+//        isClicked = false;
+        
+        
+        /*
         //        System.out.println("the myStateHistory at this moment is " + singleTStateList);
         for (int i=0; i<singleTStateList.size()-1; i++){
             //                dbgShowBoundingBox(permission);
             TurtleState myPrevState = singleTStateList.get(i);
             TurtleState myNextState= singleTStateList.get(i+1);
             drawImage("myTurtle", myPrevState.getX(), myPrevState.getY());
-            drawLine(myPrevState.getX(), myPrevState.getY(), myNextState.getX(), myNextState.getY(), 5.0, JGColor.blue);
-            drawImage("myTurtle", myNextState.getX(), myNextState.getY());
+            System.out.println("drawImage called");
+            
+//            drawLine(myPrevState.getX(), myPrevState.getY(), myNextState.getX(), myNextState.getY(), 5.0, JGColor.blue);
+//            drawImage("myTurtle", myNextState.getX(), myNextState.getY());
+            isClicked = false;
+            }*/
         }
-    }
+    
 
     public void changeDrawSpeed (Double fps, Double maxframeskip) {
         // TODO Auto-generated method stub
