@@ -1,5 +1,6 @@
 package slogo_team02;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -7,6 +8,7 @@ import javax.swing.text.View;
 
 import model.Model;
 import view.Display;
+import view.DisplayTab;
 
 public class Main {
 	private static final String TITLE = "SLogo";
@@ -25,6 +27,7 @@ public class Main {
 
 
 	}
+
 
 
 }

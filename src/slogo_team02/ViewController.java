@@ -28,7 +28,7 @@ public class ViewController {
         myModel = model;
         myHistoryMap = myModel.getMyHistoryMap();
         
-        Display display = new Display(myModel, null); 
+        Display display = new Display(); 
         JFrame frame = new JFrame(TITLE); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -37,7 +37,7 @@ public class ViewController {
         frame.setSize(SIZE);
         frame.setVisible(true);
         
-        turtleGraphicsWindow = display.getTurtleGraphicsWindow();
+        turtleGraphicsWindow = display.getTab1().getTurtleGraphicsWindow();
     }
 
     public void drawPath(){
