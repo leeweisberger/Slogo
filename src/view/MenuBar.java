@@ -105,7 +105,8 @@ public class MenuBar implements ActionListener {
 			if(temp == JFileChooser.APPROVE_OPTION) {
 				savedFile = commandInput.saveCommandsToFile(savedFile);
 			}
-
+			
+			
 		}
 		if(e.getSource() == changeColor){
 
