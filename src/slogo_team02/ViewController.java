@@ -41,11 +41,6 @@ public class ViewController {
         frame.getContentPane().add(display);        
         frame.setSize(SIZE);
         frame.setVisible(true);                
-<<<<<<< HEAD
-=======
-        turtleGraphicsWindow = display.getTab1().getTurtleGraphicsWindow();
-
->>>>>>> 58340039648404c740b754d2802e25ef0fc0b09d
         /*test draw and update path*/
 //        drawPath();
     }
