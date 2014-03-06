@@ -29,7 +29,7 @@ public class ViewController {
         myHistoryMap = myModel.getMyHistoryMap();
         myActiveTurtles = myModel.getActiveTurtles();
 
-        Display display = new Display(); 
+        Display display = new Display(myModel, null); 
         JFrame frame = new JFrame(TITLE); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

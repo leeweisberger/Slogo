@@ -2,6 +2,7 @@ Other todos: Language setting
 Need to create formatted textFields to show information about variables, and such:
 http://docs.oracle.com/javase/tutorial/uiswing/components/formattedtextfield.html
 Pair Program: paint slower (with sleep or timer)
+active variables
 
 
 Delegation:
@@ -64,5 +65,8 @@ MenuBar refactored but still doesn't obey open closed principle
 determine what methods in the GUI are to be public/ part of the API
 
 History button text doesn't wrap**
+Specify file name for file to be saved in 
+tab hierarchy refactoring 
+
 
 

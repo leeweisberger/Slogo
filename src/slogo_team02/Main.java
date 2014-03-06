@@ -18,10 +18,10 @@ public class Main {
 		Controller c = new Controller();
 		Model model = new Model();
 		model.setState(0, 0, 0,0);
-		//		main.initializeView();
+
 		ViewController vc = new ViewController();
 		vc.initializeView(model);
-		vc.drawPath();
+//		vc.drawPath();
 
 		c.go(model);
 

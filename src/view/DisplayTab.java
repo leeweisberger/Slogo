@@ -64,7 +64,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 	private MenuBar menuBar;
 	private CommandInput commandInput; 
 	private Container pane;
-	private JButton run, stop, clear, history;
+	private JButton run, stop, clear, history, saveTurtleState;
 	private JRadioButton faster, slower; 
 	private String historyLabel;
 	private JTextPane turtleStatus = new JTextPane(); 
@@ -72,43 +72,38 @@ public class DisplayTab extends JPanel implements ActionListener{
 	private Dimension GRAPHIC_WINDOW_SIZE;
 	private Map<Integer, List<TurtleState>> myHistoryMap;
 	private List<Integer> myActiveTurtles;
-	
-	
+
 	public DisplayTab (Model model, String language){
 		myModel = model;
 		setLayout(new BorderLayout());		
 		commandInput = new CommandInput();
 		menuBar = new MenuBar(commandInput); 
-		turtleGraphicsWindow = new TurtleGraphicsWindow(); 
 		run = new JButton("run");
 		stop = new JButton("stop");
 		clear = new JButton("clear");
+		saveTurtleState = new JButton("save turtle state");
 		historyLabel = new String("History"); 
 		history = new JButton(historyLabel);
 		faster = new JRadioButton("faster"); 
 		slower = new JRadioButton("slower"); 
 
-
 		pane = new Container();	
 
 		addActionListenerToComponents(); 
 		addComponentsToLayout(); 
+		
+	        myHistoryMap = myModel.getMyHistoryMap();
+	        myActiveTurtles = myModel.getActiveTurtles();
 	}
 
+	/**
+	 * 
+	 */
 	private void addComponentsToLayout(){
 		add(menuBar.getMenuBar(), BorderLayout.NORTH);
 		add(commandInput.getCommandInput(), BorderLayout.SOUTH);
 		add(layoutButtons(pane),  BorderLayout.EAST);
 		add(history,  BorderLayout.WEST);
-		add(turtleGraphicsWindow, BorderLayout.CENTER);
-//		System.out.println("turtleGraphicsWindow added");
-		
-		
-		GRAPHIC_WINDOW_SIZE = turtleGraphicsWindow.getSize();
-		System.out.println(turtleGraphicsWindow.pfWidth() + turtleGraphicsWindow.pfHeight());
-		System.out.println(turtleGraphicsWindow.viewWidth() + turtleGraphicsWindow.viewHeight());
-		System.out.println(turtleGraphicsWindow.displayWidth() + turtleGraphicsWindow.displayHeight());
-		
 	}
 	private Container layoutButtons(Container pane){
 		pane.setLayout(new GridBagLayout()); 
@@ -118,6 +113,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 		pane.add(slower, setComponentConstraints(1,2));
 		pane.add(stop, setComponentConstraints(0,3));
 		pane.add(clear, setComponentConstraints(0,4));
+		pane.add(saveTurtleState, setComponentConstraints(0,5));
 
 		return pane; 
 	}
@@ -130,7 +126,9 @@ public class DisplayTab extends JPanel implements ActionListener{
 		clear.setActionCommand("clear");
 		clear.addActionListener(this);
 		history.setActionCommand("history");
-		history.addActionListener(this);	
+		history.addActionListener(this);
+		saveTurtleState.setActionCommand("saveTurtleState");
+		saveTurtleState.addActionListener(this);
 	}
 
 	private GridBagConstraints setComponentConstraints(int x, int y){
@@ -151,7 +149,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 		if("run".equals( e.getActionCommand() )){	
 			setHistoryButtonText(commandInput.getValue());
 			myModel.parseToNodeList(commandInput.getValue());
-			turtleGraphicsWindow.drawPath(myHistoryMap, myActiveTurtles, true);
+			turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
 		}
 		if("stop".equals(e.getActionCommand())){
 
@@ -163,18 +161,36 @@ public class DisplayTab extends JPanel implements ActionListener{
 			myModel.parseToNodeList(historyLabel);
 		}
 		if("faster".equals(e.getActionCommand())){
-			
+
 		}
 		if("slower".equals(e.getActionCommand())){
-			
+
+		}
+		if("saveTurtleState".equals(e.getActionCommand())){
+			turtleGraphicsWindow = null; 
 		}
 
 	}
 
-    public TurtleGraphicsWindow getTurtleGraphicsWindow () {
-        return turtleGraphicsWindow;
-        // TODO Auto-generated method stub
-        
-    }
+	public TurtleGraphicsWindow getTurtleGraphicsWindow () {
+		return turtleGraphicsWindow;
+		// TODO Auto-generated method stub
+	}
+	
+	public void setTurtleGraphicsWindow(TurtleGraphicsWindow turtleGraphicsWindow) {
+		this.turtleGraphicsWindow = turtleGraphicsWindow;
+		add(turtleGraphicsWindow, BorderLayout.CENTER);
+	}
+
+
+	public void loadState(){
+
+	}
+
+
+	public void saveState(){
+
+	}
+
 
 }

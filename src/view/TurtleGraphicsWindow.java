@@ -22,10 +22,13 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     private static final Dimension SIZE = new Dimension(900, 600);
     TurtleState myCurrentState = TurtleState.getInstant();
-    private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
+//    private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
     private boolean test = true;  
     private double DYNAMIC_WIDTH = 835.0;
     private double DYNAMIC_HEIGHT = 567.0;
+    private Map<Integer, List<TurtleState>> myHistoryMap;
+    private List<Integer> myActiveTurtles;
+    private boolean permission;
 
 
     public TurtleGraphicsWindow(){
@@ -66,12 +69,33 @@ public class TurtleGraphicsWindow extends JGEngine{
         //        defineImage(null, null, 0, "turtle", null);
         //        JGRectangle bBox = getImageBBox("myTurtle");
         //        drawRect((double) bBox.x,(double) bBox.y,(double) Math.max(bBox.width, bBox.height),(double) Math.max(bBox.width, bBox.height), false, false, 0.8, JGColor.red);
+        showActiveTurtle();
+    }
+    
+    void showActiveTurtle(){
         drawRect(200.0, 200.0, 30.0, 20.0, false, false, 2.0, JGColor.red);
     }
+    
+    void runBottonAction(Map<Integer, List<TurtleState>> myHistoryMap, List<Integer> myActiveTurtles, boolean permission){
+        this.myHistoryMap = myHistoryMap;  
+        this.myActiveTurtles = myActiveTurtles;
+        this.permission = permission;
+        paintFrame();
+    }
 
+    /*for rotation: 
+     * defineImageRotated(java.lang.String imgname, java.lang.String tilename, int collisionid, java.lang.String srcimg, double angle) 
+              Define new image by rotating an already loaded image.*/
 
-
-    void drawPath(Map<Integer, List<TurtleState>> myHistoryMap, List<Integer> myActiveTurtles, boolean permission){
+    @Override
+    public void paintFrame(){
+        simpleDraw();
+        drawPath();
+        //            System.out.println(getImageBBox("myTurtle").toString());
+        //        System.out.println("displaywidth is " + DISPLAY_WIDTH + "displayHeight is " + DISPLAY_HEIGHT);
+    }
+    
+    void drawPath(){
         System.out.println("drawPath is called");
         permission = true;
         for (Map.Entry<Integer, List<TurtleState>> singleTStateList: myHistoryMap.entrySet()){
@@ -91,17 +115,6 @@ public class TurtleGraphicsWindow extends JGEngine{
             drawLine(myPrevState.getX(), myPrevState.getY(), myNextState.getX(), myNextState.getY(), 5.0, JGColor.blue);
             drawImage("myTurtle", myNextState.getX(), myNextState.getY());
         }
-    }
-    /*for rotation: 
-     * defineImageRotated(java.lang.String imgname, java.lang.String tilename, int collisionid, java.lang.String srcimg, double angle) 
-              Define new image by rotating an already loaded image.*/
-
-    @Override
-    public void paintFrame(){
-        simpleDraw();
-
-        //            System.out.println(getImageBBox("myTurtle").toString());
-        //        System.out.println("displaywidth is " + DISPLAY_WIDTH + "displayHeight is " + DISPLAY_HEIGHT);
     }
 
     public void changeDrawSpeed (Double fps, Double maxframeskip) {
