@@ -28,9 +28,7 @@ public class Model {
 	public List<Integer> getActiveTurtles(){
 	    return myActiveTurtles;
 	}
-
-
-
+	
 	/**
 	 * Creates a new TurtleState.
 	 *

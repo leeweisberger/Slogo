@@ -24,6 +24,5 @@ public class Main {
 //		vc.drawPath();
 
 		c.go(model);
-
 	}
 }

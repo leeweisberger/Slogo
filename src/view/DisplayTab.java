@@ -150,8 +150,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 
 
 
-            turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
-            			
+            turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);            			
         }
         if("stop".equals(e.getActionCommand())){
 

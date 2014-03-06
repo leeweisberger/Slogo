@@ -39,8 +39,6 @@ public class Display extends JPanel implements ChangeListener{
 		super(new GridLayout(1, 1));
 
 		tabbedPane = new JTabbedPane();
-
-
 		
 		tab1 = new DisplayTab(model, null); 
 		tab1.setTurtleGraphicsWindow(turtleGrahicsWindow);

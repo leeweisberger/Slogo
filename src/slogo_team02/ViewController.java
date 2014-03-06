@@ -23,7 +23,6 @@ public class ViewController {
     private TurtleGraphicsWindow turtleGraphicsWindow;
     private boolean permission;
 
-
     public void initializeView(Model model){
         myModel = model;
         myHistoryMap = myModel.getMyHistoryMap();

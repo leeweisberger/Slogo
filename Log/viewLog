@@ -6,12 +6,9 @@ active variables
 
 
 Delegation:
-Steve: 
-
-1. Access Map: In display we have already passed in model, and so write an getter that get it. 
+Steve:  
 
 3. Figure out dynamically the window size (componentSize)
-4. Flag to drawUpdateState (default state is that )
 5. Allow multiple workspaces (perhaps as tabs or as separate windows). 
 	You can define exactly what a workspace is but, at the very least, 
 	it should have a separate turtle display area, command history, and active variables
