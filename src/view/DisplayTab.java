@@ -64,7 +64,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 	private MenuBar menuBar;
 	private CommandInput commandInput; 
 	private Container pane;
-	private JButton run, stop, clear, history, saveTurtleState;
+	private JButton run, stop, clear, history;
 	private JRadioButton faster, slower; 
 	private String historyLabel;
 	private JTextPane turtleStatus = new JTextPane(); 
@@ -81,7 +81,6 @@ public class DisplayTab extends JPanel implements ActionListener{
 		run = new JButton("run");
 		stop = new JButton("stop");
 		clear = new JButton("clear");
-		saveTurtleState = new JButton("save turtle state");
 		historyLabel = new String("History"); 
 		history = new JButton(historyLabel);
 		faster = new JRadioButton("faster"); 
@@ -93,6 +92,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 		addComponentsToLayout(); 
 		
 	        myHistoryMap = myModel.getMyHistoryMap();
+	        System.out.println("checking if myHistoryMap is received in DisplayTab" + myHistoryMap.get(0));
 	        myActiveTurtles = myModel.getActiveTurtles();
 	}
 
@@ -113,7 +113,6 @@ public class DisplayTab extends JPanel implements ActionListener{
 		pane.add(slower, setComponentConstraints(1,2));
 		pane.add(stop, setComponentConstraints(0,3));
 		pane.add(clear, setComponentConstraints(0,4));
-		pane.add(saveTurtleState, setComponentConstraints(0,5));
 
 		return pane; 
 	}
@@ -127,8 +126,6 @@ public class DisplayTab extends JPanel implements ActionListener{
 		clear.addActionListener(this);
 		history.setActionCommand("history");
 		history.addActionListener(this);
-		saveTurtleState.setActionCommand("saveTurtleState");
-		saveTurtleState.addActionListener(this);
 	}
 
 	private GridBagConstraints setComponentConstraints(int x, int y){
@@ -150,6 +147,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 			setHistoryButtonText(commandInput.getValue());
 			myModel.parseToNodeList(commandInput.getValue());
 			turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
+			System.out.println(myHistoryMap.get(0));
 		}
 		if("stop".equals(e.getActionCommand())){
 
@@ -166,9 +164,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 		if("slower".equals(e.getActionCommand())){
 
 		}
-		if("saveTurtleState".equals(e.getActionCommand())){
-			turtleGraphicsWindow = null; 
-		}
+	
 
 	}
 

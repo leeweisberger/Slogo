@@ -22,14 +22,14 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     private static final Dimension SIZE = new Dimension(900, 600);
     TurtleState myCurrentState = TurtleState.getInstant();
-//    private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
+    //    private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
     private boolean test = true;  
     private double DYNAMIC_WIDTH = 835.0;
     private double DYNAMIC_HEIGHT = 567.0;
     private Map<Integer, List<TurtleState>> myHistoryMap;
     private List<Integer> myActiveTurtles;
     private boolean permission;
-
+    private boolean isClicked = false;
 
     public TurtleGraphicsWindow(){
         super();
@@ -57,6 +57,7 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     @Override
     public void doFrame() {
+//        simpleDraw();
     }
 
     public void simpleDraw () {
@@ -71,16 +72,17 @@ public class TurtleGraphicsWindow extends JGEngine{
         //        drawRect((double) bBox.x,(double) bBox.y,(double) Math.max(bBox.width, bBox.height),(double) Math.max(bBox.width, bBox.height), false, false, 0.8, JGColor.red);
         showActiveTurtle();
     }
-    
+
     void showActiveTurtle(){
         drawRect(200.0, 200.0, 30.0, 20.0, false, false, 2.0, JGColor.red);
     }
-    
+
     void runBottonAction(Map<Integer, List<TurtleState>> myHistoryMap, List<Integer> myActiveTurtles, boolean permission){
+        isClicked = true;
         this.myHistoryMap = myHistoryMap;  
         this.myActiveTurtles = myActiveTurtles;
         this.permission = permission;
-        paintFrame();
+//        paintFrame();
     }
 
     /*for rotation: 
@@ -89,14 +91,16 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     @Override
     public void paintFrame(){
-        simpleDraw();
-        drawPath();
+        if (isClicked){
+            simpleDraw();
+            drawPath();
+        }
         //            System.out.println(getImageBBox("myTurtle").toString());
         //        System.out.println("displaywidth is " + DISPLAY_WIDTH + "displayHeight is " + DISPLAY_HEIGHT);
     }
-    
+
     void drawPath(){
-        System.out.println("drawPath is called");
+//        System.out.println("drawPath is called");
         permission = true;
         for (Map.Entry<Integer, List<TurtleState>> singleTStateList: myHistoryMap.entrySet()){
             if (myActiveTurtles.contains(singleTStateList.getKey())){ 
