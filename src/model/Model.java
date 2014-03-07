@@ -29,6 +29,12 @@ public class Model {
 	    return myActiveTurtles;
 	}
 	
+	public void clearState(){
+//	    myStatesMap.clear();
+	    myActiveTurtles.clear();
+	    myHistoryMap.clear();
+	}
+	
 	/**
 	 * Creates a new TurtleState.
 	 *
