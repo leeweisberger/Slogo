@@ -62,9 +62,10 @@ public class TurtleGraphicsWindow extends JGEngine{
     }
 
     public void simpleDraw () {
-        drawImage("myTurtle", DYNAMIC_WIDTH/2, DYNAMIC_HEIGHT/2);
-        drawLine(0.0, 0.0, DYNAMIC_WIDTH, DYNAMIC_HEIGHT, 2.0, JGColor.blue);
-        showActiveTurtle();
+//        drawImage("myTurtle", DYNAMIC_WIDTH/2, DYNAMIC_HEIGHT/2);
+//        drawLine(0.0, 0.0, DYNAMIC_WIDTH, DYNAMIC_HEIGHT, 2.0, JGColor.blue);
+//        showActiveTurtle();
+        drawLine(CENTER_WIDTH, CENTER_HEIGHT, CENTER_WIDTH, CENTER_HEIGHT+10, 2.0, JGColor.red);
     }
 
     void showActiveTurtle(){
@@ -74,6 +75,7 @@ public class TurtleGraphicsWindow extends JGEngine{
     void runBottonAction(Map<Integer, List<TurtleState>> myHistoryMap, List<Integer> myActiveTurtles, boolean permission){
         isClicked = true;
         this.myHistoryMap = myHistoryMap;  
+//        System.out.println("showing historyMap in TGW" + myHistoryMap.size());
         this.myActiveTurtles = myActiveTurtles;
         this.permission = permission;
         //        System.out.println(myHistoryMap.get(0));
@@ -85,11 +87,14 @@ public class TurtleGraphicsWindow extends JGEngine{
     public void paintFrame(){
 //        drawImage("myTurtle", CENTER_WIDTH, CENTER_HEIGHT);
 //        updateView();
-        if (isClicked){
+        simpleDraw();
+        if (!isClicked){
+            resetTPosition();
+        }
+        else{
             updateView();
         }
     }
-    
 
     void updateView(){
         permission = true;
@@ -117,6 +122,11 @@ public class TurtleGraphicsWindow extends JGEngine{
         }
     }
     
+    public void clearDrawing(Map<Integer, List<TurtleState>> myHistoryMap, List<Integer> myActiveTurtles){
+        updateView();
+        resetTPosition();
+    }
+    
     void doRotation(double preAngle, double nextAngle){
         defineImageRotated("myTurtle", null, 0, "turtle.png", nextAngle); 
     }
@@ -124,6 +134,10 @@ public class TurtleGraphicsWindow extends JGEngine{
     public void changeDrawSpeed (Double fps, Double maxframeskip) {
         // TODO Auto-generated method stub
         setFrameRate(fps, maxframeskip);
+    }
+    
+    void resetTPosition () {
+        drawImage("myTurtle", CENTER_WIDTH, CENTER_HEIGHT);
     }
 
 }

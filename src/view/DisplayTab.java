@@ -146,17 +146,21 @@ public class DisplayTab extends JPanel implements ActionListener{
         // TODO Auto-generated method stub
         if("run".equals( e.getActionCommand() )){	
             setHistoryButtonText(commandInput.getValue());
-            myModel.parseToNodeList(commandInput.getValue());
-
-
-
-            turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);            			
+            
+            myModel.doCommands(commandInput.getValue());
+            System.out.println("show commandinput.getvalue " + commandInput.getValue().toString());
+//            myHistoryMap = myModel.getMyHistoryMap();
+            
+            turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);  
+            
         }
         if("stop".equals(e.getActionCommand())){
 
         }
         if("clear".equals(e.getActionCommand())){
-
+            myHistoryMap.clear();
+            myActiveTurtles.clear();
+            turtleGraphicsWindow.clearDrawing(myHistoryMap, myActiveTurtles);
         }
         if("history".equals(e.getActionCommand())){
             myModel.parseToNodeList(historyLabel);
