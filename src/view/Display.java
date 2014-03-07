@@ -27,6 +27,7 @@ import java.awt.event.KeyEvent;
 import jgame.platform.JGEngine;
 
 public class Display extends JPanel implements ChangeListener{
+
     private DisplayTab tab1; 
     private DisplayTab tab2; 
     private DisplayTab tab3; 
@@ -41,7 +42,7 @@ public class Display extends JPanel implements ChangeListener{
         Model model2 = new Model();
         
         tabbedPane = new JTabbedPane();
-
+        
         tab1 = new DisplayTab(model, "English"); 
         tab1.setTurtleGraphicsWindow(turtleGrahicsWindow);
         tab2 = new DisplayTab(model1, "English");

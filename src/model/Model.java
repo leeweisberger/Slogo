@@ -29,19 +29,22 @@ public class Model {
 	public Map<Integer, List<TurtleState>> getMyHistoryMap() {
 //	    System.out.println("getMyHistoryMap in Model called ");
 	    return myHistoryMap;
+
 	}
-	
+
 	public List<Integer> getActiveTurtles(){
-	    return myActiveTurtles;
+		return myActiveTurtles;
 	}
-	
+
 	public void clearState(){
+
 	    /*here we can either initialize new model, or clean up whatever we have in model*/
 	    myActiveTurtles.clear();
 	    myHistoryMap.clear();
 	    this.setFirstTurtleState(0, 0, 0, 0);
+
 	}
-	
+
 	/**
 	 * Creates a new TurtleState.
 	 *
@@ -58,13 +61,14 @@ public class Model {
 		myActiveTurtles.add(turtleID);
 	}
 
-	
+
 	/**
 	 * Do commands.
 	 *
 	 * @param input the raw userinput
 	 */
 	public void doCommands(String input) {
+
 	    System.out.println("doCommands in Model passed "+ input);
 	    if(parseToNodeList(input)==null){
 	        System.out.println("myError in doCommands shows up");
@@ -87,13 +91,15 @@ public class Model {
 
 			// viewUpdateState()
 		}
+		//System.out.println("myStatesMap size in doCommands: "+ myStatesMap.size());
+
 		for (TurtleState turtle : myStatesMap.values()) {
-		        System.out.println("myHistoryMap in Model updated");
+			System.out.println("myHistoryMap in Model updated");
 			myHistoryMap.put(turtle.getID(), turtle.getStateHistory());
-			
 			System.out.println("MyHistory map size: "+ myHistoryMap.get(0).size());
 		//	System.out.println("id" + turtle.getID());
 		//	System.out.println("MyHistory map size: "+ myHistoryMap.size());
+
 		}
 
 	}
@@ -106,9 +112,10 @@ public class Model {
 	 */
 	public List<Node> parseToNodeList(String input) {
 		Parser parser = new Parser(input, "English");
+		//System.out.println("parseToNodeList: "+parser.parseToNodeList().size());
 		return parser.parseToNodeList();
 	}
-	
+
 	/**
 	 * Checks if is error.
 	 *
@@ -117,13 +124,13 @@ public class Model {
 	public boolean isError(){
 		return myError;
 	}
-	
+
 	public void viewUpdateState(TurtleState myCurrentState) { // need to find
-																// place to call
-																// this??
-	// this.myCurrentState = myCurrentState;
-	// TurtleGraphicsWindow tg = new TurtleGraphicsWindow();
-	// tg.drawUpdate(myCurrentState);
+		// place to call
+		// this??
+		// this.myCurrentState = myCurrentState;
+		// TurtleGraphicsWindow tg = new TurtleGraphicsWindow();
+		// tg.drawUpdate(myCurrentState);
 
 	}
 
