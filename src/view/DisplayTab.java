@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -51,6 +52,7 @@ import java.util.List;
 import java.util.Map;
 
 import slogo_team02.ViewController;
+import view.Display;
 
 public class DisplayTab extends JPanel implements ActionListener{
     private static final Dimension SIZE = new Dimension(800, 600);
@@ -85,15 +87,16 @@ public class DisplayTab extends JPanel implements ActionListener{
         history = new JButton(historyLabel);
         faster = new JRadioButton("faster"); 
         slower = new JRadioButton("slower"); 
-
+        
         pane = new Container();	
 
         addActionListenerToComponents(); 
         addComponentsToLayout(); 
         
-        myHistoryMap = myModel.getMyHistoryMap();
-//        System.out.println("checking if myHistoryMap is received in DisplayTab " + myHistoryMap.get(0));
-        myActiveTurtles = myModel.getActiveTurtles();
+//        myHistoryMap = myModel.getMyHistoryMap();
+////        System.out.println("checking if myHistoryMap is received in DisplayTab " + myHistoryMap.get(0));
+//        myActiveTurtles = myModel.getActiveTurtles();
+
 
     }
 
@@ -145,19 +148,22 @@ public class DisplayTab extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         if("run".equals( e.getActionCommand() )){	
+            System.out.println("Run Bottum called");
             setHistoryButtonText(commandInput.getValue());
             myModel.doCommands(commandInput.getValue());
+            myHistoryMap = myModel.getMyHistoryMap();
 //            System.out.println("show commandinput.getvalue " + commandInput.getValue().toString());
-//            myHistoryMap = myModel.getMyHistoryMap();
             turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);  
             
         }
         if("stop".equals(e.getActionCommand())){
-
+            
         }
         if("clear".equals(e.getActionCommand())){
+            turtleGraphicsWindow.dbgShowGameState(true);
             myModel.clearState();
-            
+            myModel.setState(0, 0, 0, 0);
+//            turtleGraphicsWindow.clearGameState();
             
 //            myHistoryMap.clear();
 //            myActiveTurtles.clear();

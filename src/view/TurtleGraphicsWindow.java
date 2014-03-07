@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 
 import jgame.JGColor;
 import jgame.JGRectangle;
+import jgame.JGTimer;
 import jgame.platform.JGEngine;
 import model.Model;
 import model.TurtleState;
@@ -20,12 +21,11 @@ import model.TurtleState;
 
 public class TurtleGraphicsWindow extends JGEngine{    
 
-    private static final Dimension SIZE = new Dimension(900, 600);
+    private static final Dimension SIZE = new Dimension(755, 505);
     TurtleState myCurrentState = TurtleState.getInstant();
-    //    private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
-    private boolean test = true;  
-    private double DYNAMIC_WIDTH = 740.0;
-    private double DYNAMIC_HEIGHT = 517.0;
+    private boolean test = true;
+    private double DYNAMIC_WIDTH = SIZE.getWidth();
+    private double DYNAMIC_HEIGHT = SIZE.getHeight();
     private double CENTER_WIDTH = DYNAMIC_WIDTH/2;
     private double CENTER_HEIGHT = DYNAMIC_HEIGHT/2;
     private Map<Integer, List<TurtleState>> myHistoryMap;
@@ -35,7 +35,8 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     public TurtleGraphicsWindow(){
         super();
-        initEngineComponent((int) DYNAMIC_WIDTH, (int) DYNAMIC_HEIGHT);      
+        initEngineComponent(SIZE.width, SIZE.height);
+//        initEngineComponent((int) DYNAMIC_WIDTH, (int) DYNAMIC_HEIGHT);
     }
 
     @Override
@@ -55,6 +56,9 @@ public class TurtleGraphicsWindow extends JGEngine{
     public void initGame () {
         defineMedia("viewer.tbl");
         setFrameRate(4, 0);
+//        System.out.println("show the PF size width " + pfWidth() + " Height " + pfHeight());
+//        System.out.println("show the Display " + displayWidth() + " Height " + displayHeight());
+        /*define which game state to switch into */
     }
 
     @Override
@@ -63,7 +67,7 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     public void simpleDraw () {
 //        drawImage("myTurtle", DYNAMIC_WIDTH/2, DYNAMIC_HEIGHT/2);
-//        drawLine(0.0, 0.0, DYNAMIC_WIDTH, DYNAMIC_HEIGHT, 2.0, JGColor.blue);
+        drawLine(0.0, 0.0, DYNAMIC_WIDTH, DYNAMIC_HEIGHT, 2.0, JGColor.blue);
 //        showActiveTurtle();
         drawLine(CENTER_WIDTH, CENTER_HEIGHT, CENTER_WIDTH, CENTER_HEIGHT+10, 2.0, JGColor.red);
     }
@@ -115,7 +119,8 @@ public class TurtleGraphicsWindow extends JGEngine{
             TurtleState myPrevState = singleTStateList.get(i);
             TurtleState myNextState= singleTStateList.get(i+1);
 //            doRotation(myPrevState.getAngle(), myNextState.getAngle());
-            drawLine(CENTER_WIDTH + myPrevState.getX(), CENTER_HEIGHT - myPrevState.getY(), CENTER_WIDTH + myNextState.getX(), CENTER_HEIGHT - myNextState.getY(), 5.0, JGColor.blue);
+            drawLine(CENTER_WIDTH + myPrevState.getX(), CENTER_HEIGHT - myPrevState.getY(), 
+                     CENTER_WIDTH + myNextState.getX(), CENTER_HEIGHT - myNextState.getY(), 2.0, JGColor.blue);
         }
     }
     
@@ -137,4 +142,66 @@ public class TurtleGraphicsWindow extends JGEngine{
         drawImage("myTurtle", CENTER_WIDTH, CENTER_HEIGHT);
     }
 
+    public void changeState (int prevWinIndex, int nextWinIndex, Model currentModel) {
+        System.out.println("change gameState called");
+        addGameState("window" + prevWinIndex);
+        clearGameState();
+        Model.clearState();
+        Model.setState(0, 0, 0, 0);
+        setGameState("window" + nextWinIndex);
+        // TODO Auto-generated method stub   
+    }
+
+    
+    
+    
+    
+
+    /* Continue Writing
+     * Window2 Screen*/
+
+    /** Called when the Title state is entered. */
+    public void startWindow2() {
+            // we need to remove all game objects when we go from in-game to the
+            // title screen
+            removeObjects(null,0);
+    }
+
+    public void paintFrameWindow2() {
+            drawString("We are in the StartGame state.",pfWidth()/2,90,0);
+            drawString("Title state. Press space to go to InGame",pfWidth()/2,90,0);
+    }
+
+    public void doFrameWindow2() {
+            if (getKey(' ')) {
+                    // ensure the key has to be pressed again to register
+                    clearKey(' ');
+                    // Set both StartGame and InGame states simultaneously.
+                    // When setting a state, the state becomes active only at the
+                    // beginning of the next frame.
+                    setGameState("StartGame");
+                    addGameState("InGame");
+                    // set a timer to remove the StartGame state after a few seconds,
+                    // so only the InGame state remains.
+                    new JGTimer(
+                            70, // number of frames to tick until alarm
+                            true, // true means one-shot, false means run again
+                                  // after triggering alarm
+                            "StartGame" // remove timer as soon as the StartGame state
+                                        // is left by some other circumstance.
+                                        // In particular, if the game ends before
+                                        // the timer runs out, we don't want the timer to
+                                        // erroneously trigger its alarm at the next
+                                        // StartGame.
+                    ) {
+                            // the alarm method is called when the timer ticks to zero
+                            public void alarm() {
+                                    removeGameState("StartGame");
+                            }
+                    };
+            }
+    }
+
+
+    /** The StartGame state is just for displaying a start message. */
 }

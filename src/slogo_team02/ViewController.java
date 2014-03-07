@@ -16,7 +16,7 @@ import javax.swing.text.View;
 
 public class ViewController {
     private static final String TITLE = "SLogo";
-    public static final Dimension SIZE = new Dimension(1000, 800);
+    public static final Dimension SIZE = new Dimension(1000, 700);
     private Model myModel;
     private Map<Integer, List<TurtleState>> myHistoryMap;
     private List<Integer> myActiveTurtles;
