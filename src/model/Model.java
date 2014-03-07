@@ -19,7 +19,8 @@ public class Model {
 	private List<Integer> myActiveTurtles = new ArrayList<Integer>();
 	public static Map<String, Command> customCommandList = new HashMap<String, Command>();
 	private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
-
+	private boolean myError=false;
+	
 	public Map<Integer, List<TurtleState>> getMyHistoryMap() {
 //	    System.out.println("getMyHistoryMap called ");
 	    return myHistoryMap;
@@ -27,6 +28,11 @@ public class Model {
 	
 	public List<Integer> getActiveTurtles(){
 	    return myActiveTurtles;
+	}
+	
+	public void clearState(){
+	    myActiveTurtles.clear();
+	    myHistoryMap.clear();
 	}
 	
 	/**
@@ -37,12 +43,16 @@ public class Model {
 	 * @param angle the angle
 	 * @param turtleID the turtle id
 	 */
-	public void setState(double xpos, double ypos, double angle, int turtleID) {
-		TurtleState CurrentState = new TurtleState(xpos, ypos, angle, true,
+	public void setFirstTurtleState(double xpos, double ypos, double angle, int turtleID) {
+		TurtleState currentState = new TurtleState(xpos, ypos, angle, true,
 				true, turtleID,0);
-		myStatesMap.put(turtleID, CurrentState);
+		currentState.updateStateHistory();
+		myStatesMap.put(turtleID, currentState);
 		myActiveTurtles.add(turtleID);
+<<<<<<< HEAD
 		//System.out.println("myStatesMap: " + myStatesMap.size() );
+=======
+>>>>>>> 935659fb83f81c0c5246d2af26b25597bc98f10e
 	}
 
 	
@@ -53,6 +63,10 @@ public class Model {
 	 */
 	public void doCommands(String input) {
 	    System.out.println("doCommands in Model passed "+ input);
+	    if(parseToNodeList(input)==null){
+	    	myError=true;
+	    	return;
+	    }
 		for (Node node : parseToNodeList(input)) {
 			Command command = node.getCommand();
 			command.setInputsFromNode(node);
@@ -74,6 +88,11 @@ public class Model {
 		for (TurtleState turtle : myStatesMap.values()) {
 		        System.out.println("myHistoryMap in Model updated");
 			myHistoryMap.put(turtle.getID(), turtle.getStateHistory());
+<<<<<<< HEAD
+=======
+		//	System.out.println("id" + turtle.getID());
+		//	System.out.println("MyHistory map size: "+ myHistoryMap.size());
+>>>>>>> 935659fb83f81c0c5246d2af26b25597bc98f10e
 		}
 
 	}
@@ -89,7 +108,16 @@ public class Model {
 		//System.out.println("parseToNodeList: "+parser.parseToNodeList().size());
 		return parser.parseToNodeList();
 	}
-
+	
+	/**
+	 * Checks if is error.
+	 *
+	 * @return true, if is error
+	 */
+	public boolean isError(){
+		return myError;
+	}
+	
 	public void viewUpdateState(TurtleState myCurrentState) { // need to find
 																// place to call
 																// this??

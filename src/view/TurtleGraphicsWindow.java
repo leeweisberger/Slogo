@@ -80,15 +80,12 @@ public class TurtleGraphicsWindow extends JGEngine{
         this.permission = permission;
         //        System.out.println(myHistoryMap.get(0));
         //        System.out.println("runBottonAction called");
-        //        paintFrame();
     }
 
     @Override
     public void paintFrame(){
-//        drawImage("myTurtle", CENTER_WIDTH, CENTER_HEIGHT);
-//        updateView();
         simpleDraw();
-        if (!isClicked){
+        if ((!isClicked) || myHistoryMap.isEmpty()){
             resetTPosition();
         }
         else{

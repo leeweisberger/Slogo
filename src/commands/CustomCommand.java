@@ -51,7 +51,7 @@ public class CustomCommand extends CommandList{
 			}
 			myCommands.get(i).doCommand(turtleState);
 		}
-		clearInputs();
+		//clearInputs();
 		return null;
 	}
 	
