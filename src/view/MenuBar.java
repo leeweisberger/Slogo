@@ -25,7 +25,7 @@ import javax.swing.JInternalFrame;
 public class MenuBar implements ActionListener {
 	private JMenuBar menuBar;
 	private JMenu file, format, help;
-	private JMenuItem open, save, newTab, changeColor, chooseTurtleImage;
+	private JMenuItem open, save, newTab, changeColor, chooseTurtleImage, showHelpPage;
 	private JFileChooser fileChooser;
 	private HelpPage helpPage; 
 	private File importedFile; 
@@ -70,7 +70,10 @@ public class MenuBar implements ActionListener {
 				KeyEvent.VK_T);
 		chooseTurtleImage.addActionListener(this); 
 
-		help.addActionListener(this);
+		showHelpPage = new JMenuItem("Show Help Page"); 
+		showHelpPage.setActionCommand("showHelpPage");
+		showHelpPage.addActionListener(this);
+
 
 
 		file.add(open);
@@ -78,6 +81,7 @@ public class MenuBar implements ActionListener {
 		file.add(newTab);
 		format.add(changeColor);
 		format.add(chooseTurtleImage); 
+		help.add(showHelpPage);
 	}
 
 	public void addMenus(){
@@ -121,9 +125,8 @@ public class MenuBar implements ActionListener {
 		if(e.getSource() == chooseTurtleImage){
 
 		}
-		if(e.getSource() == help){
+		if("showHelpPage".equals(e.getActionCommand())){
 			helpPage.createAndShowHelpPage();
-
 		}
 	
 	}

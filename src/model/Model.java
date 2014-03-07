@@ -20,21 +20,21 @@ public class Model {
 	public static Map<String, Command> customCommandList = new HashMap<String, Command>();
 	private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
 	private boolean myError=false;
-	
+
 	public Map<Integer, List<TurtleState>> getMyHistoryMap() {
-//	    System.out.println("getMyHistoryMap called ");
-	    return myHistoryMap;
+		//	    System.out.println("getMyHistoryMap called ");
+		return myHistoryMap;
 	}
-	
+
 	public List<Integer> getActiveTurtles(){
-	    return myActiveTurtles;
+		return myActiveTurtles;
 	}
-	
+
 	public void clearState(){
-	    myActiveTurtles.clear();
-	    myHistoryMap.clear();
+		myActiveTurtles.clear();
+		myHistoryMap.clear();
 	}
-	
+
 	/**
 	 * Creates a new TurtleState.
 	 *
@@ -49,24 +49,20 @@ public class Model {
 		currentState.updateStateHistory();
 		myStatesMap.put(turtleID, currentState);
 		myActiveTurtles.add(turtleID);
-<<<<<<< HEAD
-		//System.out.println("myStatesMap: " + myStatesMap.size() );
-=======
->>>>>>> 935659fb83f81c0c5246d2af26b25597bc98f10e
 	}
 
-	
+
 	/**
 	 * Do commands.
 	 *
 	 * @param input the raw userinput
 	 */
 	public void doCommands(String input) {
-	    System.out.println("doCommands in Model passed "+ input);
-	    if(parseToNodeList(input)==null){
-	    	myError=true;
-	    	return;
-	    }
+		System.out.println("doCommands in Model passed "+ input);
+		if(parseToNodeList(input)==null){
+			myError=true;
+			return;
+		}
 		for (Node node : parseToNodeList(input)) {
 			Command command = node.getCommand();
 			command.setInputsFromNode(node);
@@ -86,13 +82,8 @@ public class Model {
 		//System.out.println("myStatesMap size in doCommands: "+ myStatesMap.size());
 
 		for (TurtleState turtle : myStatesMap.values()) {
-		        System.out.println("myHistoryMap in Model updated");
+			System.out.println("myHistoryMap in Model updated");
 			myHistoryMap.put(turtle.getID(), turtle.getStateHistory());
-<<<<<<< HEAD
-=======
-		//	System.out.println("id" + turtle.getID());
-		//	System.out.println("MyHistory map size: "+ myHistoryMap.size());
->>>>>>> 935659fb83f81c0c5246d2af26b25597bc98f10e
 		}
 
 	}
@@ -108,7 +99,7 @@ public class Model {
 		//System.out.println("parseToNodeList: "+parser.parseToNodeList().size());
 		return parser.parseToNodeList();
 	}
-	
+
 	/**
 	 * Checks if is error.
 	 *
@@ -117,13 +108,13 @@ public class Model {
 	public boolean isError(){
 		return myError;
 	}
-	
+
 	public void viewUpdateState(TurtleState myCurrentState) { // need to find
-																// place to call
-																// this??
-	// this.myCurrentState = myCurrentState;
-	// TurtleGraphicsWindow tg = new TurtleGraphicsWindow();
-	// tg.drawUpdate(myCurrentState);
+		// place to call
+		// this??
+		// this.myCurrentState = myCurrentState;
+		// TurtleGraphicsWindow tg = new TurtleGraphicsWindow();
+		// tg.drawUpdate(myCurrentState);
 
 	}
 
