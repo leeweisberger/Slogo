@@ -48,6 +48,7 @@ public class Parser {
 	/** The Constant DEFAULT_RESOURCE_PACKAGE. */
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources.";
 	
+	private boolean myError = false;
 	
 	ResourceBundle myResources;
 
@@ -72,6 +73,9 @@ public class Parser {
 	public List<Node> parseToNodeList() {
 		List<Token> tokens = makeTokenList();
 		List<Command> commandList = makeCommandList(tokens);
+		if(myError){
+			return null;
+		}
 		List<Node> NodeList = new ArrayList<Node>();
 		while (!commandList.isEmpty()) {
 			NodeList.add(buildTree(commandList, new Node(commandList.get(0))));
@@ -197,11 +201,9 @@ public class Parser {
 
 		} catch (MissingResourceException e) {
 			if (isNewCommand) {
-				//isNewCommand = false;
-				
 				return new CustomCommand(token.data);
 			}
-			e.printStackTrace();
+			myError = true;
 		}
 		return null;
 	}
