@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) {
 		Controller c = new Controller();
 		Model model = new Model();
-		model.setState(0, 0, 0,0);
+		model.setFirstTurtleState(0, 0, 0,0);
 		
 
 

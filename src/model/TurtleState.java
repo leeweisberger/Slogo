@@ -9,29 +9,29 @@ import java.util.List;
  */
 public class TurtleState {
 
-	private double myX;
-	private double myY;
-	private double myAngle;
-	private boolean myPenDown;
-	private boolean myShowing;
+	private double myX=0;
+	private double myY=0;
+	private double myAngle=0;
+	private boolean myPenDown=true;
+	private boolean myShowing=true;
 	private int myID;
 	private List<TurtleState> myStateHistory = new ArrayList<TurtleState>();
-	private static TurtleState _instanceState;
+	//private static TurtleState _instanceState;
 	private static TurtleState myCurrentState;
-	private boolean isnew = true;
 	private double myColor=0;
+	
 	/**
 	 * Instantiates a new turtle state.
 	 *
-	 * @param x the x
-	 * @param y the y
+	 * @param x the x ps
+	 * @param y the y pos
 	 * @param angle the angle
 	 * @param penDown the pen down
 	 * @param showing the showing
 	 * @param turtleID the turtle id
 	 */
 	public TurtleState(double x, double y, double angle,boolean penDown,boolean showing, int turtleID, double color) {
-		setState(x, y, angle, penDown, showing, turtleID);
+		initializeState(x, y, angle, penDown, showing, turtleID, color);
 	}
 
 	/**
@@ -39,10 +39,9 @@ public class TurtleState {
 	 *
 	 * @return the instant
 	 */
-	
+
 	public static TurtleState getInstant(){
 		return myCurrentState;
- 
 	}
 
 	/**
@@ -57,29 +56,26 @@ public class TurtleState {
 	 */
 	public void setState(double x, double y, double angle, boolean penDown,
 			boolean showing, int turtleID) {
+		initializeState(x, y, angle, penDown, showing, turtleID, myColor);
+		updateStateHistory();
+	}
+
+	public void initializeState(double x, double y, double angle,boolean penDown,boolean showing, int turtleID, double color){
 		myX = x;
 		myY = y;
 		myAngle = angle;
 		myPenDown = penDown;
 		myShowing = showing;
 		myID = turtleID;
-		if(!isnew)updateStateHistory();
-		for(TurtleState st : myStateHistory){
-			System.out.println("History: " + st.getID() + " x: " + st.getX() + " y: " + st.getY() + " angle: " + st.getAngle());
-		}
-		
-//		System.out.println("x: " + myX + " y: " + myY + " angle: " + myAngle
-//				+ " penDown: " + myPenDown + " showing: " + myShowing);
-		isnew = false;
+		myColor=color;
 	}
-
 	/**
 	 * Gets the state history.
 	 *
 	 * @return the state history
 	 */
 	public List<TurtleState> getStateHistory() {
-		
+
 		return myStateHistory;
 	}
 
@@ -137,7 +133,7 @@ public class TurtleState {
 	public void setShow(boolean isShown) {
 		setState(myX, myY, myAngle, myPenDown, isShown, myID);
 	}
-	
+
 	/**
 	 * Sets the color.
 	 *
@@ -147,7 +143,7 @@ public class TurtleState {
 		myColor=d;
 		setState(myX, myY, myAngle, myPenDown, myShowing, myID);
 	}
-	
+
 	/**
 	 * Gets the color.
 	 *
@@ -158,10 +154,10 @@ public class TurtleState {
 	}
 
 	/**
-	 * Update state history if the state is not new.
+	 * Update state history.
 	 */
 	public void updateStateHistory() {
-		isnew = true;
+		
 		myStateHistory.add(new TurtleState(myX,myY,myAngle,myPenDown,myShowing,myID,myColor));
 	}
 
@@ -218,17 +214,5 @@ public class TurtleState {
 	public int getID() {
 		return myID;
 	}
-
-	
-
-	// public static TurtleState getStateInstant(double x, double y, double
-	// angle){
-	// if (_instanceState == null){
-	// _instanceState = new TurtleState(x, y, angle);
-	// return _instanceState;
-	// }
-	// return _instanceState;
-	// }
-
 
 }

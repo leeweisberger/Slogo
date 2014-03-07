@@ -20,6 +20,7 @@ public class Model {
 	public static Map<String, Command> customCommandList = new HashMap<String, Command>();
 	private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
 	private boolean myError=false;
+	
 	public Map<Integer, List<TurtleState>> getMyHistoryMap() {
 //	    System.out.println("getMyHistoryMap called ");
 	    return myHistoryMap;
@@ -30,7 +31,6 @@ public class Model {
 	}
 	
 	public void clearState(){
-//	    myStatesMap.clear();
 	    myActiveTurtles.clear();
 	    myHistoryMap.clear();
 	}
@@ -43,12 +43,12 @@ public class Model {
 	 * @param angle the angle
 	 * @param turtleID the turtle id
 	 */
-	public void setState(double xpos, double ypos, double angle, int turtleID) {
-		TurtleState CurrentState = new TurtleState(xpos, ypos, angle, true,
+	public void setFirstTurtleState(double xpos, double ypos, double angle, int turtleID) {
+		TurtleState currentState = new TurtleState(xpos, ypos, angle, true,
 				true, turtleID,0);
-		myStatesMap.put(turtleID, CurrentState);
+		currentState.updateStateHistory();
+		myStatesMap.put(turtleID, currentState);
 		myActiveTurtles.add(turtleID);
-		
 	}
 
 	
@@ -82,7 +82,8 @@ public class Model {
 		for (TurtleState turtle : myStatesMap.values()) {
 		        System.out.println("myHistoryMap in Model updated");
 			myHistoryMap.put(turtle.getID(), turtle.getStateHistory());
-			System.out.println("MyHistory map size: "+ myHistoryMap.size());
+		//	System.out.println("id" + turtle.getID());
+		//	System.out.println("MyHistory map size: "+ myHistoryMap.size());
 		}
 
 	}
