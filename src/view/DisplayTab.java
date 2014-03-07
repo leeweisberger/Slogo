@@ -56,7 +56,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 	private static final String DRAW_BOX_TITLE = "Draw";
 	private static final String HISTORY_BOX_TITLE = "History";
 	private static final String COMMAND_BOX_TITLE = "Command";
-	private static Model model;
+	private static Model myModel;
 	private MenuBar menuBar;
 	private CommandInput commandInput; 
 	private Container pane;
@@ -68,8 +68,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 	private List<Integer> myActiveTurtles;
 
 	public DisplayTab (Model model, String language){
-		this.model = model;			
-
+		myModel = model;
 		initialiseComponents();
 		setLayout(new BorderLayout());
 
@@ -86,9 +85,8 @@ public class DisplayTab extends JPanel implements ActionListener{
 		history = new JButton(historyLabel);
 		pane = new Container();
 
-		myHistoryMap = model.getMyHistoryMap();
-		System.out.println("checking if myHistoryMap is received in DisplayTab" + myHistoryMap.get(0));
-		myActiveTurtles = model.getActiveTurtles();
+		myHistoryMap = myModel.getMyHistoryMap();
+		myActiveTurtles = myModel.getActiveTurtles();
 	}
 
 	private void addComponentsToLayout(){
@@ -133,9 +131,10 @@ public class DisplayTab extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		if("run".equals( e.getActionCommand() )){	
 			setHistoryButtonText(commandInput.getValue());
-			model.parseToNodeList(commandInput.getValue());
+			myModel.doCommands("fd 50");
+			myHistoryMap = myModel.getMyHistoryMap();
 			turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
-			System.out.println(myHistoryMap.get(0));
+			System.out.println("my history map "+myHistoryMap.size());
 		}
 		
 		if("stop".equals(e.getActionCommand())){
@@ -146,7 +145,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 
 		}
 		if("history".equals(e.getActionCommand())){
-			model.parseToNodeList(historyLabel);
+			myModel.doCommands(historyLabel);
 		}
 	}
 

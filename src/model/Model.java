@@ -42,7 +42,7 @@ public class Model {
 				true, turtleID,0);
 		myStatesMap.put(turtleID, CurrentState);
 		myActiveTurtles.add(turtleID);
-		
+		//System.out.println("myStatesMap: " + myStatesMap.size() );
 	}
 
 	
@@ -68,9 +68,11 @@ public class Model {
 
 			// viewUpdateState()
 		}
+		//System.out.println("myStatesMap size in doCommands: "+ myStatesMap.size());
+
 		for (TurtleState turtle : myStatesMap.values()) {
 			myHistoryMap.put(turtle.getID(), turtle.getStateHistory());
-//			System.out.println("the parser has put the history inside");
+			//System.out.println("historyMap size in doCommands: " + myHistoryMap.size());
 		}
 
 	}
@@ -83,6 +85,7 @@ public class Model {
 	 */
 	public List<Node> parseToNodeList(String input) {
 		Parser parser = new Parser(input, "English");
+		//System.out.println("parseToNodeList: "+parser.parseToNodeList().size());
 		return parser.parseToNodeList();
 	}
 

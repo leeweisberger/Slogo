@@ -28,11 +28,8 @@ public class ViewController {
     private boolean permission;
 
     public void initializeView(Model model){
-        myModel = model;
-        myHistoryMap = myModel.getMyHistoryMap();
-        myActiveTurtles = myModel.getActiveTurtles();
 
-        Display display = new Display(myModel, null); 
+        Display display = new Display(model, null); 
         JFrame frame = new JFrame(TITLE); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
