@@ -42,9 +42,9 @@ public class Display extends JPanel implements ChangeListener{
         
         tabbedPane = new JTabbedPane();
 
-        tab1 = new DisplayTab(model1, "English"); 
+        tab1 = new DisplayTab(model, "English"); 
         tab1.setTurtleGraphicsWindow(turtleGrahicsWindow);
-        tab2 = new DisplayTab(model, "English");
+        tab2 = new DisplayTab(model1, "English");
 //        tab2.setTurtleGraphicsWindow(turtleGrahicsWindow);
         tab3 = new DisplayTab(model2, "English");
 //        tab3.setTurtleGraphicsWindow(turtleGrahicsWindow);
@@ -69,7 +69,7 @@ public class Display extends JPanel implements ChangeListener{
             ((DisplayTab) tabbedPane.getSelectedComponent()).setTurtleGraphicsWindow(turtleGrahicsWindow);
             int prevIndex = selectedIndex;
             selectedIndex = tabbedPane.getSelectedIndex();
-            turtleGrahicsWindow.changeState(prevIndex, selectedIndex);
+//            turtleGrahicsWindow.changeState(prevIndex, selectedIndex);
             
         }
     }

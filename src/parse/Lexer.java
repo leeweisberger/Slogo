@@ -89,7 +89,7 @@ public class Lexer {
     }
 
     public static void main(String[] args) {
-        String input = "fd :get";
+        String input = "repeat 5 [ repeat 4 [ fd 5 ] ]";
         // Create tokens and print them
         Lexer l = new Lexer();
         List<Token> tokens = l.lex(input);

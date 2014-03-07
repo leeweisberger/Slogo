@@ -35,6 +35,7 @@ public abstract class MultipleTurtleCommand extends CommandList {
 		if (!statesMap.keySet().contains(turtleID)) {
 			TurtleState currentState = new TurtleState(0, 0, 0, true, true, turtleID,0);
 			statesMap.put(turtleID, currentState);
+			currentState.updateStateHistory();
 			return currentState;
 		}
 

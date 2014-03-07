@@ -82,14 +82,14 @@ public class TurtleGraphicsWindow extends JGEngine{
 //        System.out.println("showing historyMap in TGW" + myHistoryMap.size());
         this.myActiveTurtles = myActiveTurtles;
         this.permission = permission;
-        //        System.out.println(myHistoryMap.get(0));
-        //        System.out.println("runBottonAction called");
+//        System.out.println("myHistory map received in run action is of size " + myHistoryMap.size());
+//                System.out.println("runBottonAction called");
     }
 
     @Override
     public void paintFrame(){
-        simpleDraw();
-        if ((!isClicked) || myHistoryMap.isEmpty()){
+//        simpleDraw();
+        if ((!isClicked) || myHistoryMap.isEmpty()){    
             resetTPosition();
         }
         else{
@@ -142,15 +142,15 @@ public class TurtleGraphicsWindow extends JGEngine{
         drawImage("myTurtle", CENTER_WIDTH, CENTER_HEIGHT);
     }
 
-    public void changeState (int prevWinIndex, int nextWinIndex, Model currentModel) {
-        System.out.println("change gameState called");
-        addGameState("window" + prevWinIndex);
-        clearGameState();
-        Model.clearState();
-        Model.setState(0, 0, 0, 0);
-        setGameState("window" + nextWinIndex);
-        // TODO Auto-generated method stub   
-    }
+//    public void changeState (int prevWinIndex, int nextWinIndex, Model currentModel) {
+//        System.out.println("change gameState called");
+//        addGameState("window" + prevWinIndex);
+//        clearGameState();
+//        Model.clearState();
+//        Model.setState(0, 0, 0, 0);
+//        setGameState("window" + nextWinIndex);
+//        // TODO Auto-generated method stub   
+//    }
 
     
     

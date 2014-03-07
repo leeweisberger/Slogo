@@ -19,13 +19,15 @@ public class Model {
 	private List<Integer> myActiveTurtles = new ArrayList<Integer>();
 	public static Map<String, Command> customCommandList = new HashMap<String, Command>();
 	private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
+
+	private boolean myError=false;
 	
 	public Model(){
-	    this.setState(0, 0, 0, 0);
+	    this.setFirstTurtleState(0, 0, 0, 0);
 	}
 
 	public Map<Integer, List<TurtleState>> getMyHistoryMap() {
-//	    System.out.println("getMyHistoryMap called ");
+//	    System.out.println("getMyHistoryMap in Model called ");
 	    return myHistoryMap;
 	}
 	
@@ -34,9 +36,10 @@ public class Model {
 	}
 	
 	public void clearState(){
-	    myStatesMap.clear();
+	    /*here we can either initialize new model, or clean up whatever we have in model*/
 	    myActiveTurtles.clear();
 	    myHistoryMap.clear();
+	    this.setFirstTurtleState(0, 0, 0, 0);
 	}
 	
 	/**
@@ -47,12 +50,12 @@ public class Model {
 	 * @param angle the angle
 	 * @param turtleID the turtle id
 	 */
-	public void setState(double xpos, double ypos, double angle, int turtleID) {
-		TurtleState CurrentState = new TurtleState(xpos, ypos, angle, true,
+	public void setFirstTurtleState(double xpos, double ypos, double angle, int turtleID) {
+		TurtleState currentState = new TurtleState(xpos, ypos, angle, true,
 				true, turtleID,0);
-		myStatesMap.put(turtleID, CurrentState);
+		currentState.updateStateHistory();
+		myStatesMap.put(turtleID, currentState);
 		myActiveTurtles.add(turtleID);
-		
 	}
 
 	
@@ -63,6 +66,11 @@ public class Model {
 	 */
 	public void doCommands(String input) {
 	    System.out.println("doCommands in Model passed "+ input);
+	    if(parseToNodeList(input)==null){
+	        System.out.println("myError in doCommands shows up");
+	    	myError=true;
+	    	return;
+	    }
 		for (Node node : parseToNodeList(input)) {
 			Command command = node.getCommand();
 			command.setInputsFromNode(node);
@@ -82,7 +90,10 @@ public class Model {
 		for (TurtleState turtle : myStatesMap.values()) {
 		        System.out.println("myHistoryMap in Model updated");
 			myHistoryMap.put(turtle.getID(), turtle.getStateHistory());
+			
 			System.out.println("MyHistory map size: "+ myHistoryMap.get(0).size());
+		//	System.out.println("id" + turtle.getID());
+		//	System.out.println("MyHistory map size: "+ myHistoryMap.size());
 		}
 
 	}
@@ -97,7 +108,16 @@ public class Model {
 		Parser parser = new Parser(input, "English");
 		return parser.parseToNodeList();
 	}
-
+	
+	/**
+	 * Checks if is error.
+	 *
+	 * @return true, if is error
+	 */
+	public boolean isError(){
+		return myError;
+	}
+	
 	public void viewUpdateState(TurtleState myCurrentState) { // need to find
 																// place to call
 																// this??

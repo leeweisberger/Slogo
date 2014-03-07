@@ -148,13 +148,13 @@ public class DisplayTab extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         if("run".equals( e.getActionCommand() )){	
-            System.out.println("Run Bottum called");
+//            System.out.println("Run Bottum called");
             setHistoryButtonText(commandInput.getValue());
             myModel.doCommands(commandInput.getValue());
             myHistoryMap = myModel.getMyHistoryMap();
+//            System.out.println("size of myHistoryMap in the game " + myHistoryMap.get(0).size());
 //            System.out.println("show commandinput.getvalue " + commandInput.getValue().toString());
-            turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);  
-            
+            turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);     
         }
         if("stop".equals(e.getActionCommand())){
             
@@ -162,19 +162,9 @@ public class DisplayTab extends JPanel implements ActionListener{
         if("clear".equals(e.getActionCommand())){
             turtleGraphicsWindow.dbgShowGameState(true);
             myModel.clearState();
-            myModel.setState(0, 0, 0, 0);
+                      
 //            turtleGraphicsWindow.clearGameState();
-            
-//            myHistoryMap.clear();
-//            myActiveTurtles.clear();
-//            
-            /* ASK frontend guy to take care:
-             * manually add a turtleState at the origin*/
-//            turtleGraphicsWindow.clearDrawing(myHistoryMap, myActiveTurtles);
-            
-            /* Ask backEnd guys to take care
-             * We need to get access to the History in the Model
-             */
+
         }
         if("history".equals(e.getActionCommand())){
             myModel.parseToNodeList(historyLabel);
