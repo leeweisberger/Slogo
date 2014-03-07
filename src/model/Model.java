@@ -52,6 +52,7 @@ public class Model {
 	 * @param input the raw userinput
 	 */
 	public void doCommands(String input) {
+	    System.out.println("doCommands in Model passed "+ input);
 		for (Node node : parseToNodeList(input)) {
 			Command command = node.getCommand();
 			command.setInputsFromNode(node);
@@ -71,8 +72,8 @@ public class Model {
 		//System.out.println("myStatesMap size in doCommands: "+ myStatesMap.size());
 
 		for (TurtleState turtle : myStatesMap.values()) {
+		        System.out.println("myHistoryMap in Model updated");
 			myHistoryMap.put(turtle.getID(), turtle.getStateHistory());
-			//System.out.println("historyMap size in doCommands: " + myHistoryMap.size());
 		}
 
 	}

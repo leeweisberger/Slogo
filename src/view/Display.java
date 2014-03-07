@@ -43,9 +43,8 @@ public class Display extends JPanel implements ChangeListener{
         
         tab1 = new DisplayTab(model, "English"); 
         tab1.setTurtleGraphicsWindow(turtleGrahicsWindow);
-        
-        tab2 = new DisplayTab(new Model(), "English"); 
-        tab3 = new DisplayTab(new Model(), "English");
+        tab2 = new DisplayTab(model, "English"); 
+        tab3 = new DisplayTab(model, "English");
 
         tabbedPane.addTab("tab 1", null, tab1, "first workspace");
         tabbedPane.addTab("tab 2", null, tab2, "second workspace");
