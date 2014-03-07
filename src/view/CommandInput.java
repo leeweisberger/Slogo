@@ -22,9 +22,9 @@ public class CommandInput {
 
 
 	CommandInput(){
-		commandIn = new JTextArea(10, 10);
+		commandIn = new JTextArea(5, 10);
 		commandInScrollPane  = new JScrollPane(commandIn);
-		setProperties("Serif", 16); 
+		setProperties("Sanserif", 16); 
 	}
 
 	public void setProperties(String fontName, int fontSize){

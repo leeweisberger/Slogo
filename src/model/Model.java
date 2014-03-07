@@ -19,11 +19,17 @@ public class Model {
 	private List<Integer> myActiveTurtles = new ArrayList<Integer>();
 	public static Map<String, Command> customCommandList = new HashMap<String, Command>();
 	private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
+
 	private boolean myError=false;
+	
+	public Model(){
+	    this.setFirstTurtleState(0, 0, 0, 0);
+	}
 
 	public Map<Integer, List<TurtleState>> getMyHistoryMap() {
-		//	    System.out.println("getMyHistoryMap called ");
-		return myHistoryMap;
+//	    System.out.println("getMyHistoryMap in Model called ");
+	    return myHistoryMap;
+
 	}
 
 	public List<Integer> getActiveTurtles(){
@@ -31,8 +37,12 @@ public class Model {
 	}
 
 	public void clearState(){
-		myActiveTurtles.clear();
-		myHistoryMap.clear();
+
+	    /*here we can either initialize new model, or clean up whatever we have in model*/
+	    myActiveTurtles.clear();
+	    myHistoryMap.clear();
+	    this.setFirstTurtleState(0, 0, 0, 0);
+
 	}
 
 	/**
@@ -58,11 +68,13 @@ public class Model {
 	 * @param input the raw userinput
 	 */
 	public void doCommands(String input) {
-		System.out.println("doCommands in Model passed "+ input);
-		if(parseToNodeList(input)==null){
-			myError=true;
-			return;
-		}
+
+	    System.out.println("doCommands in Model passed "+ input);
+	    if(parseToNodeList(input)==null){
+	        System.out.println("myError in doCommands shows up");
+	    	myError=true;
+	    	return;
+	    }
 		for (Node node : parseToNodeList(input)) {
 			Command command = node.getCommand();
 			command.setInputsFromNode(node);
@@ -84,6 +96,10 @@ public class Model {
 		for (TurtleState turtle : myStatesMap.values()) {
 			System.out.println("myHistoryMap in Model updated");
 			myHistoryMap.put(turtle.getID(), turtle.getStateHistory());
+			System.out.println("MyHistory map size: "+ myHistoryMap.get(0).size());
+		//	System.out.println("id" + turtle.getID());
+		//	System.out.println("MyHistory map size: "+ myHistoryMap.size());
+
 		}
 
 	}

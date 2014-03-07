@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -56,7 +57,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.awt.Desktop; 
-
 
 public class DisplayTab extends JPanel implements ActionListener{	
 	private static final Dimension SIZE = new Dimension(800, 600);
@@ -174,9 +174,6 @@ public class DisplayTab extends JPanel implements ActionListener{
 		this.turtleGraphicsWindow = turtleGraphicsWindow;
 		add(turtleGraphicsWindow, BorderLayout.CENTER);
 	}
-
-
-
 
 
 
