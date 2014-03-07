@@ -162,7 +162,9 @@ public class DisplayTab extends JPanel implements ActionListener{
             turtleGraphicsWindow.clearDrawing(myHistoryMap, myActiveTurtles);
         }
         if("history".equals(e.getActionCommand())){
-            myModel.parseToNodeList(historyLabel);
+            myModel.doCommands(historyLabel);
+            turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);  
+
         }
         if("faster".equals(e.getActionCommand())){
 
