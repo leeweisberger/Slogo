@@ -29,6 +29,12 @@ public class Model {
 	    return myActiveTurtles;
 	}
 	
+	public void clearState(){
+//	    myStatesMap.clear();
+	    myActiveTurtles.clear();
+	    myHistoryMap.clear();
+	}
+	
 	/**
 	 * Creates a new TurtleState.
 	 *
@@ -52,6 +58,7 @@ public class Model {
 	 * @param input the raw userinput
 	 */
 	public void doCommands(String input) {
+	    System.out.println("doCommands in Model passed "+ input);
 		for (Node node : parseToNodeList(input)) {
 			Command command = node.getCommand();
 			command.setInputsFromNode(node);
@@ -69,8 +76,9 @@ public class Model {
 			// viewUpdateState()
 		}
 		for (TurtleState turtle : myStatesMap.values()) {
+		        System.out.println("myHistoryMap in Model updated");
 			myHistoryMap.put(turtle.getID(), turtle.getStateHistory());
-//			System.out.println("the parser has put the history inside");
+			System.out.println("MyHistory map size: "+ myHistoryMap.size());
 		}
 
 	}

@@ -25,9 +25,11 @@ public class Controller {
 	 * @param input the raw user input
 	 * @param model the model to be called
 	 */
+	
 	public void doModel(String input, Model model) {
 		model.doCommands(input);
 		Map<Integer, List<TurtleState>> historyMap = model.getMyHistoryMap();
+//		System.out.println("calling doModel in Controller");
 	}
 
 	public void go(Model model) {

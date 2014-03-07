@@ -41,25 +41,5 @@ public class ViewController {
         /*test draw and update path*/
 //        drawPath();
     }
-
-    void drawPath(){
-        /*Run when the run button or is pressed;*/
-        
-    }
     
-    public void drawTurtle(){
-        
-    }
-
-    private void changeColor(JGColor color){
-        turtleGraphicsWindow.setColor(color);
-    }
-
-    private void changeDrawSpeed(Double fps, Double maxframeskip){
-        turtleGraphicsWindow.changeDrawSpeed(fps, maxframeskip);
-    }    
-
-    private void activeTurtle(boolean showBounding){
-        //        public void dbgShowBoundingBox(boolean enabled)
-    }
 }
