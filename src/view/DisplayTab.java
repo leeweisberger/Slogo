@@ -57,7 +57,6 @@ import java.util.List;
 import java.util.Map;
 import java.awt.Desktop; 
 
-import slogo_team02.ViewController;
 
 public class DisplayTab extends JPanel implements ActionListener{	
 	private static final Dimension SIZE = new Dimension(800, 600);
@@ -78,22 +77,29 @@ public class DisplayTab extends JPanel implements ActionListener{
 	public DisplayTab (Model model, String language){
 		myModel = model;
 		setLayout(new BorderLayout());		
+		
+		initialiseComponents(); 
+		addActionListenerToComponents(); 
+		addComponentsToLayout(); 
+		setState(); 
+
+
+	}
+	
+	public void setState(){
+		myHistoryMap = myModel.getMyHistoryMap();
+		//        System.out.println("checking if myHistoryMap is received in DisplayTab " + myHistoryMap.get(0));
+		myActiveTurtles = myModel.getActiveTurtles();
+	}
+	
+	public void initialiseComponents(){
 		commandInput = new CommandInput();
 		menuBar = new MenuBar(commandInput); 
 		run = new JButton("run");
 		clear = new JButton("clear");
 		historyLabel = new String("History"); 
 		history = new JButton(historyLabel);
-
 		pane = new Container();	
-
-		addActionListenerToComponents(); 
-		addComponentsToLayout(); 
-
-		myHistoryMap = myModel.getMyHistoryMap();
-		//        System.out.println("checking if myHistoryMap is received in DisplayTab " + myHistoryMap.get(0));
-		myActiveTurtles = myModel.getActiveTurtles();
-
 	}
 
 	/**
