@@ -12,7 +12,7 @@ public class YCor extends CommandZeroInputs{
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public Double doCommand(TurtleState state) {
+	public double doCommand(TurtleState state) {
 		return state.getY();
 
 	}

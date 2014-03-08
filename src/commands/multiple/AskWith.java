@@ -16,13 +16,13 @@ public class AskWith extends MultipleTurtleCommand {
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public Object doCommand(TurtleState turtleState) {
-
+	public double doCommand(TurtleState turtleState) {
+		double result = -1;
 		for (int i = 0; i < getNumFalseInputs(); i++) {
-			getFalseInputs().get(i).doCommand(turtleState);
+			result = getFalseInputs().get(i).doCommand(turtleState);
 		}
 
-		return null;
+		return result;
 	}
 
 	/* (non-Javadoc)

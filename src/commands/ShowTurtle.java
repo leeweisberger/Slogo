@@ -13,7 +13,7 @@ public class ShowTurtle extends CommandZeroInputs{
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public Object doCommand(TurtleState turtleState) {
+	public double doCommand(TurtleState turtleState) {
 		turtleState.setShow(true);
 		return 1;
 	}

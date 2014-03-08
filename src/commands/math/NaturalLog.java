@@ -4,16 +4,16 @@ import commands.basic.CommandOneInput;
 import model.TurtleState;
 
 /**
- * The Class ATan.
+ * The Class Log.
  */
-public class ATan extends CommandOneInput{
+public class NaturalLog extends CommandOneInput{
 
 	/* (non-Javadoc)
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public Double doCommand(TurtleState state) {
-		return(Math.toDegrees(Math.atan((Double) getInput1().doCommand(state))));
+	public double doCommand(TurtleState state) {
+		return(Math.log((Double) getInput1().doCommand(state)));
 
 	}
 }

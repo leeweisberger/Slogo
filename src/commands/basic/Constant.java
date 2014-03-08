@@ -16,7 +16,7 @@ public class Constant extends CommandZeroInputs{
 	
 
 	@Override
-	public Double doCommand(TurtleState turtleState) {
+	public double doCommand(TurtleState turtleState) {
 		return getMyValue();
 	}
 	public double getMyValue() {

@@ -4,16 +4,16 @@ import commands.basic.CommandOneInput;
 import model.TurtleState;
 
 /**
- * The Class Log.
+ * The Class Sin.
  */
-public class Log extends CommandOneInput{
+public class Sine extends CommandOneInput{
 
 	/* (non-Javadoc)
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public Double doCommand(TurtleState state) {
-		return(Math.log((Double) getInput1().doCommand(state)));
+	public double doCommand(TurtleState state) {
+		return(Math.sin(Math.toRadians((Double) getInput1().doCommand(state))));
 
 	}
 }
