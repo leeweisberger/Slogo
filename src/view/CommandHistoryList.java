@@ -29,39 +29,31 @@ implements ListSelectionListener {
         listModel.addElement(" Clickable input history below ");
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        list.setLayoutOrientation(JList.VERTICAL);
         list.setSelectedIndex(0);
         list.addListSelectionListener(this);
-        list.setVisibleRowCount(15);
+        list.setVisibleRowCount(40);
 
         listScrollPane = new JScrollPane(list);
 
         add(listScrollPane, BorderLayout.CENTER);
     }
     
-    public MouseListener initializeMouseListener () {
-        // TODO Auto-generated method stub
-        MouseListener mouseListener = new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int index = list.locationToIndex(e.getPoint());
-                    lastCommand = listModel.getElementAt(index).toString();
-
-                    getLastCommand(lastCommand);
-
-                    System.out.println("Double clicked on Item " + index);
-                }
-            }
-        };
-        return mouseListener;
-    }
-
-    public String getLastCommand(String command){
-        lastCommand =  command;
-        System.out.println(lastCommand);
-        return lastCommand;
-    }
-
+//    public MouseListener initializeMouseListener () {
+//        // TODO Auto-generated method stub
+//        MouseListener mouseListener = new MouseAdapter() {
+//            public void mouseClicked(MouseEvent e) {
+//                if (e.getClickCount() == 2) {
+//                    int index = list.locationToIndex(e.getPoint());
+//                    lastCommand = listModel.getElementAt(index).toString();
+//
+//
+//                    System.out.println("Double clicked on Item " + index);
+//                }
+//            }
+//        };
+//        return mouseListener;
+//    }
     public DefaultListModel getListModel(){
         return listModel;
     }

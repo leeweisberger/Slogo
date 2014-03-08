@@ -8,6 +8,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -75,6 +78,7 @@ public class DisplayTab extends JPanel implements ActionListener{
     private TurtleGraphicsWindow turtleGraphicsWindow;
     private Map<Integer, List<TurtleState>> myHistoryMap;
     private List<Integer> myActiveTurtles;
+    private String lastCommand;
 
 
     public DisplayTab (Model model, String language){
@@ -122,8 +126,22 @@ public class DisplayTab extends JPanel implements ActionListener{
         clear.setActionCommand("clear");
         clear.addActionListener(this);
 
-        list.addMouseListener(historyList.initializeMouseListener());
-
+        list.addMouseListener(initializeMouseListener());
+    }
+    
+    private MouseListener initializeMouseListener () {
+        // TODO Auto-generated method stub
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int index = list.locationToIndex(e.getPoint());
+                    lastCommand = listModel.getElementAt(index).toString();
+                    updateBackEndandDraw(lastCommand);
+                    System.out.println("Double clicked on Item " + index);
+                }
+            }
+        };
+        return mouseListener;
     }
 
     private GridBagConstraints setComponentConstraints(int x, int y){
@@ -143,39 +161,16 @@ public class DisplayTab extends JPanel implements ActionListener{
         // TODO Auto-generated method stub
         if("run".equals( e.getActionCommand() )){	
             updateBackEndandDraw(commandInput.getValue());
-            historyList.getListModel().addElement(commandInput.getValue());
         }
 
         if("clear".equals(e.getActionCommand())){
             myModel.clearState();
-
         }
 
         if("history".equals(e.getActionCommand())){
             myModel.doCommands(historyLabel);
             turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);  
-
         }
-
-
-
-        //        public void actionPerformed(ActionEvent e) {
-        //            
-        //            
-        //            int index = list.getSelectedIndex(); //get selected index
-        //            if (index == -1) { //no selection, so insert at beginning
-        //                index = 0;
-        //            } else {           //add after the selected item
-        //                index++;
-        //	        //            }
-        //	        int index = list.getSelectedIndex();
-        //	        //Select the new item and make it visible.
-        //	        list.setSelectedIndex(index);
-        //	        list.ensureIndexIsVisible(index);
-        //		/*some potential command to add in:*/
-        //		String clickCommand = (String) historyList.getList().getSelectedValue();
-
-
     }
 
     void updateBackEndandDraw (String typedCommand) {
@@ -185,6 +180,7 @@ public class DisplayTab extends JPanel implements ActionListener{
         setHistoryButtonText(typedCommand);
         myModel.doCommands(typedCommand);
         turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
+        historyList.getListModel().addElement(typedCommand);
     }
 
 
@@ -197,7 +193,23 @@ public class DisplayTab extends JPanel implements ActionListener{
         this.turtleGraphicsWindow = turtleGraphicsWindow;
         add(turtleGraphicsWindow, BorderLayout.CENTER);
     }
+    
 
 
 
+    //        public void actionPerformed(ActionEvent e) {
+    //            
+    //            
+    //            int index = list.getSelectedIndex(); //get selected index
+    //            if (index == -1) { //no selection, so insert at beginning
+    //                index = 0;
+    //            } else {           //add after the selected item
+    //                index++;
+    //              //            }
+    //              int index = list.getSelectedIndex();
+    //              //Select the new item and make it visible.
+    //              list.setSelectedIndex(index);
+    //              list.ensureIndexIsVisible(index);
+    //              /*some potential command to add in:*/
+    //              String clickCommand = (String) historyList.getList().getSelectedValue();
 }
