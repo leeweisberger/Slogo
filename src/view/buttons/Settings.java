@@ -37,7 +37,6 @@ public class Settings {
 		stringToJGColorMap.put("blue", new JGColor(0,0,255)); 
 		stringToJGColorMap.put("red", new JGColor(255,0,0)); 
 		stringToJGColorMap.put("green", new JGColor(0,128,0)); 
-		stringToJGColorMap.put("yellow", new JGColor(255,255,0)); 	
 		return stringToJGColorMap;
 	}
 
@@ -47,6 +46,11 @@ public class Settings {
 			return _instance; 
 		}
 		return _instance;
+	}
+	
+	public void updateSettings(){ 
+		TurtleGraphicsWindow.setPenColor(stringToJGColorMap.get("penColor")); 
+		TurtleGraphicsWindow.setTurtleImage(settings.get("turtleImage")); 
 	}
 	
 	public void loadSettings(File settingsFile){
@@ -62,9 +66,9 @@ public class Settings {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		updateSettings(); 
 		
-		
-		updateBackgroundColor(); 
+	
 	}
 	
 	public void saveSettings(){
@@ -79,32 +83,9 @@ public class Settings {
 	public void setDefaultSettings(){
 		settings.put("penColor", "yellow");
 		settings.put("backgroundColor", "black");
-		settings.put("turtleImage", "turtle1.jpg");
+		settings.put("turtleImage", "myCircle");
 		settings.put("commandFile", "commands.txt");
 	}
 	
-	public String getPenColor(){
-		return settings.get("penColor"); 
-	}
-	public void updateBackgroundColor(){
-
-	}
-	public String TurtleImageName(){
-		return settings.get("turtleImage"); 
-	}
-	public String getCommandFile(){
-		return settings.get("commandFile"); 
-	}
-	public String putPenColor(String penColor){
-		return settings.put("penColor",penColor); 
-	}
-	public String putBackgroundColor(String backgroundColor){
-		return settings.put("backgroundColor", backgroundColor); 
-	}
-	public String putTurtleImageName(String turtleImageName){
-		return settings.put("turtleImage", turtleImageName); 
-	}
-	public String putCommandFile(String commandFileName){
-		return settings.put("commandFile",commandFileName ); 
-	}
+	
 }

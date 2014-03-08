@@ -25,7 +25,7 @@ public class FormatMenu implements ActionListener {
 	private JMenu format, changePenColor, chooseTurtleImage; 
 	private Settings mySettings; 
 	private Map<String, JGColor> stringToJGColorMap; 
-	private String turtleImageURL, boxImageURL, shoeImageURL; 
+	private String turtleImageURL, boxImageURL, circleImageURL; 
 
 
 	public FormatMenu(){
@@ -43,7 +43,7 @@ public class FormatMenu implements ActionListener {
 	public void initialiseTurtleImageURLs(){
 		turtleImageURL =  "turtle.png";
 		boxImageURL = "";
-		shoeImageURL = "";
+		circleImageURL = "";
 		
 	}
 
@@ -85,7 +85,7 @@ public class FormatMenu implements ActionListener {
 		turtleImage.add(turtle);
 		box = new JMenuItem("box");
 		turtleImage.add(box);
-		circle = new JMenuItem("shoe"); 
+		circle = new JMenuItem("circle"); 
 		turtleImage.add(circle);
 	}
 
