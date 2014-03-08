@@ -8,13 +8,13 @@ import model.TurtleState;
 /**
  * The Class SetXY.
  */
-public class SetXY extends CommandTwoInputs {
+public class SetPosition extends CommandTwoInputs {
 
 	/* (non-Javadoc)
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public Double doCommand(TurtleState state) {
+	public double doCommand(TurtleState state) {
 
 		double newX=(Double) getInput1().doCommand(state);
 		double newY=(Double) getInput2().doCommand(state);

@@ -83,5 +83,5 @@ public abstract class Command {
 	 * @param turtleState the turtle state
 	 * @return the object that results from the command
 	 */
-	public abstract Object doCommand(TurtleState turtleState);
+	public abstract double doCommand(TurtleState turtleState);
 }

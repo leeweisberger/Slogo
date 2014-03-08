@@ -4,6 +4,7 @@ import java.util.List;
 
 import commands.basic.Command;
 import commands.basic.CommandList;
+import commands.basic.Constant;
 import model.Model;
 import model.TurtleState;
 import parse.Node;
@@ -12,15 +13,16 @@ import parse.Node;
  * The Class Repeat.
  */
 public class Repeat extends CommandList{
-	public Object doCommand(TurtleState state) {
+	public double doCommand(TurtleState state) {
 		List<Command> inputs = getCommands(); 
 		double numTimes = getNumTimes(state);
+		double result = -1;
 		for(int j=0; j<numTimes; j++){
 			for(int i=0; i<getNumCommands(); i++){
-				inputs.get(i).doCommand(state);
+				result = inputs.get(i).doCommand(state);
 			}
 		}
-		return null;
+		return result;
 	}
 	
 	/**
@@ -30,7 +32,7 @@ public class Repeat extends CommandList{
 	 * @return the num times
 	 */
 	protected double getNumTimes(TurtleState state){
-		return (Double) getInputs().get(0).doCommand(state);
+		return getInputs().get(0).doCommand(state);
 	}
 	
 	/**
@@ -39,6 +41,7 @@ public class Repeat extends CommandList{
 	 * @return the commands
 	 */
 	protected List<Command> getCommands(){
+//		System.out.println(getInputs().get(0).getClass());
 		return getInputs().subList(1, getInputs().size()-1);
 	}
 	

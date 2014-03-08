@@ -23,7 +23,7 @@ public class Tell extends MultipleTurtleCommand {
 		activeTurtles.clear();
 		myActiveTurtles = activeTurtles;
 		for (int i = 0; i < getNumInputs(); i++) {
-			int turtleID = (int) ((double) getInputs().get(i).doCommand(null));
+			int turtleID = (int) getInputs().get(i).doCommand(null);
 			doCommand(getTurtle(turtleID, activeTurtles, statesMap));
 		}
 	}
@@ -32,9 +32,9 @@ public class Tell extends MultipleTurtleCommand {
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public Object doCommand(TurtleState turtleState) {
+	public double doCommand(TurtleState turtleState) {
 		myActiveTurtles.add(turtleState.getID());
-		return null;
+		return 0;//return value has to be modified
 	}
 
 }

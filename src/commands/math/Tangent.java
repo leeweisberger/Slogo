@@ -4,16 +4,16 @@ import commands.basic.CommandOneInput;
 import model.TurtleState;
 
 /**
- * The Class Cos.
+ * The Class Tan.
  */
-public class Cos extends CommandOneInput{
+public class Tangent extends CommandOneInput{
 
 	/* (non-Javadoc)
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public Double doCommand(TurtleState state) {
-		return(Math.cos(Math.toRadians((Double) getInput1().doCommand(state))));
+	public double doCommand(TurtleState state) {
+		return(Math.tan(Math.toRadians((Double) getInput1().doCommand(state))));
 
 	}
 }

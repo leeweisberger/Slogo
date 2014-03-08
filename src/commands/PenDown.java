@@ -13,7 +13,7 @@ public class PenDown extends CommandZeroInputs{
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public Object doCommand(TurtleState turtleState) {
+	public double doCommand(TurtleState turtleState) {
 		turtleState.setPen(true);
 		return 1;
 	}
