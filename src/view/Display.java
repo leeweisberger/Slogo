@@ -33,7 +33,7 @@ public class Display extends JPanel implements ChangeListener{
     private DisplayTab tab3; 
     
     private static Model myModel;
-    private static TurtleGraphicsWindow turtleGrahicsWindow = new TurtleGraphicsWindow(); 
+    private static TurtleGraphicsWindow turtleGrahicsWindow =  TurtleGraphicsWindow.getInstance(); 
     private final JTabbedPane tabbedPane; 
     private int selectedIndex = 0;
 
@@ -56,10 +56,8 @@ public class Display extends JPanel implements ChangeListener{
         tabbedPane.addTab("tab 3", null, tab3, "third workspace");
         tabbedPane.addChangeListener(this);
 
-        //Add the tabbed pane to this panel.
         add(tabbedPane);
 
-        //The following line enables to use scrolling tabs.
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         
     }
@@ -71,7 +69,6 @@ public class Display extends JPanel implements ChangeListener{
             ((DisplayTab) tabbedPane.getSelectedComponent()).setTurtleGraphicsWindow(turtleGrahicsWindow);
             int prevIndex = selectedIndex;
             selectedIndex = tabbedPane.getSelectedIndex();
-//            turtleGrahicsWindow.changeState(prevIndex, selectedIndex);
             
         }
     }
@@ -79,24 +76,5 @@ public class Display extends JPanel implements ChangeListener{
     public DisplayTab getTab1() {
         return tab1;
     }
-
-    public static TurtleGraphicsWindow getTurtleGrahicsWindow() {
-        return turtleGrahicsWindow;
-    }
-    
-
-    
-//  tabbedPane.addChangeListener(new ChangeListener() {
-//  public void stateChanged(ChangeEvent e) {
-//      System.out.println("Tab: " + tabbedPane.getSelectedIndex());
-//      turtleGrahicsWindow.changeState(tabbedPane.getSelectedIndex());
-//  }
-//});
-    
-    
-/*
-    for effective switch btw tabs:
-        http://examples.javacodegeeks.com/desktop-java/swing/jtabbedpane/get-set-selected-tab-in-jtabbedpane/
-    */
     
 }

@@ -21,6 +21,10 @@ public class Settings {
 	private static Settings _instance; 
 	private Map<String, JGColor> stringToJGColorMap; 
 
+	public Map<String, JGColor> getStringToJGColorMap() {
+		return stringToJGColorMap;
+	}
+
 	public Settings(){
 		myParseAndWriteXML = new ParseAndWriteXML(); 
 		settings = new HashMap<String, String>(); 
@@ -36,7 +40,6 @@ public class Settings {
 		stringToJGColorMap.put("green", new JGColor(0,128,0)); 
 		stringToJGColorMap.put("yellow", new JGColor(255,255,0)); 	
 		return stringToJGColorMap;
-
 	}
 
 	public static Settings getInstance(){
@@ -85,7 +88,7 @@ public class Settings {
 		return settings.get("penColor"); 
 	}
 	public void updateBackgroundColor(){
-		TurtleGraphicsWindow.setBackDropColor(stringToJGColorMap.get(settings.get("backgroundColor"))); 
+
 	}
 	public String TurtleImageName(){
 		return settings.get("turtleImage"); 

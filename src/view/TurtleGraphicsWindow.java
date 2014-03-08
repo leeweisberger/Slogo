@@ -22,7 +22,9 @@ import model.TurtleState;
 
 public class TurtleGraphicsWindow extends JGEngine{    
 
-    public static final Dimension SIZE = new Dimension(755, 505);
+    
+
+	public static final Dimension SIZE = new Dimension(755, 505);
 
     public static final double DYNAMIC_WIDTH = SIZE.getWidth();
     public static final double DYNAMIC_HEIGHT = SIZE.getHeight();
@@ -39,13 +41,43 @@ public class TurtleGraphicsWindow extends JGEngine{
     private boolean permission = true;
     private boolean isClicked = false;
     
+    private static JGColor penColor; 
+    private static String turtleImage;
+    private static TurtleGraphicsWindow _instance; 
+    
 
     public TurtleGraphicsWindow(){
         super();
         initEngineComponent(SIZE.width, SIZE.height);
         //        initEngineComponent((int) DYNAMIC_WIDTH, (int) DYNAMIC_HEIGHT);
+        penColor = new JGColor(0,0,0); 
+        turtleImage = "myTurtle";
     }
 
+    public static TurtleGraphicsWindow getInstance(){
+    	if(_instance==null){
+    		_instance = new TurtleGraphicsWindow(); 
+    		return _instance; 
+    	}
+		return _instance; 
+    }
+    
+    public static void setPenColor(JGColor newPenColor){
+    	if(_instance==null){
+    		_instance = new TurtleGraphicsWindow(); 
+    		_instance.penColor = newPenColor; 
+    	}
+    	_instance.penColor = newPenColor; 
+    }
+ 
+    public static void setTurtleImage(String newTurtleImage){
+    	if(_instance==null){
+    		_instance = new TurtleGraphicsWindow(); 
+    		_instance.turtleImage = newTurtleImage; 
+    	}
+    	_instance.turtleImage = newTurtleImage; 
+    }
+  
 	@Override
     public void initCanvas () {
         // TODO Auto-generated method stub
@@ -122,15 +154,13 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     void drawPath(List<TurtleState> singleTStateList){   
         TurtleState myFinalState = singleTStateList.get(singleTStateList.size() - 1);
-        drawImage("myTurtle", (CENTER_WIDTH+myFinalState.getX()), (CENTER_HEIGHT-myFinalState.getY()));
+        drawImage(turtleImage, (CENTER_WIDTH+myFinalState.getX()), (CENTER_HEIGHT-myFinalState.getY()));
 
         for (int i=0; i<singleTStateList.size()-1; i++){
-            //                dbgShowBoundingBox(permission);
             TurtleState myPrevState = singleTStateList.get(i);
             TurtleState myNextState= singleTStateList.get(i+1);
-            //            doRotation(myPrevState.getAngle(), myNextState.getAngle());
             drawLine(CENTER_WIDTH + myPrevState.getX(), CENTER_HEIGHT - myPrevState.getY(), 
-                     CENTER_WIDTH + myNextState.getX(), CENTER_HEIGHT - myNextState.getY(), 2.0, JGColor.blue);
+                     CENTER_WIDTH + myNextState.getX(), CENTER_HEIGHT - myNextState.getY(), 2.0, penColor);
         }
     }
 
@@ -140,7 +170,7 @@ public class TurtleGraphicsWindow extends JGEngine{
     }
 
     void doRotation(double preAngle, double nextAngle){
-        defineImageRotated("myTurtle", null, 0, "turtle.png", nextAngle); 
+        defineImageRotated(turtleImage, null, 0, turtleImage, nextAngle); 
     }
 
     public void changeDrawSpeed (Double fps, Double maxframeskip) {
@@ -149,31 +179,13 @@ public class TurtleGraphicsWindow extends JGEngine{
     }
 
     void resetTPosition () {
-        drawImage("myTurtle", CENTER_WIDTH, CENTER_HEIGHT);
+        drawImage(turtleImage, CENTER_WIDTH, CENTER_HEIGHT);
     }
 
-    //    public void changeState (int prevWinIndex, int nextWinIndex, Model currentModel) {
-    //        System.out.println("change gameState called");
-    //        addGameState("window" + prevWinIndex);
-    //        clearGameState();
-    //        Model.clearState();
-    //        Model.setState(0, 0, 0, 0);
-    //        setGameState("window" + nextWinIndex);
-    //        // TODO Auto-generated method stub   
-    //    }
 
-
-
-
-
-
-    /* Continue Writing
-     * Window2 Screen*/
 
     /** Called when the Title state is entered. */
     public void startWindow2() {
-        // we need to remove all game objects when we go from in-game to the
-        // title screen
         removeObjects(null,0);
     }
 

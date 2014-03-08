@@ -164,7 +164,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 
 	}
 
-	void updateBackEndandDraw (String typedCommand) {
+	public void updateBackEndandDraw (String typedCommand) {
 		myHistoryMap = myModel.getMyHistoryMap();
 		myActiveTurtles = myModel.getActiveTurtles();
 		myModel.doCommands(typedCommand);

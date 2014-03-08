@@ -33,9 +33,7 @@ public class MenuBar implements ActionListener {
 	private FileMenu myFileMenu; 
 	private FormatMenu myFormatMenu; 
 	private JMenu file, format, help, penColors, turtleImages;
-	private JMenuItem open, save,  newTab, savePreferences,loadPreferences, redPen,
-	chooseTurtleImage, showHelpPage;
-	private JFileChooser fileChooser;
+	private JMenuItem showHelpPage;
 	private HelpPage helpPage; 
 	private File importedFile, savedFile;  
 	private CommandInput commandInput; 
@@ -43,81 +41,38 @@ public class MenuBar implements ActionListener {
 	public MenuBar(CommandInput commandInput){		
 		myFileMenu = new FileMenu(commandInput, importedFile, savedFile); 
 		myFormatMenu = new FormatMenu(); 
-		
+
 		//Create the menu bar.
 		menuBar = new JMenuBar();
-		format = new JMenu("Format");
-		help = new JMenu("Help");
-		penColors = new JMenu("Choose a Pen Color"); 
-		turtleImages = new JMenu("Choose a Turtle Image");
-		
+
 		helpPage = new HelpPage(); 
 		this.commandInput = commandInput; 
 		savedFile = new File("saved commands.txt");
-		
+
 		addMenus();
-		createAndAddMenuItems(); 
+	
 	}
 
 	public void createAndAddMenuItems(){
+
+
 	
-
-		redPen = new JMenuItem("Red",
-				KeyEvent.VK_T);
-		redPen.addActionListener(this); 
-
-
-		chooseTurtleImage = new JMenuItem("Choose Turtle Image",
-				KeyEvent.VK_T);
-		chooseTurtleImage.addActionListener(this); 
-
-		showHelpPage = new JMenuItem("Show Help Page"); 
-		showHelpPage.setActionCommand("showHelpPage");
-		showHelpPage.addActionListener(this);
-
-		penColors.add(redPen);
-		
-		
-
-		help.add(showHelpPage);
 	}
 
 	public void addMenus(){
 		menuBar.add(myFileMenu.getFileMenu());
 		menuBar.add(myFormatMenu.getFormatMenu());
-		menuBar.add(help);
+		menuBar.add(helpPage.getHelp());
 	}
 
 	public JMenuBar getMenuBar() {
 		return menuBar;
 	}
 
-	
+
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		int temp; 
-		Component temp1 = null; 
+	public void actionPerformed(ActionEvent e) {	
 	
-		
-		if(e.getSource() == newTab){
-			
-		}
-		if(e.getSource() == redPen){
-
-		}
-		if(e.getSource() == chooseTurtleImage){
-
-		}
-		if("showHelpPage".equals(e.getActionCommand())){
-			helpPage.createAndShowHelpPage();
-		}
-	
-		
-		if(e.getSource()== redPen){
-			
-		}
 	}
-	
-	
 }
