@@ -175,30 +175,4 @@ public class ParseAndWriteXML {
 
         return settings;
 	}
-
-	
- 	
-	public static void main(String argv[]) {
-		ParseAndWriteXML parserAndWriter = new ParseAndWriteXML(); 
-		
-		try {
-			parserAndWriter.writeOutXMLFile(parserAndWriter.getSettings());
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-				
-		try {
-			parserAndWriter.parseXML(parserAndWriter.getFile());
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-	}
 }

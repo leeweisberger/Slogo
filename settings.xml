@@ -1,8 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<settings>
-    <penColor>yellow</penColor>
-    <backgroundColor>black</backgroundColor>
-    <turtleImage>turtle1.jpg</turtleImage>
-    <commandFile>commands.txt</commandFile>
-    
-    </settings>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><settings><penColor>yellow</penColor><backgroundColor>black</backgroundColor><turtleImage>turtle1.jpg</turtleImage><commandFile>commands.txt</commandFile></settings>
