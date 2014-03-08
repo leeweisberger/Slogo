@@ -1,12 +1,15 @@
 package slogo_team02;
 
+import java.awt.geom.Point2D;
+
 import jgame.JGObject;
 
 
 
 public class JTurtle extends JGObject {
 	private static final int COLLISION_ID  = 0; 
-	private static final String IMAGE_NAME = "turtle.jpg"; 	
+	private static final String IMAGE_NAME = "turtle.jpg";
+	private Point2D coordinate; 
 
 	public JTurtle(double x, double y) {
 		super("turtle", false, x, y, COLLISION_ID, IMAGE_NAME);

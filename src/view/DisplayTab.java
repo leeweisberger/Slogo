@@ -81,15 +81,19 @@ public class DisplayTab extends JPanel implements ActionListener{
 		initialiseComponents(); 
 		addActionListenerToComponents(); 
 		addComponentsToLayout(); 
-		setState(); 
-
-
+		setModelState(); 
+		setPreferences(); 
 	}
 	
-	public void setState(){
+	public void setModelState(){
 		myHistoryMap = myModel.getMyHistoryMap();
 		//        System.out.println("checking if myHistoryMap is received in DisplayTab " + myHistoryMap.get(0));
 		myActiveTurtles = myModel.getActiveTurtles();
+	}
+	
+	public void setPreferences(){
+		setOpaque(true); 
+		setBackground(Color.blue);
 	}
 	
 	public void initialiseComponents(){

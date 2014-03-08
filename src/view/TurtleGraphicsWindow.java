@@ -24,7 +24,8 @@ public class TurtleGraphicsWindow extends JGEngine{
     private static final Dimension SIZE = new Dimension(755, 505);
     TurtleState myCurrentState = TurtleState.getInstant();
     private boolean test = true;
-    private double DYNAMIC_WIDTH = SIZE.getWidth();
+    private JGColor penColor;  
+	private double DYNAMIC_WIDTH = SIZE.getWidth();
     private double DYNAMIC_HEIGHT = SIZE.getHeight();
     private double CENTER_WIDTH = DYNAMIC_WIDTH/2;
     private double CENTER_HEIGHT = DYNAMIC_HEIGHT/2;
@@ -36,7 +37,7 @@ public class TurtleGraphicsWindow extends JGEngine{
     public TurtleGraphicsWindow(){
         super();
         initEngineComponent(SIZE.width, SIZE.height);
-//        initEngineComponent((int) DYNAMIC_WIDTH, (int) DYNAMIC_HEIGHT);
+        penColor = new JGColor(10, 10, 10); 
     }
 
     @Override
@@ -120,7 +121,7 @@ public class TurtleGraphicsWindow extends JGEngine{
             TurtleState myNextState= singleTStateList.get(i+1);
 //            doRotation(myPrevState.getAngle(), myNextState.getAngle());
             drawLine(CENTER_WIDTH + myPrevState.getX(), CENTER_HEIGHT - myPrevState.getY(), 
-                     CENTER_WIDTH + myNextState.getX(), CENTER_HEIGHT - myNextState.getY(), 2.0, JGColor.blue);
+                     CENTER_WIDTH + myNextState.getX(), CENTER_HEIGHT - myNextState.getY(), 2.0, penColor);
         }
     }
     
@@ -172,6 +173,14 @@ public class TurtleGraphicsWindow extends JGEngine{
             drawString("Title state. Press space to go to InGame",pfWidth()/2,90,0);
     }
 
+    public JGColor getPenColor() {
+		return penColor;
+	}
+
+	public void setPenColor(JGColor penColor) {
+		this.penColor = penColor;
+	}
+	
     public void doFrameWindow2() {
             if (getKey(' ')) {
                     // ensure the key has to be pressed again to register
