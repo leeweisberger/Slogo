@@ -15,7 +15,7 @@ public class JTurtle extends JGObject {
     private Vec2 velocity;
     private int shapeId;
     private String IMAGE_NAME;
-    //    private static final String IMAGE_NAME = "turtle";
+    
 
     public JTurtle(double x, double y, String imageName) {
         super(imageName, true, x, y, COLLISION_ID, "myTurtle");
@@ -49,7 +49,6 @@ public class JTurtle extends JGObject {
         rotate(myAngle);
         setPos(myX,myY);	
     }
-
 
     public void rotate(double angle){
         xdir = (int) Math.abs((1*Math.cos(angle)));  //check what values these give 

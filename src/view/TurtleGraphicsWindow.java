@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
+import slogo_team02.JTurtle;
 
 import jgame.JGColor;
 import jgame.JGRectangle;
@@ -27,6 +28,7 @@ public class TurtleGraphicsWindow extends JGEngine{
     public static final double DYNAMIC_HEIGHT = SIZE.getHeight();
     public static final double CENTER_WIDTH = DYNAMIC_WIDTH/2;
     public static final double CENTER_HEIGHT = DYNAMIC_HEIGHT/2;
+    private static final String TURTLE  = "turtle";
 
     private boolean isPenUp;
     private JGColor color;
@@ -71,6 +73,7 @@ public class TurtleGraphicsWindow extends JGEngine{
     }
 
     public void simpleDraw () {
+        JTurtle newTurtle = new JTurtle(200.0, 300.0, TURTLE);
         //        drawImage("myTurtle", DYNAMIC_WIDTH/2, DYNAMIC_HEIGHT/2);
         drawLine(0.0, 0.0, DYNAMIC_WIDTH, DYNAMIC_HEIGHT, 2.0, JGColor.blue);
         //        showActiveTurtle();
@@ -94,7 +97,7 @@ public class TurtleGraphicsWindow extends JGEngine{
 
     @Override
     public void paintFrame(){
-        //        simpleDraw();
+        simpleDraw();
         if ((!isClicked) || myHistoryMap.isEmpty()){    
             resetTPosition();
         }
@@ -110,9 +113,6 @@ public class TurtleGraphicsWindow extends JGEngine{
                 List<TurtleState> singleTStateList = singleTEntrySet.getValue();
                 drawPath(singleTStateList);
             }
-            //                        if (myActiveTurtles.contains(singleTStateList.getKey())){ 
-            //                            drawUpdate(singleTStateList.getValue());
-            //                        } 
             //            System.out.println("drawPath called");
             //            System.out.println("singleTStateList value is " + singleTStateList.getValue());
         }
