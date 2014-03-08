@@ -166,7 +166,6 @@ public class DisplayTab extends JPanel implements ActionListener{
 
 	void updateBackEndandDraw (String typedCommand) {
 		myHistoryMap = myModel.getMyHistoryMap();
-		//        System.out.println("checking if myHistoryMap is received in DisplayTab " + myHistoryMap.get(0));
 		myActiveTurtles = myModel.getActiveTurtles();
 		myModel.doCommands(typedCommand);
 		turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
@@ -183,5 +182,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 		this.turtleGraphicsWindow = turtleGraphicsWindow;
 		add(turtleGraphicsWindow, BorderLayout.CENTER);
 	}
+
+
 
 }

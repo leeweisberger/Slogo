@@ -17,7 +17,15 @@ implements ListSelectionListener {
         super(new BorderLayout());
         this.list = list;
         this.listModel = listModel;
- 
+        //        listModel = new DefaultListModel();
+
+        //        /*TODO:need to rework here*/
+
+        //        listModel.addElement("John Smith");
+        //        listModel.addElement("Kathy Green");
+
+        //Create the list and put it in a scroll pane.
+        //        list = new JList(listModel);
         listModel.addElement(" Clickable input history below ");
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -30,7 +38,6 @@ implements ListSelectionListener {
 
         add(listScrollPane, BorderLayout.CENTER);
     }
-    
 
     public DefaultListModel getListModel(){
         return listModel;
@@ -56,7 +63,9 @@ implements ListSelectionListener {
         //Select the new item and make it visible.
         list.setSelectedIndex(index);
         list.ensureIndexIsVisible(index);
+        /*some potential command to add in:*/
         listModel.addElement(list.getSelectedValue());
+        //        String clickCommand = (String) historyList.getList().getSelectedValue();
     }
 
     //This method is required by ListSelectionListener.
@@ -66,7 +75,8 @@ implements ListSelectionListener {
             listModel.addElement(" <none>");
 
         } else {
-         
+            //Selection, enable the fire button.
+            //            System.out.println("the value is been clicked");
         }
     }
 }
