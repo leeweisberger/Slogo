@@ -13,7 +13,7 @@ public class Lexer {
 
     enum TokenType {
         CONSTANT("-?[0-9]+\\.?[0-9]*"), VARIABLE(":[a-zA-z]+"), INBRACKETS("\\[(.*?)\\]"),  
-        COMMAND("[a-zA-z_]+(\\?)?"),  WHITESPACE("[ \t\f\r\n]+"), FALSE(""); 
+        COMMAND("[a-zA-z_]+(\\?)?"),  WHITESPACE("[ \t\f\r\n]+"), FALSE("");
 
         public final String pattern;
         private static final List<TokenType> tokenTypes;
