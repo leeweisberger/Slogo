@@ -25,8 +25,7 @@ public class Settings {
 		myParseAndWriteXML = new ParseAndWriteXML(); 
 		settings = new HashMap<String, String>(); 
 		setDefaultSettings();
-		initialiseStringToJGColorMap(); 
-		
+		initialiseStringToJGColorMap(); 	
 	}
 	
 	public Map<String, JGColor> initialiseStringToJGColorMap(){
@@ -85,7 +84,7 @@ public class Settings {
 		return settings.get("penColor"); 
 	}
 	public void updateBackgroundColor(){
-		TurtleGraphicsWindow.setBackDropColor(stringToJGColorMap.get(settings.get("backgroundColor"))); 
+		 
 	}
 	public String TurtleImageName(){
 		return settings.get("turtleImage"); 

@@ -54,6 +54,7 @@ import java.util.List;
 import java.util.Map;
 import java.awt.Desktop; 
 
+import slogo_team02.JTurtle;
 import sun.awt.X11.ListHelper;
 import view.Display;
 import view.buttons.Settings;
@@ -81,6 +82,8 @@ public class DisplayTab extends JPanel implements ActionListener{
 	private TurtleGraphicsWindow turtleGraphicsWindow;
 	private Map<Integer, List<TurtleState>> myHistoryMap;
 	private List<Integer> myActiveTurtles;
+	private Map<Integer, TurtleState> myStatesMap;
+	private List<JTurtle> TurtleList = new ArrayList<JTurtle>();
 	private String lastCommand;
 
 	public DisplayTab (Model model, String language){
@@ -135,7 +138,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 					int index = list.locationToIndex(e.getPoint());
 					lastCommand = listModel.getElementAt(index).toString();
 					updateBackEndandDraw(lastCommand);
-					System.out.println("Double clicked on Item " + index);
+
 				}
 			}
 		};
@@ -160,15 +163,23 @@ public class DisplayTab extends JPanel implements ActionListener{
 
 		if("clear".equals(e.getActionCommand())){
 			myModel.clearState();
+			turtleGraphicsWindow.clearDrawing();
 		}
 
 	}
 
 	void updateBackEndandDraw (String typedCommand) {
+	        myModel.doCommands(typedCommand);
+	        myStatesMap = myModel.getMyStatesMap();
 		myHistoryMap = myModel.getMyHistoryMap();
+	        for (Map.Entry<Integer, List<TurtleState>> singleTEntrySet: myHistoryMap.entrySet()){
+//	            System.out.println("the Size of Map in TurtleGraphics is " + myHistoryMap.size());
+	            TurtleList.add(new JTurtle(TurtleGraphicsWindow.CENTER_WIDTH, TurtleGraphicsWindow.CENTER_HEIGHT, TurtleGraphicsWindow.TURTLE, singleTEntrySet.getKey()));
+	            System.out.println("the size of myHistoryMap at the DisplayTab " + myHistoryMap.size());
+	            System.out.println("the size of TurtleList at this moment " + TurtleList.size());
+	        }
 		myActiveTurtles = myModel.getActiveTurtles();
-		myModel.doCommands(typedCommand);
-		turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
+		turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, myStatesMap, TurtleList, true);
 		historyList.getListModel().addElement(typedCommand);
 	}
 

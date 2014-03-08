@@ -59,7 +59,7 @@ implements ListSelectionListener {
         String name = listModel.getElementAt(
                                              list.getSelectedIndex()).toString();
         int index = list.getSelectedIndex();
-        System.out.println("doHistoryCommand is runned");
+//        System.out.println("doHistoryCommand is runned");
         //Select the new item and make it visible.
         list.setSelectedIndex(index);
         list.ensureIndexIsVisible(index);
@@ -73,7 +73,6 @@ implements ListSelectionListener {
         if (list.getSelectedIndex() == -1) {
             //No selection, disable fire button.
             listModel.addElement(" <none>");
-
         } else {
             //Selection, enable the fire button.
             //            System.out.println("the value is been clicked");

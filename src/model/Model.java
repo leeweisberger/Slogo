@@ -19,11 +19,14 @@ public class Model {
 	private List<Integer> myActiveTurtles = new ArrayList<Integer>();
 	public static Map<String, Command> customCommandList = new HashMap<String, Command>();
 	private Map<Integer, List<TurtleState>> myHistoryMap = new HashMap<Integer, List<TurtleState>>();
-
 	private boolean myError=false;
 	
 	public Model(){
 	    this.setFirstTurtleState(0, 0, 0, 0);
+	}
+	
+	public Map<Integer, TurtleState> getMyStatesMap(){
+	    return myStatesMap;
 	}
 
 	public Map<Integer, List<TurtleState>> getMyHistoryMap() {
@@ -43,7 +46,6 @@ public class Model {
 	    myHistoryMap.clear();
 	    myStatesMap.clear();
 	    this.setFirstTurtleState(0, 0, 0, 0);
-
 	}
 
 	/**
@@ -70,7 +72,7 @@ public class Model {
 	 */
 	public void doCommands(String input) {
 
-	    System.out.println("doCommands in Model passed "+ input);
+//	    System.out.println("doCommands in Model passed "+ input);
 	    if(parseToNodeList(input)==null){
 	        System.out.println("myError in doCommands shows up");
 	    	myError=true;
