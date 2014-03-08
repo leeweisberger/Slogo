@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,13 +22,14 @@ import model.TurtleState;
 
 public class TurtleGraphicsWindow extends JGEngine{    
 
-    private static final Dimension SIZE = new Dimension(755, 505);
+    public static final Dimension SIZE = new Dimension(755, 505);
+    public double DYNAMIC_WIDTH = SIZE.getWidth();
+    public double DYNAMIC_HEIGHT = SIZE.getHeight();
+    public double CENTER_WIDTH = DYNAMIC_WIDTH/2;
+    public double CENTER_HEIGHT = DYNAMIC_HEIGHT/2;
+    
     TurtleState myCurrentState = TurtleState.getInstant();
     private boolean test = true;
-    private double DYNAMIC_WIDTH = SIZE.getWidth();
-    private double DYNAMIC_HEIGHT = SIZE.getHeight();
-    private double CENTER_WIDTH = DYNAMIC_WIDTH/2;
-    private double CENTER_HEIGHT = DYNAMIC_HEIGHT/2;
     private Map<Integer, List<TurtleState>> myHistoryMap;
     private List<Integer> myActiveTurtles;
     private boolean permission = true;
@@ -201,7 +203,4 @@ public class TurtleGraphicsWindow extends JGEngine{
                     };
             }
     }
-
-
-    /** The StartGame state is just for displaying a start message. */
 }

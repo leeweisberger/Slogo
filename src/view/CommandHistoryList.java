@@ -38,22 +38,7 @@ implements ListSelectionListener {
 
         add(listScrollPane, BorderLayout.CENTER);
     }
-    
-//    public MouseListener initializeMouseListener () {
-//        // TODO Auto-generated method stub
-//        MouseListener mouseListener = new MouseAdapter() {
-//            public void mouseClicked(MouseEvent e) {
-//                if (e.getClickCount() == 2) {
-//                    int index = list.locationToIndex(e.getPoint());
-//                    lastCommand = listModel.getElementAt(index).toString();
-//
-//
-//                    System.out.println("Double clicked on Item " + index);
-//                }
-//            }
-//        };
-//        return mouseListener;
-//    }
+
     public DefaultListModel getListModel(){
         return listModel;
     }
