@@ -3,11 +3,13 @@ automatic creation of tabs:
 change between tabs = keep track of new history, and clear the current stuff on view.
 	Lines.clear()
 	canvas.clear()
-change the background color: add combo choose in panel: http://docs.oracle.com/javase/tutorial/uiswing/components/combobox.html
-change the pen color 
+change the background color: add combo choose in panel: 
+change the pen color: http://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
 allow user to select different turtle, use this: http://docs.oracle.com/javase/tutorial/uiswing/components/filechooser.html
 active variables
 Other todos: Language setting
+
+
 
 JGObject for Turtle Object? 
 3. Figure out dynamically the window size (componentSize)
@@ -99,6 +101,5 @@ HTML formatted help page
 *show variables currently available in the environment (even better, make their values directly clickable to edit)
 *show user-defined commands currently available in the environment (even better, make these commands directly clickable to execute) 
 *allow users to set, save, and load workspace preferences (like default background, starting image list, starting number of turtles, starting file to load, etc.)
-
-
+*save turtleState and load on tab switch 
 
