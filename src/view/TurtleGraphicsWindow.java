@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,26 +22,27 @@ import model.TurtleState;
 
 public class TurtleGraphicsWindow extends JGEngine{    
 
-    private static final Dimension SIZE = new Dimension(755, 505);
+    public static final Dimension SIZE = new Dimension(755, 505);
+    public double DYNAMIC_WIDTH = SIZE.getWidth();
+    public double DYNAMIC_HEIGHT = SIZE.getHeight();
+    public double CENTER_WIDTH = DYNAMIC_WIDTH/2;
+    public double CENTER_HEIGHT = DYNAMIC_HEIGHT/2;
+    
     TurtleState myCurrentState = TurtleState.getInstant();
     private boolean test = true;
-    private JGColor penColor;  
-	private double DYNAMIC_WIDTH = SIZE.getWidth();
-    private double DYNAMIC_HEIGHT = SIZE.getHeight();
-    private double CENTER_WIDTH = DYNAMIC_WIDTH/2;
-    private double CENTER_HEIGHT = DYNAMIC_HEIGHT/2;
     private Map<Integer, List<TurtleState>> myHistoryMap;
     private List<Integer> myActiveTurtles;
     private boolean permission = true;
     private boolean isClicked = false;
+    
 
     public TurtleGraphicsWindow(){
         super();
         initEngineComponent(SIZE.width, SIZE.height);
-        penColor = new JGColor(10, 10, 10); 
+//        initEngineComponent((int) DYNAMIC_WIDTH, (int) DYNAMIC_HEIGHT);
     }
 
-    @Override
+	@Override
     public void initCanvas () {
         // TODO Auto-generated method stub
         setCanvasSettings(1, // width of the canvas in tiles
@@ -121,7 +123,7 @@ public class TurtleGraphicsWindow extends JGEngine{
             TurtleState myNextState= singleTStateList.get(i+1);
 //            doRotation(myPrevState.getAngle(), myNextState.getAngle());
             drawLine(CENTER_WIDTH + myPrevState.getX(), CENTER_HEIGHT - myPrevState.getY(), 
-                     CENTER_WIDTH + myNextState.getX(), CENTER_HEIGHT - myNextState.getY(), 2.0, penColor);
+                     CENTER_WIDTH + myNextState.getX(), CENTER_HEIGHT - myNextState.getY(), 2.0, JGColor.blue);
         }
     }
     
@@ -173,14 +175,6 @@ public class TurtleGraphicsWindow extends JGEngine{
             drawString("Title state. Press space to go to InGame",pfWidth()/2,90,0);
     }
 
-    public JGColor getPenColor() {
-		return penColor;
-	}
-
-	public void setPenColor(JGColor penColor) {
-		this.penColor = penColor;
-	}
-	
     public void doFrameWindow2() {
             if (getKey(' ')) {
                     // ensure the key has to be pressed again to register
@@ -210,7 +204,4 @@ public class TurtleGraphicsWindow extends JGEngine{
                     };
             }
     }
-
-
-    /** The StartGame state is just for displaying a start message. */
 }

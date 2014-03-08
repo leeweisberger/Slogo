@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -57,6 +56,14 @@ import java.awt.Desktop;
 
 import sun.awt.X11.ListHelper;
 import view.Display;
+import view.buttons.Settings;
+import view.menu.MenuBar;
+
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import javax.swing.event.*;
 
 public class DisplayTab extends JPanel implements ActionListener{	
 	private static final Dimension SIZE = new Dimension(800, 600);
@@ -68,66 +75,46 @@ public class DisplayTab extends JPanel implements ActionListener{
 	private CommandInput commandInput; 
 	private Container pane;
 	private CommandHistoryList historyList;
-	private JButton run, clear, history;
 	private JList list;
 	private DefaultListModel listModel;
-	private String historyLabel;
-    private String lastCommand;
+	private JButton run, clear;
 	private TurtleGraphicsWindow turtleGraphicsWindow;
 	private Map<Integer, List<TurtleState>> myHistoryMap;
 	private List<Integer> myActiveTurtles;
-
+	private String lastCommand;
 
 	public DisplayTab (Model model, String language){
 		myModel = model;
 		setLayout(new BorderLayout());		
-
-		initialiseComponents(); 
+		initialiseComponents();
 		addActionListenerToComponents(); 
-		addComponentsToLayout(); 
-		setModelState(); 
-		setPreferences(); 
+		addComponentsToLayout();
 	}
 
-	public void setModelState(){
-		myHistoryMap = myModel.getMyHistoryMap();
-		//        System.out.println("checking if myHistoryMap is received in DisplayTab " + myHistoryMap.get(0));
-		myActiveTurtles = myModel.getActiveTurtles();
-	}
-
-	public void setPreferences(){
-		setOpaque(true); 
-		setBackground(Color.blue);
-	}
 
 	public void initialiseComponents(){
 		commandInput = new CommandInput();
 		menuBar = new MenuBar(commandInput); 
 		run = new JButton("run");
 		clear = new JButton("clear");
-		historyLabel = new String("History"); 
-		history = new JButton(historyLabel);
-		pane = new Container();	
 		listModel = new DefaultListModel();
 		list = new JList(listModel);
 		historyList = new CommandHistoryList(list, listModel);
+	
+		pane = new Container();	
 	}
 
-	/**
-	 * 
-	 */
 	private void addComponentsToLayout(){
 		add(menuBar.getMenuBar(), BorderLayout.NORTH);
 		add(commandInput.getCommandInput(), BorderLayout.SOUTH);
 		add(layOutAllButtons(pane),  BorderLayout.EAST);
-		add(history,  BorderLayout.WEST);
+		add(historyList.getScrollPane(),  BorderLayout.WEST);
 	}
 
 	private Container layOutAllButtons(Container pane){
 		pane.setLayout(new GridBagLayout()); 
 		pane.add(run, setComponentConstraints(0,1));
 		pane.add(clear, setComponentConstraints(0,2));
-
 		return pane; 
 	}
 
@@ -136,40 +123,8 @@ public class DisplayTab extends JPanel implements ActionListener{
 		run.addActionListener(this);
 		clear.setActionCommand("clear");
 		clear.addActionListener(this);
-		history.setActionCommand("history");
-		history.addActionListener(this);
-	}
 
-	private GridBagConstraints setComponentConstraints(int x, int y){
-		GridBagConstraints c = new GridBagConstraints();
-		c.weightx= 0.5;
-		c.gridx = x; 
-		c.gridy = y; 
-		return c; 
-	}
-
-	public void setHistoryButtonText(String lastCommand){
-		historyLabel = lastCommand; 
-		history.setText(historyLabel);
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if("run".equals( e.getActionCommand() )){	
-			updateBackEndandDraw(commandInput.getValue()); 
-
-		}
-
-		if("clear".equals(e.getActionCommand())){
-			myModel.clearState();
-		}
-		if("history".equals(e.getActionCommand())){
-			myModel.doCommands(historyLabel);
-			turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true); 
-
-		}
-
-
+		list.addMouseListener(initializeMouseListener());
 	}
 
 	private MouseListener initializeMouseListener () {
@@ -187,11 +142,32 @@ public class DisplayTab extends JPanel implements ActionListener{
 		return mouseListener;
 	}
 
+	private GridBagConstraints setComponentConstraints(int x, int y){
+		GridBagConstraints c = new GridBagConstraints();
+		c.weightx= 0.5;
+		c.gridx = x; 
+		c.gridy = y; 
+		return c; 
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if("run".equals( e.getActionCommand() )){	
+			updateBackEndandDraw(commandInput.getValue());
+		}
+
+		if("clear".equals(e.getActionCommand())){
+			myModel.clearState();
+		}
+
+	}
+
 	void updateBackEndandDraw (String typedCommand) {
 		myHistoryMap = myModel.getMyHistoryMap();
 		//        System.out.println("checking if myHistoryMap is received in DisplayTab " + myHistoryMap.get(0));
 		myActiveTurtles = myModel.getActiveTurtles();
-		setHistoryButtonText(typedCommand);
 		myModel.doCommands(typedCommand);
 		turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
 		historyList.getListModel().addElement(typedCommand);

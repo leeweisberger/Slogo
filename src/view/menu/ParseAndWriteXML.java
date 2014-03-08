@@ -135,6 +135,7 @@ public class ParseAndWriteXML {
                 Element onlySettingNode = (Element)firstSettingNode;
 
                 //-------
+                
                 NodeList penColorList = onlySettingNode.getElementsByTagName("penColor");
                 Element penColorElement = (Element)penColorList.item(0);
 
@@ -167,12 +168,11 @@ public class ParseAndWriteXML {
                 
             }
         }
-        System.out.println(settings.get("penColor"));
-        System.out.println(settings.get("backgroundColor"));
-        System.out.println(settings.get("turtleImage"));
-        System.out.println(settings.get("commandFile"));
+   
 
 
         return settings;
 	}
+	
+	
 }

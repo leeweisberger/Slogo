@@ -1,4 +1,4 @@
-package view;
+package view.menu;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -20,8 +20,10 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.JInternalFrame;
 
-import view.menu.FileMenu;
-import view.menu.FormatMenu;
+import view.CommandInput;
+import view.HelpPage;
+import view.buttons.Settings;
+
 import jgame.JGColor;
 
 
@@ -35,13 +37,10 @@ public class MenuBar implements ActionListener {
 	chooseTurtleImage, showHelpPage;
 	private JFileChooser fileChooser;
 	private HelpPage helpPage; 
-	private File importedFile; 
-	private File savedFile; 
-
+	private File importedFile, savedFile;  
 	private CommandInput commandInput; 
 
-	MenuBar(CommandInput commandInput){
-		
+	public MenuBar(CommandInput commandInput){		
 		myFileMenu = new FileMenu(commandInput, importedFile, savedFile); 
 		myFormatMenu = new FormatMenu(); 
 		

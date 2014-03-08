@@ -13,26 +13,26 @@ import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
 
 import view.CommandInput;
+import view.buttons.Settings;
 
 public class FileMenu implements ActionListener {
 	private List<JMenuItem> menuItems = new ArrayList<JMenuItem>(); // to be used or reflection 
 	private JMenuItem open, save, loadPreferences, savePreferences, newTab; 
 	private JFileChooser fileChooser; 
 	private JMenu file;
-	
-
+	private Settings mySettings; 
 	private CommandInput myCommandIn; 
-	private File importedCommandsFile, savedCommandsFile; 
+	private File importedCommandsFile, savedCommandsFile, importedSettingsFile, savedSettingsFile; 
 	
 	public FileMenu(CommandInput commandInput, File importedFile, File savedFile){
 		this.myCommandIn = commandInput; 
+		this.mySettings = Settings.getInstance();
 		initialiseMenuItems(); 
 		addMenuItemsToMenu(menuItems, file); 
 		addActionListenerToMenuItems(menuItems); 
-		
 		fileChooser = new JFileChooser(); 
 		this.importedCommandsFile = importedFile; 
-		this.savedCommandsFile = savedFile; 
+		this.savedCommandsFile = savedFile;
 	}
 	
 	public List<JMenuItem> initialiseMenuItems(){
@@ -88,18 +88,20 @@ public class FileMenu implements ActionListener {
 			}	
 		}
 		if(e.getSource() == loadPreferences){
-			temp = fileChooser.showSaveDialog(temp1);
-			
-			if(temp == JFileChooser.APPROVE_OPTION) {
-				
-			}	
+			temp = fileChooser.showOpenDialog(temp1);
+
+			if (temp == JFileChooser.APPROVE_OPTION) {
+				//importedSettingsFile = fileChooser.getSelectedFile();
+				importedSettingsFile = new File("Settings.xml"); 
+				mySettings.loadSettings(importedSettingsFile); 
+			}
 		}
 		
 		if(e.getSource() == savePreferences){
 			temp = fileChooser.showSaveDialog(temp1);
 			
 			if(temp == JFileChooser.APPROVE_OPTION) {
-				
+				mySettings.saveSettings();
 			}	
 		}				
 	}
@@ -108,5 +110,7 @@ public class FileMenu implements ActionListener {
 		return file;
 	}
 	
-
+	public void updateSettings(){
+		
+	}
 }
