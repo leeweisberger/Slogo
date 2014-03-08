@@ -50,7 +50,6 @@ import java.util.List;
 import java.util.Map;
 import java.awt.Desktop; 
 
-import slogo_team02.ViewController;
 import sun.awt.X11.ListHelper;
 import view.Display;
 
@@ -122,9 +121,6 @@ public class DisplayTab extends JPanel implements ActionListener{
         run.addActionListener(this);
         clear.setActionCommand("clear");
         clear.addActionListener(this);
-
-        history.setActionCommand("history");
-        history.addActionListener(this);
 
         list.addMouseListener(historyList.initializeMouseListener());
 

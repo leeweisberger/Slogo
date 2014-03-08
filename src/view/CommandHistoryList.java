@@ -34,8 +34,6 @@ implements ListSelectionListener {
         list.addListSelectionListener(this);
         list.setVisibleRowCount(15);
 
-
-
         listScrollPane = new JScrollPane(list);
 
         add(listScrollPane, BorderLayout.CENTER);

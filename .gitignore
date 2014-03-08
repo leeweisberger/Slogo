@@ -3,4 +3,8 @@
 # Package Files #
 *.war
 *.ear
+<<<<<<< HEAD
+.DS_Store
+=======
 *.DS_Store
+>>>>>>> eb6bae6b66ef887c1cfedb10ddebcc443d7dbffb
