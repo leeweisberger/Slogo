@@ -79,7 +79,7 @@ public class TurtleGraphicsWindow extends JGEngine{
     void runBottonAction(Map<Integer, List<TurtleState>> myHistoryMap, List<Integer> myActiveTurtles, boolean permission){
         isClicked = true;
         this.myHistoryMap = myHistoryMap;  
-//        System.out.println("showing historyMap in TGW" + myHistoryMap.size());
+        System.out.println("showing historyMap in TGW" + myHistoryMap.size());
         this.myActiveTurtles = myActiveTurtles;
         this.permission = permission;
 //        System.out.println("myHistory map received in run action is of size " + myHistoryMap.size());
