@@ -41,6 +41,7 @@ public class Model {
 	    /*here we can either initialize new model, or clean up whatever we have in model*/
 	    myActiveTurtles.clear();
 	    myHistoryMap.clear();
+	    myStatesMap.clear();
 	    this.setFirstTurtleState(0, 0, 0, 0);
 
 	}
