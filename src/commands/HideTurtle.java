@@ -13,7 +13,7 @@ public class HideTurtle extends CommandZeroInputs{
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public double doCommand(TurtleState turtleState) {
+	public Object doCommand(TurtleState turtleState) {
 		turtleState.setShow(false);
 		return 0;
 	}

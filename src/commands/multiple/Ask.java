@@ -15,13 +15,12 @@ public class Ask extends MultipleTurtleCommand {
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public double doCommand(TurtleState turtleState) {
-		double result = -1;
+	public Object doCommand(TurtleState turtleState) {
 		for (int i = 0; i < this.getNumFalseInputs(); i++) {
-			result = getFalseInputs().get(i).doCommand(turtleState);
+			getFalseInputs().get(i).doCommand(turtleState);
 		}
 
-		return result;
+		return null;
 	}
 
 	/* (non-Javadoc)
@@ -31,7 +30,7 @@ public class Ask extends MultipleTurtleCommand {
 	public void commandTurtles(List<Integer> activeTurtles,
 			Map<Integer, TurtleState> statesMap) {
 		for (int i = 0; i < getNumInputs(); i++) {
-			int turtleID = (int) getInputs().get(i).doCommand(null);
+			int turtleID = (int) ((double) getInputs().get(i).doCommand(null));
 			doCommand(getTurtle(turtleID, activeTurtles, statesMap));
 		}
 

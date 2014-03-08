@@ -3,10 +3,10 @@ package commands;
 import model.TurtleState;
 import commands.basic.CommandZeroInputs;
 
-public class GetPenColor extends CommandZeroInputs{
+public class PenColor extends CommandZeroInputs{
 
 	@Override
-	public double doCommand(TurtleState turtleState) {
+	public Object doCommand(TurtleState turtleState) {
 		return turtleState.getColor();
 	}
 

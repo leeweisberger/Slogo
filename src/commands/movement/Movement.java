@@ -12,11 +12,10 @@ import model.TurtleState;
 public abstract class Movement extends CommandOneInput{
 	
 	
-	public double doCommand(TurtleState state){
+	public Double doCommand(TurtleState state){
 
 		double pixels = (Double) getInput1().doCommand(state);
-		state.setPosition(state.getX()+move(pixels)*Math.cos(Math.toRadians(state.getAngle())), 
-				state.getY()+move(pixels)*Math.sin(Math.toRadians(state.getAngle())));
+		state.setPosition(state.getX()+move(pixels)*Math.sin(state.getAngle()), state.getY()+move(pixels)*Math.cos(state.getAngle()));
 		return move(pixels);
 	}
 	

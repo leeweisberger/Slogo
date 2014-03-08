@@ -9,7 +9,7 @@ import model.TurtleState;
 public class Not extends CommandOneInput{
 
 	@Override
-	public double doCommand(TurtleState state) {
+	public Double doCommand(TurtleState state) {
 		if((Double) getInput1().doCommand(state)==0)
 			return 1.0;
 		return 0.0;

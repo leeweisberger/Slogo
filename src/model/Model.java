@@ -72,9 +72,8 @@ public class Model {
 
 			} else {
 				for (int turtle : myActiveTurtles) {
-					TurtleState t = myStatesMap.get(turtle);
-					command.doCommand(t);
-					System.out.format("%f %f %f\n",t.getX(),t.getY(),t.getAngle());
+					command.doCommand(myStatesMap.get(turtle));
+
 				}
 			}
 
@@ -96,7 +95,7 @@ public class Model {
 	 * @return the list of nodes
 	 */
 	public List<Node> parseToNodeList(String input) {
-		Parser parser = new Parser(input, "Previous");
+		Parser parser = new Parser(input, "English");
 		return parser.parseToNodeList();
 	}
 	

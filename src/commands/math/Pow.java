@@ -6,13 +6,13 @@ import model.TurtleState;
 /**
  * The Class Pow.
  */
-public class Power extends CommandTwoInputs{
+public class Pow extends CommandTwoInputs{
 
 	/* (non-Javadoc)
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public double doCommand(TurtleState state) {
+	public Double doCommand(TurtleState state) {
 		return(Math.pow((Double) getInput1().doCommand(state),(Double) getInput2().doCommand(state)));
 
 	}

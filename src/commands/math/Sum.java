@@ -12,7 +12,7 @@ public class Sum extends CommandTwoInputs{
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public double doCommand(TurtleState state) {
+	public Double doCommand(TurtleState state) {
 		return((Double) getInput1().doCommand(state)+(Double) getInput2().doCommand(state));
 
 	}

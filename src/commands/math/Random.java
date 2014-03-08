@@ -12,7 +12,7 @@ public class Random extends CommandOneInput{
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public double doCommand(TurtleState state) {
+	public Double doCommand(TurtleState state) {
 		return(Math.random()*(Double) getInput1().doCommand(state));
 
 	}

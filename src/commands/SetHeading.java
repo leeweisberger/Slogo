@@ -14,7 +14,7 @@ public class SetHeading extends CommandOneInput {
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public double doCommand(TurtleState state) {
+	public Double doCommand(TurtleState state) {
 		double degrees = Math.toRadians((Double) getInput1().doCommand(state));
 		double degreeChange = degreesMoved(state.getAngle(),degrees);
 		state.setAngle(degrees);

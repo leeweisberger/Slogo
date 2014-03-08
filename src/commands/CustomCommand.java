@@ -37,9 +37,9 @@ public class CustomCommand extends CommandList{
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public double doCommand(TurtleState turtleState) {
+	public Object doCommand(TurtleState turtleState) {
 		for(int i=0;i<myVariables.size();i++){
-			((Variable)myVariables.get(i)).setValue((Double) getInputs().get(i).doCommand(turtleState));
+			((Variable)myVariables.get(i)).setValue((double) getInputs().get(i).doCommand(turtleState));
 		}
 		for(int i=0; i<getNumFalseInputs(); i++){
 			//recursion
@@ -52,7 +52,7 @@ public class CustomCommand extends CommandList{
 			myCommands.get(i).doCommand(turtleState);
 		}
 		//clearInputs();
-		return 1;
+		return null;
 	}
 	
 	/**

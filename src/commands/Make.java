@@ -9,17 +9,16 @@ import model.TurtleState;
 /**
  * The Class Make.
  */
-public class MakeVariable extends CommandTwoInputs{
+public class Make extends CommandTwoInputs{
 
 	/* (non-Javadoc)
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public double doCommand(TurtleState turtleState) {
+	public Object doCommand(TurtleState turtleState) {
 		Variable variable = (Variable) getInput1();
 		Command command = getInput2();
-		double result = (Double) command.doCommand(turtleState);
-		variable.setValue(result);
-		return result;
+		variable.setValue((double) command.doCommand(turtleState));
+		return null;
 	}
 }

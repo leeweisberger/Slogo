@@ -4,16 +4,16 @@ import commands.basic.CommandOneInput;
 import model.TurtleState;
 
 /**
- * The Class ATan.
+ * The Class Sin.
  */
-public class ArcTangent extends CommandOneInput{
+public class Sin extends CommandOneInput{
 
 	/* (non-Javadoc)
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public double doCommand(TurtleState state) {
-		return(Math.toDegrees(Math.atan((Double) getInput1().doCommand(state))));
+	public Double doCommand(TurtleState state) {
+		return(Math.sin(Math.toRadians((Double) getInput1().doCommand(state))));
 
 	}
 }

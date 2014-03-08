@@ -4,16 +4,16 @@ import commands.basic.CommandZeroInputs;
 import model.TurtleState;
 
 /**
- * The Class PenDownP.
+ * The Class ShowingP.
  */
-public class IsPenDown extends CommandZeroInputs{
+public class ShowingP extends CommandZeroInputs{
 
 	/* (non-Javadoc)
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public double doCommand(TurtleState state) {
-		if (state.getPenDown())
+	public Double doCommand(TurtleState state) {
+		if (state.getShowing())
 			return 1.0;
 		return 0.0;
 	}

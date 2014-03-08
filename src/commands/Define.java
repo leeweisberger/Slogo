@@ -8,7 +8,7 @@ public class Define extends CommandList{
 
 
 	@Override
-	public double doCommand(TurtleState turtleState) {
+	public Object doCommand(TurtleState turtleState) {
 		CustomCommand customCommand = (CustomCommand) getInputs().get(0);
 		Model.customCommandList.put(customCommand.getName(), customCommand);
 		customCommand.saveCommand(customCommand.getInputs(), customCommand.getFalseInputs());

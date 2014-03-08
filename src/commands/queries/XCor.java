@@ -12,7 +12,7 @@ public class XCor extends CommandZeroInputs{
 	 * @see commands.basic.Command#doCommand(model.TurtleState)
 	 */
 	@Override
-	public double doCommand(TurtleState state) {
+	public Double doCommand(TurtleState state) {
 		return state.getX();
 
 	}

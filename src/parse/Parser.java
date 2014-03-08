@@ -16,6 +16,7 @@ import commands.basic.Command;
 import commands.basic.CommandList;
 import commands.basic.Constant;
 import commands.basic.Variable;
+import commands.movement.Forward;
 
 
 /**
