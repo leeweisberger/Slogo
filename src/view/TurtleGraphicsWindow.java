@@ -121,7 +121,7 @@ public class TurtleGraphicsWindow extends JGEngine{
     }
 
 
-    void runBottonAction(Map<Integer, List<TurtleState>> myHistoryMap, List<Integer> myActiveTurtles, Map<Integer, TurtleState> myStatesMap, List<JTurtle> turtleList2, boolean permission){
+    void runBottonAction(Map<Integer, List<TurtleState>> myHistoryMap, List<Integer> myActiveTurtles, boolean permission){
         isClicked = true;
         this.myHistoryMap = myHistoryMap;  
 //        System.out.println("showing historyMap in TGW" + myHistoryMap.size());
@@ -160,12 +160,8 @@ public class TurtleGraphicsWindow extends JGEngine{
     private void drawPath(List<TurtleState> singleTStateList, JTurtle JTurtle){   
         
         TurtleState myFinalState = singleTStateList.get(singleTStateList.size() - 1);
-<<<<<<< HEAD
         drawImage(turtleImage, (CENTER_WIDTH+myFinalState.getX()), (CENTER_HEIGHT-myFinalState.getY()));
-=======
-        JTurtle.move((CENTER_WIDTH+myFinalState.getX()), (CENTER_HEIGHT-myFinalState.getY()), myFinalState.getAngle());
-        
->>>>>>> branch 'master' of https://github.com/duke-compsci308-spring2014/slogo_team02
+
 
         for (int i=0; i<singleTStateList.size()-1; i++){
             TurtleState myPrevState = singleTStateList.get(i);
@@ -207,15 +203,8 @@ public class TurtleGraphicsWindow extends JGEngine{
     }
 
     void resetTPosition () {
-<<<<<<< HEAD
         drawImage(turtleImage, CENTER_WIDTH, CENTER_HEIGHT);
-=======
-        for (JTurtle turtle: TurtleList){
-            turtle.move(CENTER_WIDTH, CENTER_HEIGHT, 0);
-        }
-        
-//        drawImage("myTurtle", CENTER_WIDTH, CENTER_HEIGHT);
->>>>>>> branch 'master' of https://github.com/duke-compsci308-spring2014/slogo_team02
+
     }
 
 

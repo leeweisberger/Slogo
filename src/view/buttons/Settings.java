@@ -87,11 +87,7 @@ public class Settings {
 		return settings.get("penColor"); 
 	}
 	public void updateBackgroundColor(){
-<<<<<<< HEAD
 
-=======
-		 
->>>>>>> branch 'master' of https://github.com/duke-compsci308-spring2014/slogo_team02
 	}
 	public String TurtleImageName(){
 		return settings.get("turtleImage"); 

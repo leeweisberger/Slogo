@@ -103,7 +103,7 @@ public class DisplayTab extends JPanel implements ActionListener{
 		listModel = new DefaultListModel();
 		list = new JList(listModel);
 		historyList = new CommandHistoryList(list, listModel);
-	
+
 		pane = new Container();	
 	}
 
@@ -168,22 +168,13 @@ public class DisplayTab extends JPanel implements ActionListener{
 
 	}
 
-<<<<<<< HEAD
+
 	public void updateBackEndandDraw (String typedCommand) {
-=======
-	void updateBackEndandDraw (String typedCommand) {
-	        myModel.doCommands(typedCommand);
-	        myStatesMap = myModel.getMyStatesMap();
->>>>>>> branch 'master' of https://github.com/duke-compsci308-spring2014/slogo_team02
 		myHistoryMap = myModel.getMyHistoryMap();
-	        for (Map.Entry<Integer, List<TurtleState>> singleTEntrySet: myHistoryMap.entrySet()){
-//	            System.out.println("the Size of Map in TurtleGraphics is " + myHistoryMap.size());
-	            TurtleList.add(new JTurtle(TurtleGraphicsWindow.CENTER_WIDTH, TurtleGraphicsWindow.CENTER_HEIGHT, TurtleGraphicsWindow.TURTLE, singleTEntrySet.getKey()));
-	            System.out.println("the size of myHistoryMap at the DisplayTab " + myHistoryMap.size());
-	            System.out.println("the size of TurtleList at this moment " + TurtleList.size());
-	        }
 		myActiveTurtles = myModel.getActiveTurtles();
-		turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, myStatesMap, TurtleList, true);
+		System.out.println("checking if myActiveTurtle is received in DisplayTab " + myActiveTurtles.size());
+		myModel.doCommands(typedCommand);
+		turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
 		historyList.getListModel().addElement(typedCommand);
 	}
 
