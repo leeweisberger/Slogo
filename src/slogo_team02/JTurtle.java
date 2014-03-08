@@ -59,16 +59,3 @@ public class JTurtle extends JGObject {
 
 }
 
-
-
-//public boolean getIsPen(){
-//  return isPenUp;
-//}
-//
-//public JGColor getColor(){
-//  return color;
-//}
-//
-//public void setColor(){
-//
-//}

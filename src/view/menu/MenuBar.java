@@ -1,4 +1,4 @@
-package view;
+package view.menu;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -20,26 +20,37 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.JInternalFrame;
 
+import view.CommandInput;
+import view.HelpPage;
+import view.buttons.Settings;
+
+import jgame.JGColor;
+
 
 
 public class MenuBar implements ActionListener {
 	private JMenuBar menuBar;
-	private JMenu file, format, help;
-	private JMenuItem open, save, newTab, changeColor, chooseTurtleImage, showHelpPage;
+	private FileMenu myFileMenu; 
+	private FormatMenu myFormatMenu; 
+	private JMenu file, format, help, penColors, turtleImages;
+	private JMenuItem open, save,  newTab, savePreferences,loadPreferences, redPen,
+	chooseTurtleImage, showHelpPage;
 	private JFileChooser fileChooser;
 	private HelpPage helpPage; 
-	private File importedFile; 
-	private File savedFile; 
-
+	private File importedFile, savedFile;  
 	private CommandInput commandInput; 
 
-	MenuBar(CommandInput commandInput){
+	public MenuBar(CommandInput commandInput){		
+		myFileMenu = new FileMenu(commandInput, importedFile, savedFile); 
+		myFormatMenu = new FormatMenu(); 
+		
 		//Create the menu bar.
 		menuBar = new JMenuBar();
-		file = new JMenu("File");
 		format = new JMenu("Format");
 		help = new JMenu("Help");
-		fileChooser = new JFileChooser(); 
+		penColors = new JMenu("Choose a Pen Color"); 
+		turtleImages = new JMenu("Choose a Turtle Image");
+		
 		helpPage = new HelpPage(); 
 		this.commandInput = commandInput; 
 		savedFile = new File("saved commands.txt");
@@ -49,21 +60,11 @@ public class MenuBar implements ActionListener {
 	}
 
 	public void createAndAddMenuItems(){
-		open = new JMenuItem("Open File",
-				KeyEvent.VK_T);
-		open.addActionListener(this); 
+	
 
-		save = new JMenuItem("Save File",
+		redPen = new JMenuItem("Red",
 				KeyEvent.VK_T);
-		save.addActionListener(this);
-		
-		newTab = new JMenuItem("New Tab",
-				KeyEvent.VK_T);
-		newTab.addActionListener(this);
-
-		changeColor = new JMenuItem("Change Pen Color",
-				KeyEvent.VK_T);
-		changeColor.addActionListener(this); 
+		redPen.addActionListener(this); 
 
 
 		chooseTurtleImage = new JMenuItem("Choose Turtle Image",
@@ -74,19 +75,16 @@ public class MenuBar implements ActionListener {
 		showHelpPage.setActionCommand("showHelpPage");
 		showHelpPage.addActionListener(this);
 
+		penColors.add(redPen);
+		
+		
 
-
-		file.add(open);
-		file.add(save);
-		file.add(newTab);
-		format.add(changeColor);
-		format.add(chooseTurtleImage); 
 		help.add(showHelpPage);
 	}
 
 	public void addMenus(){
-		menuBar.add(file);
-		menuBar.add(format);
+		menuBar.add(myFileMenu.getFileMenu());
+		menuBar.add(myFormatMenu.getFormatMenu());
 		menuBar.add(help);
 	}
 
@@ -100,26 +98,12 @@ public class MenuBar implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		int temp; 
 		Component temp1 = null; 
-		if(e.getSource() == open){
-			temp = fileChooser.showOpenDialog(temp1);
-
-			if (temp == JFileChooser.APPROVE_OPTION) {
-				importedFile = fileChooser.getSelectedFile();
-				commandInput.insertCommandsFromFile(importedFile); 
-			}
-		}
-		if(e.getSource() == save){
-			temp = fileChooser.showSaveDialog(temp1);
-			
-			if(temp == JFileChooser.APPROVE_OPTION) {
-				savedFile = commandInput.saveCommandsToFile(savedFile);
-			}	
-		}
+	
 		
 		if(e.getSource() == newTab){
 			
 		}
-		if(e.getSource() == changeColor){
+		if(e.getSource() == redPen){
 
 		}
 		if(e.getSource() == chooseTurtleImage){
@@ -129,5 +113,11 @@ public class MenuBar implements ActionListener {
 			helpPage.createAndShowHelpPage();
 		}
 	
+		
+		if(e.getSource()== redPen){
+			
+		}
 	}
+	
+	
 }

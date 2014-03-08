@@ -24,6 +24,7 @@ import model.TurtleState;
 public class TurtleGraphicsWindow extends JGEngine{    
 
     public static final Dimension SIZE = new Dimension(755, 505);
+
     public static final double DYNAMIC_WIDTH = SIZE.getWidth();
     public static final double DYNAMIC_HEIGHT = SIZE.getHeight();
     public static final double CENTER_WIDTH = DYNAMIC_WIDTH/2;
@@ -39,6 +40,7 @@ public class TurtleGraphicsWindow extends JGEngine{
     private List<Integer> myActiveTurtles;
     private boolean permission = true;
     private boolean isClicked = false;
+    
 
     public TurtleGraphicsWindow(){
         super();
@@ -46,7 +48,7 @@ public class TurtleGraphicsWindow extends JGEngine{
         //        initEngineComponent((int) DYNAMIC_WIDTH, (int) DYNAMIC_HEIGHT);
     }
 
-    @Override
+	@Override
     public void initCanvas () {
         // TODO Auto-generated method stub
         setCanvasSettings(1, // width of the canvas in tiles
