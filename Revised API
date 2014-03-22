@@ -9,23 +9,23 @@ TODO:
 Team member Responsibility breakdown:
 Lee Weisberger and Shenghan Chen: Back-end
 Anthony Olawo and Siyang Wang: Front-end:
-	1: Graphic Layout (Olawo and Wang will peer program this part)
-	2: Data I/O (Olawo and Wang will peer program this part)
-	3: Drawing functionalities (Olawo)
-	4: Buttons(Wang)
+	1: Graphic Layout (Olawo and Wang, peer program)
+	2: Data I/O (Olawo)
+	3: Drawing functionalities (Wang)
+	4: Buttons(Olawo)
 
+============
 Design Goals:
 The team is designing and implementing a flexible GUI program-- SLogo-- whose functionality can be used and/or extended via an API. Like most standard GUI programs SLogo will have a view and model. The view will consist of four modules: a graphic layout module, a 'draw' module, an action listener module and a command history module. The model on the other hand will consist of a parsing module, a command module, and a TurtleState module.
 
 View Modules
-The graphic layout module will be a canvas responsible for laying out the windows and buttons that the user will interract with. These include command, turtle graphics, command, and command history windows, as well as run, stop, clear, slow, and undo button. This module will be designed to allow future developers to add windows and buttons to it. 
+The graphic layout module will be a canvas responsible for laying out the windows and buttons that the user will interract with. These include menubar, turtle graphics window, command input bar, command history, as well as button component that is comprised of "run", and "clear" button. To be specific, menubar includes saving and loading of commands, preferences, changing the draw format (such as change pen color, and change background color) and a HTML help page. The commandInput part allows user to type in command, which then pass the String input to backend and start the parsing and analyzing process. The clickable history gets what is typed by the user from commandInput bar, and then append the "latest command" to the end of the history list. The history list is clickable, and when any previous history is clicked, the command is called. The turtle graphics window, as its name suggests, is the graphics window that outputs the result of commands, and draw the update to on the canvas. The following paragraphs discusses the design of each modules in details.   
 
-The draw module's will draw the turtle and trace its movements on the turtle graphics window. Here  the team assumed that the module would only ever have to draw a single turtle at a time because all other implementations of logo had a single turtle. That said, it will be designed to allow future developers extend the manner in which the turtle is drawn and its movements traced eg. the type of turtle drawn, the thickness, color and style of the trace etc.
-
+The draw module's will draw the turtle and trace its movements on the turtle graphics window. Here the team assumed that the module would only ever have to draw a single turtle at a time because all other implementations of logo had a single turtle. That said, it will be designed to allow future developers extend the manner in which the turtle is drawn and its movements traced eg. the type of turtle drawn, the thickness, color and style of the trace etc. Later on we have made changes which allows the multiple window (display). 
 
 The action listener module's primary goal will be to communicate user input from the graphic layout module to the model and then query the turtle module in order to update the graphic layout module. A developer should only need to extend this after they have already extended either the graphical layout module-- which it takes input from to pass to the model-- or the turtle-- which it takes input from to update the view's draw module and command history module.
 
-The command history module will be responsible for keeping track of and displaying the commmands entered in the command window of the graphical layout module. 
+The command history module will be responsible for keeping track of and displaying the commmands entered in the command window of the graphical layout module. We have combined the command history function with the clickable command history so that each list in history is clickable, and once clicked, particular command will be called. 
 
 Model: 
 The parsing module's primary goal will be to take raw input from the view and parse it into commands. The module should be capable of parsing a line at a time or more. Parsing occurs in a few steps:
@@ -33,29 +33,40 @@ The parsing module's primary goal will be to take raw input from the view and pa
 2. Tokens are converted into Commands using reflection. This is done by the parser in its getCommandType() method and its makeCommandList() method
 3. Commands are converted into nodes in a parse tree. Each command node has children which are the arguments and expressions that the command needs.
 
-
 The command module will then instantiate the respective commands. This module will need to be flexible since it lexicographs a huge part of the turtle's behaviour and other developers may want to extend this behaviour. Each command is created using its own class. Each command extends a subclass of the Command superclass. Every command implements a doCommand() method which retrieves the command's inputs, does any appropriate calculations, changes the turtle's state if appropriate, and returns the appropriate value.
 
 The TurtleState module will keep track of each of the active turtles' histories. Each turtle keeps track of its own history. The TurtleState keeps track of the turtle's position as well as its pen. Every time a TurtleState is updated, this updated state is added to that turtles' history so that each of the turtles' positions can be drawn by the view. The view uses a map of turtle histories (where the key is the turtle and the value is a list of its histories) to draw the turtle.
 
-
+============
 Primary Classes: 
-View:
-		GraphicalLayout.java
+(front-end)
+In View Package:
+		CommandHistoryList.java
+		CommandInput.java
+		Display.java
+		DisplayTab.java
+		HelpPage.java
+		TurtleGraphicsWindow.java
+In View.buttons Package:
+		SuperButton.java
+		ClearButton.java
+		HistoryButton.java
+		RunButton.java
+		Settings.java
+In View.menu Package:
+		FileMenu.java
+		FormatMenu.java
+		MenuBar.java
+		ParseAndWriteXML.java
+		SuperMenu.java
 		
-		Sample Commands
-		Turtle Graphics 
-		Command Window 
-		Command History
-		Buttons (abstract)
-			Run buttons: Speed selection
-			Change color:
-			Clear
-			Undo
-			Terminate when infinite loop
+The core architecture of the front end includes view part, which are swing components each enclosed in JPanel, that satisfy different functionality requirements. CommandHistoryList is a JList, CommandInput is JTextArea, and TurtleGraphicsWindow is merely another component on which JGEngine runs. Display is a JTabbedPane on which multiple Tab is implemented, and DisplayTab is the place where methods allowed in single tab is written (DisplayTab is instantiated in Display). 
 
-	
-			
+View.buttons packages is pretty reusable and independ on its own. The buttons all implements JButtons, and SuperButton is extended by specifc button with specific functions. 
+
+View.menu package is also reusable and independ on its own. The menubar is implemented using JMenu, and menu of specific kind is implemented using JMenuItem. 
+
+(back-end)		
 Model:
 Parsing(module):
 	Lexer to parse input into tokens
@@ -93,8 +104,11 @@ The program is generally divided into the Model, the View Interface(GUI), and th
 
 Another important component is the Turtle class. It is an independent class that lives between the Model and the Interface. Model calls Turtle once it finishes parsing, and then TurtleGraphics, that extends some GUI tools in the View Interface, calls Turtle. 
 
-The View Interface is the third important component, and its responsibility is to call Turtle and then perform the basic methods like draw(), rotate(), changeColor(). The turtle is passed into the turtleGraphics where all the drawings are implemented. Moreover, the View Interface also has some additional functionalities: get History, move fast, move slow, clear -- these correspond to buttons, and onClick. The View Interface will call TurtleGraphics to make adjustments and implement any additions in the drawing process. 
+The core architecture of the front end includes view part, which are swing components each enclosed in JPanel, that satisfy different functionality requirements. CommandHistoryList is a JList, CommandInput is JTextArea, and TurtleGraphicsWindow is merely another component on which JGEngine runs. Display is a JTabbedPane on which multiple Tab is implemented, and DisplayTab is the place where methods allowed in single tab is written (DisplayTab is instantiated in Display). View.buttons packages is pretty reusable and independ on its own. The buttons all implements JButtons, and SuperButton is extended by specifc button with specific functions. View.menu package is also reusable and independ on its own. The menubar is implemented using JMenu, and menu of specific kind is implemented using JMenuItem. 
 
+The hierchy is described below: everytime backend parses, and calls the corresponding class (doCommand is called), it returns hashMaps, which keep track of finalState, stateHistory, ActiveTurtle, where a single turtleState contains information as x, y, angle, turtleID, PenUporDown, and PenColor. This is then passed to front-end, and specifically to the TurtleGraphicsWindow, where the update is drew, and reflcted on the display. The one caveat, though, is that there are two way commnicatio between frontend and backend, in that front end takes user input/load command/load preference, and then it calls backend parser to start the process of analyzing the command, before the turtleState is passed back again to the backend. 
+
+The View Interface frame is another important component. View Interface laysout the GUI, specifies the responsibility of each component, and is related to each other in the manner described in the primary classes section, just above this. 
 
 
 
