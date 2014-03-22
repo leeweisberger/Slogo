@@ -105,7 +105,26 @@ The hierchy is described below: everytime backend parses, and calls the correspo
 
 The View Interface frame is another important component. View Interface laysout the GUI, specifies the responsibility of each component, and is related to each other in the manner described in the primary classes section, just above this. 
 
+Example Code (Forward 50) 
+This is pseudo code. It isn't exactly how the code works, but gives a good high level example
+###################View Stuff ###################
+Model model = new Model();
+Parser parser = new Parser (input, "english");
+Lexer lexer = new Lexer(input);
+tokenList = lexer.lex();
+commandList = parser.makeCommandList(tokenList);
+nodeList = parser.buildTree(commandList);
+for(Command command : nodeList.getCommand()){
+	command.setInputsFromNode(Node.getChildren);
+}
+for(int turtle : myActiveTurtles){
+	command.doCommand(myHistoryMap.get(turtle));
+	myStatesMap.get(turtle).updateHistory();
+}
+getHistoryMap();
 
+
+	
 
 There are several alternatives we could take, either to have the parser work in another way, or to make the turtle graphic module look difference.
 
