@@ -109,6 +109,17 @@ Example Code (Forward 50)
 This is pseudo code. It isn't exactly how the code works, but gives a good high level example
 ###################View Stuff ###################
 Model model = new Model();
+Display display = new View(model);
+display.displayTab.run(input){
+	model.updateBackEndAndDraw(input); 
+}
+updateBackEndandDraw (String typedCommand) {
+	myHistoryMap = model.getMyHistoryMap();
+	myActiveTurtles = model.getActiveTurtles();
+	myModel.doCommands(typedCommand);
+	turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
+	historyList.getListModel().addElement(typedCommand);
+}
 Parser parser = new Parser (input, "english");
 Lexer lexer = new Lexer(input);
 tokenList = lexer.lex();
