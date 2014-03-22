@@ -116,7 +116,7 @@ display.displayTab.run(input){
 updateBackEndandDraw (String typedCommand) {
 	myHistoryMap = model.getMyHistoryMap();
 	myActiveTurtles = model.getActiveTurtles();
-	myModel.doCommands(typedCommand);
+	model.doCommands(typedCommand);
 	turtleGraphicsWindow.runBottonAction(myHistoryMap, myActiveTurtles, true);
 	historyList.getListModel().addElement(typedCommand);
 }
